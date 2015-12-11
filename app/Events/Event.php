@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace Matchappen\Events;
 
 abstract class Event
 {

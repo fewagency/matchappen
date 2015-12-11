@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Matchappen\Http\Controllers\Auth;
 
-use App\User;
+use Matchappen\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use Matchappen\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
