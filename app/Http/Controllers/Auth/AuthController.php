@@ -41,6 +41,7 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        //TODO: validate User + Workplace
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -56,6 +57,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        //TODO: create User + Workplace
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
