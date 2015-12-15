@@ -5,4 +5,5 @@
 
 return [
     'appname' => 'Match-up Malmö',
+    'workplaces' => 'arbetsplatser',
 ];

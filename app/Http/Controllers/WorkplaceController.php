@@ -9,5 +9,7 @@ use Matchappen\Http\Controllers\Controller;
 
 class WorkplaceController extends Controller
 {
-    //
+    public function index() {
+        return view('workplace.index');
+    }
 }
