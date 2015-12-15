@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 
-class CompanyController extends Controller
+class WorkplaceController extends Controller
 {
     //
 }

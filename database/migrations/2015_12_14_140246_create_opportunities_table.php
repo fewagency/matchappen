@@ -14,7 +14,7 @@ class CreateOpportunitiesTable extends Migration
     {
         Schema::create('opportunities', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('company_id')->index();
+            $table->unsignedInteger('workplace_id')->index();
             $table->unsignedTinyInteger('max_visitors');
             $table->text('description')->nullable();
             $table->dateTime('start')->index();
