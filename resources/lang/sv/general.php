@@ -6,4 +6,5 @@
 return [
     'appname' => 'Match-up Malmö',
     'workplaces' => 'arbetsplatser',
+    'edu-staff' => 'skolpersonal',
 ];
