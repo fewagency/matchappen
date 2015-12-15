@@ -14,3 +14,5 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 // Registration routes...
 Route::get('registrering', 'Auth\AuthController@getRegister');
 Route::post('registrering', 'Auth\AuthController@postRegister');
+
+//TODO: set up password reset routes
