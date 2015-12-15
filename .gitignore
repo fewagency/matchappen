@@ -5,4 +5,7 @@ Homestead.json
 .env
 .env.behat
 _ide_helper.php
+/public/build/
+/public/css/app.css
+/public/css/app.css.map
 .idea
