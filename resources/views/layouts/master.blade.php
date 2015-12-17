@@ -13,6 +13,8 @@
 </head>
 <body class="{{ $body_class or '' }}">
 
+@include('partials.nav')
+
 @yield('content')
 
 <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
