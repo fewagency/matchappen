@@ -10,23 +10,32 @@
   @endif
 
   <div>
-    Name
-    <input type="text" name="name" value="{{ old('name') }}">
+    Arbetsplats
+    <input type="text" name="workplace[name]" value="{{ old('workplace.name') }}">
+  </div>
+  <div>
+    Antal anställda på arbetsplatsen
+    <input type="number" name="workplace[employees]" min="1" max="65535" value="{{ old('workplace.employees') }}">
   </div>
 
   <div>
-    Email
-    <input type="email" name="email" value="{{ old('email') }}">
+    Ditt namn
+    <input type="text" name="user[name]" value="{{ old('user.name') }}">
   </div>
 
   <div>
-    Password
-    <input type="password" name="password">
+    Din epostadress
+    <input type="email" name="user[email]" value="{{ old('user.email') }}">
   </div>
 
   <div>
-    Confirm Password
-    <input type="password" name="password_confirmation">
+    Önskat lösenord
+    <input type="password" name="user[password]">
+  </div>
+
+  <div>
+    Bekräfta lösenord
+    <input type="password" name="user[password_confirmation]">
   </div>
 
   <div>

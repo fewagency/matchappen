@@ -3,6 +3,7 @@
 namespace Matchappen\Http\Controllers\Auth;
 
 use Matchappen\User;
+use Matchappen\Workplace;
 use Validator;
 use Matchappen\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -48,13 +49,15 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        //TODO: validate User + Workplace
-        return Validator::make($data, [
-            'name' => 'max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-            'phone' => ['max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
-        ]);
+        $validator = Validator::make($data, []);
+        foreach (User::rulesForCreate() as $attribute => $rules) {
+            $validator->mergeRules('user.' . $attribute, $rules);
+        }
+        foreach (Workplace::rulesForCreate() as $attribute => $rules) {
+            $validator->mergeRules('workplace.' . $attribute, $rules);
+        }
+
+        return $validator;
     }
 
     /**
@@ -65,12 +68,16 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        //TODO: create Workplace
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $workplace = Workplace::create(array_filter($data['workplace']));
+
+        $user_data = array_filter($data['user']);
+        $user_data['password'] = bcrypt($user_data['password']);
+
+        $user = new User($user_data);
+        $user->workplace()->associate($workplace);
+        $user->save();
+
+        return $user;
     }
 
     /**
