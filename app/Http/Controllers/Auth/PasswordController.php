@@ -29,4 +29,16 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+    //TODO: make postEmail() redirect to getLogin() withInput if user has triggered login action
+
+    /**
+     * @return string url for redirect after successful password reset
+     */
+    public function redirectPath()
+    {
+        return route('dashboard');
+    }
+
+
 }

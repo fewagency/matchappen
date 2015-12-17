@@ -1,5 +1,6 @@
-<form method="POST" action="{{ action('Auth\AuthController@postRegister') }}">
+<form method="POST" action="{{ action('Auth\PasswordController@postReset') }}">
   {!! csrf_field() !!}
+  <input type="hidden" name="token" value="{{ $token }}">
 
   @if (count($errors) > 0)
     <ul>
@@ -8,11 +9,6 @@
       @endforeach
     </ul>
   @endif
-
-  <div>
-    Name
-    <input type="text" name="name" value="{{ old('name') }}">
-  </div>
 
   <div>
     Email
@@ -30,6 +26,8 @@
   </div>
 
   <div>
-    <button type="submit">Register</button>
+    <button type="submit">
+      Reset Password
+    </button>
   </div>
 </form>

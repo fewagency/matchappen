@@ -33,6 +33,13 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    //TODO: make postRegister() redirect to getLogin() withInput if the email exists
+    //TODO: make postRegister() redirect to getLogin() withInput if user has triggered login action
+    //TODO: if organization name is taken in postRegister(), link to the organisation for contact details
+
+    //TODO: make postLogin() redirect to getRegister() withInput if user has triggered register action
+    //TODO: make postLogin() redirect to Auth\PasswordController@getEmail withInput if user has triggered forgotten password action
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -65,6 +72,11 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
     public function loginPath()
     {
         return action('Auth\AuthController@getLogin');

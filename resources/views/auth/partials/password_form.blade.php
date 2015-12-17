@@ -1,4 +1,4 @@
-<form method="POST" action="{{ action('Auth\AuthController@postLogin') }}">
+<form method="POST" action="{{ action('Auth\PasswordController@postEmail') }}">
   {!! csrf_field() !!}
 
   @if (count($errors) > 0)
@@ -15,11 +15,8 @@
   </div>
 
   <div>
-    Password
-    <input type="password" name="password" id="password">
-  </div>
-
-  <div>
-    <button type="submit">Login</button>
+    <button type="submit">
+      Send Password Reset Link
+    </button>
   </div>
 </form>
