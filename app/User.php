@@ -43,7 +43,7 @@ class User extends Model implements AuthenticatableContract,
      */
     public function workplace()
     {
-        return $this->belongsTo('Matchappen\User');
+        return $this->belongsTo('Matchappen\Workplace');
     }
 
     /**
