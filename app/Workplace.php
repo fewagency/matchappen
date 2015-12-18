@@ -2,12 +2,17 @@
 
 namespace Matchappen;
 
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Workplace extends Model
+/**
+ * @property string name
+ */
+class Workplace extends Model implements SluggableInterface
 {
-    use SoftDeletes;
+    use SoftDeletes, SluggableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +30,26 @@ class Workplace extends Model
         'address',
     ];
 
-    //TODO: make global scope: is_published=1
+    /**
+     * Scope a query to only include public workplaces for display.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublic($query)
+    {
+        //TODO: also add "active" scope to avoid listing workplaces whose admins put themselves on hold
+        return $query->published();
+    }
+
+    /**
+     * Scope a query to only include published workplaces.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
 
     /**
      * @return array of validator rules
@@ -43,4 +67,11 @@ class Workplace extends Model
             'address' => 'max:500',
         ];
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+
 }
