@@ -14,8 +14,9 @@ class CreateWorkplacesTable extends Migration
     {
         Schema::create('workplaces', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug')->index();
             $table->boolean('is_published')->default(false);
-            $table->string('name')->unique();
+            $table->string('name');
             $table->unsignedSmallInteger('employees')->index();
             $table->text('description')->nullable();
             $table->string('homepage')->nullable();
