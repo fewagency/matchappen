@@ -5,6 +5,7 @@ Route::get('/', function () {
 });
 
 Route::get(trans('general.workplaces'), 'WorkplaceController@index');
+Route::get(trans('general.workplace') . '/{workplace}', 'WorkplaceController@show');
 
 // Dashboard for workplaces and admins
 Route::get('hem', 'UserController@dashboard')->name('dashboard');

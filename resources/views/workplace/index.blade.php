@@ -4,6 +4,6 @@
 
   <h1>{{ trans('general.workplaces') }}</h1>
 
-  <!-- TODO: list all published workplaces -->
+  @include('workplace.partials.workplace_list')
 
 @endsection
