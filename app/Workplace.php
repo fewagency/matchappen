@@ -68,6 +68,13 @@ class Workplace extends Model implements SluggableInterface
         ];
     }
 
+    public function getRouteKeyName()
+    {
+        $config = $this->getSluggableConfig();
+
+        return $config['save_to'];
+    }
+
     public function __toString()
     {
         return $this->name;
