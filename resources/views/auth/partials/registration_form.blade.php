@@ -13,6 +13,7 @@
     Arbetsplats
     <input type="text" name="workplace[name]" value="{{ old('workplace.name') }}">
   </div>
+
   <div>
     Antal anställda på arbetsplatsen
     <input type="number" name="workplace[employees]" min="1" max="65535" value="{{ old('workplace.employees') }}">

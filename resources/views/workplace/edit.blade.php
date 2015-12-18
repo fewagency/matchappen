@@ -4,8 +4,6 @@
 
   <h1>{{ $workplace->name }}</h1>
 
-  <p>{{ $workplace->description }}</p>
-
-  @include('workplace.partials.admin_edit_link')
+  @include('workplace.partials.edit_form')
 
 @endsection

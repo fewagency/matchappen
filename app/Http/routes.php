@@ -4,8 +4,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get(trans('general.workplaces'), 'WorkplaceController@index');
 Route::get(trans('general.workplace') . '/{workplace}', 'WorkplaceController@show');
+Route::group(['prefix' => trans('general.workplaces')], function () {
+    Route::get('/', 'WorkplaceController@index');
+    Route::get('{workplace}/edit', 'WorkplaceController@edit');
+    Route::post('{workplace}/update', 'WorkplaceController@update');
+});
 
 // Dashboard for workplaces and admins
 Route::get('hem', 'UserController@dashboard')->name('dashboard');

@@ -21,4 +21,20 @@ class WorkplaceController extends Controller
     {
         return view('workplace.show')->with(compact('workplace'));
     }
+
+    public function edit(Workplace $workplace)
+    {
+        $this->authorize('update', $workplace);
+
+        return view('workplace.edit')->with(compact('workplace'));
+    }
+
+    public function update(Workplace $workplace)
+    {
+        //TODO: authorize and validate workplace form input
+        //TODO: update workplace
+        //TODO: trigger email on workplace update
+
+        return redirect()->action('WorkplaceController@edit', $workplace->getKey());
+    }
 }

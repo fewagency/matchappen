@@ -4,6 +4,8 @@ namespace Matchappen\Providers;
 
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Matchappen\Policies\WorkplacePolicy;
+use Matchappen\Workplace;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Matchappen\Model' => 'Matchappen\Policies\ModelPolicy',
+        Workplace::class => WorkplacePolicy::class,
     ];
 
     /**
