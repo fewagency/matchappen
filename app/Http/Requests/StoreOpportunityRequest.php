@@ -18,7 +18,7 @@ class StoreOpportunityRequest extends Request
         $opportunity = $this->route('opportunity');
 
         if (!$opportunity) {
-            return (bool) $this->user()->workplace_id;
+            return (bool)$this->user()->workplace_id;
         }
 
         return Gate::allows('update', $opportunity);
@@ -30,6 +30,24 @@ class StoreOpportunityRequest extends Request
      * @return array
      */
     public function rules()
+    {
+        $opportunity = $this->route('opportunity');
+        if (!$opportunity) {
+            return $this->rulesForCreate();
+        }
+
+        return $this->rulesForUpdate();
+    }
+
+    public static function rulesForCreate()
+    {
+        $rules = self::rulesForUpdate();
+        $rules['max_visitors'] .= '|required';
+
+        return $rules;
+    }
+
+    public static function rulesForUpdate()
     {
         return [
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,

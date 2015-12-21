@@ -11,6 +11,13 @@ use Matchappen\Opportunity;
 
 class OpportunityController extends Controller
 {
+
+    public function __construct(Request $request)
+    {
+        $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
+        $this->middleware('input.trim:' . implode(',', $fields_to_trim), ['only' => ['update', 'store']]);
+    }
+
     public function index()
     {
         $opportunities = Opportunity::published()->get();

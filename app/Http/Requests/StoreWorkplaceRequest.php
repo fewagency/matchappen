@@ -31,9 +31,6 @@ class StoreWorkplaceRequest extends Request
         return $this->rulesForUpdate($workplace ? $workplace->getKey() : null);
     }
 
-    /**
-     * @return array of validator rules
-     */
     public static function rulesForCreate()
     {
         $rules = self::rulesForUpdate();
