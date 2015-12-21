@@ -14,6 +14,9 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property bool is_admin
  * @property int workplace_id
  * @property Workplace workplace
+ * @property string name
+ * @property string email
+ * @property string phone
  */
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
