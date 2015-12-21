@@ -20,6 +20,11 @@
   </div>
 
   <div>
+    Företagets adress
+    <textarea name="workplace[address]">{{ old('workplace.address') }}</textarea>
+  </div>
+
+  <div>
     Ditt namn
     <input type="text" name="user[name]" value="{{ old('user.name') }}">
   </div>
