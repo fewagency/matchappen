@@ -2,6 +2,7 @@
 
 namespace Matchappen\Http\Controllers\Auth;
 
+use Matchappen\Http\Requests\StoreWorkplaceRequest;
 use Matchappen\User;
 use Matchappen\Workplace;
 use Validator;
@@ -53,7 +54,7 @@ class AuthController extends Controller
         foreach (User::rulesForCreate() as $attribute => $rules) {
             $validator->mergeRules('user.' . $attribute, $rules);
         }
-        foreach (Workplace::rulesForCreate() as $attribute => $rules) {
+        foreach (StoreWorkplaceRequest::rulesForCreate() as $attribute => $rules) {
             $validator->mergeRules('workplace.' . $attribute, $rules);
         }
 

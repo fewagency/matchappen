@@ -40,23 +40,6 @@ class Workplace extends Model implements SluggableInterface
         return $query->where('is_published', true);
     }
 
-    /**
-     * @return array of validator rules
-     */
-    public static function rulesForCreate()
-    {
-        return [
-            'name' => 'required|min:3|max:255|unique:workplaces,name',
-            'employees' => 'required|integer|min:1|max:65535',
-            'description' => '',
-            'homepage' => 'url|max:255',
-            'contact_name' => 'max:100',
-            'email' => 'email|max:50',
-            'phone' => ['max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
-            'address' => 'max:500',
-        ];
-    }
-
     public function getRouteKeyName()
     {
         $config = $this->getSluggableConfig();

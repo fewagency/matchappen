@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
+use Matchappen\Http\Requests\StoreWorkplaceRequest;
 use Matchappen\Workplace;
 
 class WorkplaceController extends Controller
@@ -29,9 +30,8 @@ class WorkplaceController extends Controller
         return view('workplace.edit')->with(compact('workplace'));
     }
 
-    public function update(Workplace $workplace, Request $request)
+    public function update(Workplace $workplace, StoreWorkplaceRequest $request)
     {
-        //TODO: authorize and validate workplace form input
         $workplace->update($request->input());
         //TODO: trigger email on workplace update
 
