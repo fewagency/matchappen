@@ -26,7 +26,8 @@ class StoreWorkplaceRequest extends Request
      */
     public function rules()
     {
-        return $this->rulesForUpdate();
+        $workplace = $this->route('workplace');
+        return $this->rulesForUpdate($workplace ? $workplace->getKey() : null);
     }
 
     /**
@@ -41,10 +42,9 @@ class StoreWorkplaceRequest extends Request
         return $rules;
     }
 
-    public static function rulesForUpdate()
+    public static function rulesForUpdate($exclude_id_from_unique = null)
     {
-        //TODO: add option to exclude model key from unique check
-        return [
+        $rules = [
             'name' => 'min:3|max:255|unique:workplaces,name',
             'employees' => 'integer|min:1|max:65535',
             'description' => '',
@@ -54,5 +54,10 @@ class StoreWorkplaceRequest extends Request
             'phone' => ['max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
             'address' => 'max:500',
         ];
+        if($exclude_id_from_unique) {
+            $rules['name'] = $rules['name'] .= ','.$exclude_id_from_unique;
+        }
+
+        return $rules;
     }
 }
