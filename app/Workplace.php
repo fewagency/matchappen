@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string contact_name
  * @property string display_contact_name
  * @property Collection users
+ * @property string address
  */
 class Workplace extends Model implements SluggableInterface
 {
