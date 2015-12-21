@@ -35,19 +35,13 @@ class AuthController extends Controller
     {
         $this->middleware('guest', ['except' => 'getLogout']);
 
-        //Trim user input
-        $input = $request->all();
-        foreach (['name', 'email', 'phone'] as $field_to_trim) {
-            if (isset($input['user'][$field_to_trim])) {
-                $input['user'][$field_to_trim] = trim($input['user'][$field_to_trim]);
-            }
-        }
-        foreach (array_keys(StoreWorkplaceRequest::rulesForCreate()) as $field_to_trim) {
-            if (isset($input['workplace'][$field_to_trim])) {
-                $input['workplace'][$field_to_trim] = trim($input['workplace'][$field_to_trim]);
-            }
-        }
-        $request->replace($input);
+        $fields_to_trim = array_merge(
+            ['user.name', 'user.email', 'user.phone'],
+            array_map(function ($value) {
+                return 'workplace.' . $value;
+            }, array_keys(StoreWorkplaceRequest::rulesForCreate()))
+        );
+        $this->middleware('input.trim:' . implode(',', $fields_to_trim), ['only' => 'postRegister']);
     }
 
     //TODO: make postRegister() redirect to getLogin() withInput if the email exists
