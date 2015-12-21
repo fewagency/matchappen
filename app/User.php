@@ -57,7 +57,7 @@ class User extends Model implements AuthenticatableContract,
     public static function rulesForCreate()
     {
         return [
-            'name' => 'string|max:255',
+            'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|confirmed|min:6',
             'phone' => ['string', 'max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
