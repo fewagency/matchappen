@@ -4,6 +4,6 @@
 
   <h1>{{ trans('general.opportunities') }}</h1>
 
-  @include('opportunity.partials.opportunity_list')
+  @include('opportunity.partials.list')
 
 @endsection

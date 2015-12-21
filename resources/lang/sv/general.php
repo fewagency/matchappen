@@ -10,4 +10,5 @@ return [
     'opportunity' => 'tillfälle',
     'opportunities' => 'tillfällen',
     'edu-staff' => 'skolpersonal',
+    'oportunity_at_workplace' => 'Besök hos :workplace',
 ];

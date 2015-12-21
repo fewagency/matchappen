@@ -1,7 +1,7 @@
 <ul>
   @foreach($workplaces as $workplace)
     <li>
-      @include('workplace.partials.workplace_card')
+      @include('workplace.partials.card')
     </li>
   @endforeach
 </ul>

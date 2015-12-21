@@ -4,6 +4,6 @@
 
   <h1>{{ trans('general.workplaces') }}</h1>
 
-  @include('workplace.partials.workplace_list')
+  @include('workplace.partials.list')
 
 @endsection
