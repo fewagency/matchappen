@@ -31,8 +31,9 @@ class Opportunity extends Model
      */
     public function scopePublished($query)
     {
-        //TODO: implement scope via relation to workplace
-        return $query->where('is_published', true);
+        return $query->whereHas('workplace', function ($query) {
+            $query->published();
+        });
     }
 
     /**
@@ -42,6 +43,11 @@ class Opportunity extends Model
     public function workplace()
     {
         return $this->belongsTo('Matchappen\Workplace');
+    }
+
+    public function getNameAttribute()
+    {
+        return trans('general.oportunity_at_workplace', ['workplace' => $this->workplace->name]);
     }
 
 }
