@@ -41,6 +41,20 @@
     <textarea name="description">{{ old('description', $opportunity->description) }}</textarea>
   </div>
 
+  <div>
+    Adress
+    <textarea name="address" placeholder="{{ $opportunity->fallback_address }}">{{ old('address', $opportunity->address) }}</textarea>
+  </div>
+
+  <div>
+    Kontaktperson
+    <input type="text" name="contact_name" value="{{ old('contact_name', $opportunity->contact_name) }}" placeholder="{{ $opportunity->fallback_contact_name }}">
+  </div>
+
+  <div>
+    Telefon
+    <input type="text" name="contact_phone" value="{{ old('contact_phone', $opportunity->contact_phone) }}" placeholder="{{ $opportunity->fallback_contact_phone }}">
+  </div>
 
   <div>
     <button type="submit">Spara</button>

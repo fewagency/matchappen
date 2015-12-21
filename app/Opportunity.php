@@ -10,6 +10,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int workplace_id
  * @property Carbon start
  * @property Carbon end
+ * @property Workplace workplace
+ * @property string address
+ * @property string display_address
+ * @property string fallback_address
+ * @property string contact_name
+ * @property string display_contact_name
+ * @property string fallback_contact_name
+ * @property string contact_phone
+ * @property string display_contact_phone
+ * @property string fallback_contact_phone
  */
 class Opportunity extends Model
 {
@@ -75,6 +85,36 @@ class Opportunity extends Model
 
     public function setRegistrationEndAttribute($datetime) {
         $this->attributes['registration_end'] = Carbon::parse($datetime);
+    }
+
+    public function getDisplayAddressAttribute()
+    {
+        return $this->address ?: $this->fallback_address;
+    }
+
+    public function getFallbackAddressAttribute()
+    {
+        return $this->workplace->address;
+    }
+
+    public function getDisplayContactNameAttribute()
+    {
+        return $this->contact_name ?: $this->fallback_contact_name;
+    }
+
+    public function getFallbackContactNameAttribute()
+    {
+        return $this->workplace->display_contact_name;
+    }
+
+    public function getDisplayContactPhoneAttribute()
+    {
+        return $this->contact_phone ?: $this->fallback_contact_phone;
+    }
+
+    public function getFallbackContactPhoneAttribute()
+    {
+        return $this->workplace->display_phone;
     }
 
     public function getNameAttribute()

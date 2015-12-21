@@ -10,10 +10,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property string name
- * @property string contact_name
- * @property string display_contact_name
  * @property Collection users
  * @property string address
+ * @property string email
+ * @property string display_email
+ * @property string fallback_email
+ * @property string contact_name
+ * @property string display_contact_name
+ * @property string fallback_contact_name
+ * @property string phone
+ * @property string display_phone
+ * @property string fallback_phone
+ * @property string homepage
  */
 class Workplace extends Model implements SluggableInterface
 {
@@ -33,6 +41,7 @@ class Workplace extends Model implements SluggableInterface
         'email',
         'phone',
         'address',
+        'homepage',
     ];
 
     /**
@@ -47,12 +56,32 @@ class Workplace extends Model implements SluggableInterface
 
     public function getDisplayContactNameAttribute()
     {
-        return $this->contact_name ?: $this->fallback_contact_name();
+        return $this->contact_name ?: $this->fallback_contact_name;
     }
 
     public function getFallbackContactNameAttribute()
     {
         return $this->users->first()->name;
+    }
+
+    public function getDisplayEmailAttribute()
+    {
+        return $this->email ?: $this->fallback_email;
+    }
+
+    public function getFallbackEmailAttribute()
+    {
+        return $this->users->first()->email;
+    }
+
+    public function getDisplayPhoneAttribute()
+    {
+        return $this->phone ?: $this->fallback_phone;
+    }
+
+    public function getFallbackPhoneAttribute()
+    {
+        return $this->users->first()->phone;
     }
 
     public function users()

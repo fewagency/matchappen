@@ -25,6 +25,31 @@
   </div>
 
   <div>
+    Email
+    <input type="email" name="email" value="{{ old('email', $workplace->email) }}" placeholder="{{ $workplace->fallback_email }}">
+  </div>
+
+  <div>
+    Telefon
+    <input type="text" name="phone" value="{{ old('phone', $workplace->phone) }}" placeholder="{{ $workplace->fallback_phone }}">
+  </div>
+
+  <div>
+    Adress
+    <textarea name="address">{{ old('address', $workplace->address) }}</textarea>
+  </div>
+
+  <div>
+    Beskrivning
+    <textarea name="description">{{ old('description', $workplace->description) }}</textarea>
+  </div>
+
+  <div>
+    Hemsida
+    <input type="text" name="homepage" value="{{ old('homepage', $workplace->homepage) }}">
+  </div>
+
+  <div>
     <button type="submit">Spara</button>
   </div>
 </form>
