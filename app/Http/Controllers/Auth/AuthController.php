@@ -78,6 +78,8 @@ class AuthController extends Controller
         $user->workplace()->associate($workplace);
         $user->save();
 
+        //TODO: email admin after new workplace registration
+
         return $user;
     }
 
