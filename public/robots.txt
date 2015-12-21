@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /
 
 # TODO: exclude auth and password pages from robots
