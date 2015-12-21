@@ -27,6 +27,7 @@ class StoreWorkplaceRequest extends Request
     public function rules()
     {
         $workplace = $this->route('workplace');
+
         return $this->rulesForUpdate($workplace ? $workplace->getKey() : null);
     }
 
@@ -47,15 +48,15 @@ class StoreWorkplaceRequest extends Request
         $rules = [
             'name' => 'min:3|max:255|unique:workplaces,name',
             'employees' => 'integer|min:1|max:65535',
-            'description' => '',
+            'description' => 'string',
             'homepage' => 'url|max:255',
-            'contact_name' => 'max:100',
+            'contact_name' => 'string|max:100',
             'email' => 'email|max:50',
-            'phone' => ['max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
-            'address' => 'max:500',
+            'phone' => ['string', 'max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
+            'address' => 'string|max:500',
         ];
-        if($exclude_id_from_unique) {
-            $rules['name'] = $rules['name'] .= ','.$exclude_id_from_unique;
+        if ($exclude_id_from_unique) {
+            $rules['name'] = $rules['name'] .= ',' . $exclude_id_from_unique;
         }
 
         return $rules;
