@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property int workplace_id
  * @property Carbon start
+ * @property Carbon end
  */
 class Opportunity extends Model
 {
@@ -31,6 +32,12 @@ class Opportunity extends Model
     protected $fillable = [
         'max_visitors',
         'description',
+        'start',
+        'minutes',
+        'registration_end',
+        'address',
+        'contact_name',
+        'contact_phone',
     ];
 
     /**
@@ -52,6 +59,22 @@ class Opportunity extends Model
     public function workplace()
     {
         return $this->belongsTo('Matchappen\Workplace');
+    }
+
+    public function setStartAttribute($datetime) {
+        $this->attributes['start'] = Carbon::parse($datetime);
+    }
+
+    public function getMinutesAttribute() {
+        return $this->start->diffInMinutes($this->end);
+    }
+
+    public function setMinutesAttribute($minutes) {
+        $this->end = $this->start->copy()->addMinutes($minutes);
+    }
+
+    public function setRegistrationEndAttribute($datetime) {
+        $this->attributes['registration_end'] = Carbon::parse($datetime);
     }
 
     public function getNameAttribute()
