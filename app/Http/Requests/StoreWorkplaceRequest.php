@@ -36,6 +36,7 @@ class StoreWorkplaceRequest extends Request
         $rules = self::rulesForUpdate();
         $rules['name'] .= '|required';
         $rules['employees'] .= '|required';
+        $rules['address'] .= '|required';
 
         return $rules;
     }
