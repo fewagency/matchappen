@@ -28,6 +28,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot($router);
 
         $router->model('user', 'Matchappen\User');
+        $router->model('opportunity', 'Matchappen\Opportunity');
         $router->bind('workplace', function($value) {
             return Workplace::findBySlugOrIdOrFail($value);
         });
