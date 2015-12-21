@@ -6,7 +6,7 @@
 
   <a href="{{ action('WorkplaceController@index') }}">{{ trans('general.workplaces') }}</a>
 
-  <a href="{{ action('Auth\AuthController@getLogin') }}">Logga in!</a>
+  @include('user.partials.login_info')
 
   <!-- TODO: add teacher login to the index page -->
 
