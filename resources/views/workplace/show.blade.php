@@ -6,6 +6,8 @@
 
   <p>{{ $workplace->description }}</p>
 
+  <p>Kontaktperson: {{ $workplace->display_contact_name }}</p>
+
   @include('workplace.partials.admin_edit_link')
 
 @endsection

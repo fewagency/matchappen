@@ -20,6 +20,11 @@
   </div>
 
   <div>
+    Kontaktperson
+    <input type="text" name="contact_name" value="{{ old('contact_name', $workplace->contact_name) }}" placeholder="{{ $workplace->fallback_contact_name }}">
+  </div>
+
+  <div>
     <button type="submit">Spara</button>
   </div>
 </form>
