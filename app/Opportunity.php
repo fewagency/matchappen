@@ -2,17 +2,26 @@
 
 namespace Matchappen;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int workplace_id
+ * @property Carbon start
  */
 class Opportunity extends Model
 {
     use SoftDeletes;
 
     const MAX_VISITORS = 30;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at', 'start', 'end', 'registration_end'];
 
     /**
      * The attributes that are mass assignable.
@@ -47,7 +56,11 @@ class Opportunity extends Model
 
     public function getNameAttribute()
     {
-        return trans('general.oportunity_at_workplace', ['workplace' => $this->workplace->name]);
+        return trans('general.oportunity_at_workplace',
+            [
+                'workplace' => $this->workplace->name,
+                'time' => $this->start->format('j/n G:i'),
+            ]);
     }
 
 }
