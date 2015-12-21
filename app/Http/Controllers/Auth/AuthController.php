@@ -2,6 +2,7 @@
 
 namespace Matchappen\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use Matchappen\Http\Requests\StoreWorkplaceRequest;
 use Matchappen\User;
 use Matchappen\Workplace;
@@ -30,9 +31,23 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        //Trim user input
+        $input = $request->all();
+        foreach (['name', 'email', 'phone'] as $field_to_trim) {
+            if (isset($input['user'][$field_to_trim])) {
+                $input['user'][$field_to_trim] = trim($input['user'][$field_to_trim]);
+            }
+        }
+        foreach (array_keys(StoreWorkplaceRequest::rulesForCreate()) as $field_to_trim) {
+            if (isset($input['workplace'][$field_to_trim])) {
+                $input['workplace'][$field_to_trim] = trim($input['workplace'][$field_to_trim]);
+            }
+        }
+        $request->replace($input);
     }
 
     //TODO: make postRegister() redirect to getLogin() withInput if the email exists
