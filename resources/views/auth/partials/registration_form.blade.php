@@ -30,6 +30,11 @@
   </div>
 
   <div>
+    Ditt telefonnummer
+    <input type="text" name="user[phone]" value="{{ old('user.phone') }}">
+  </div>
+
+  <div>
     Önskat lösenord
     <input type="password" name="user[password]">
   </div>
