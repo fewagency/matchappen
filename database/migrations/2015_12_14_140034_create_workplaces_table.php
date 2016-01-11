@@ -14,7 +14,7 @@ class CreateWorkplacesTable extends Migration
     {
         Schema::create('workplaces', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('is_published')->default(false);
+            $table->boolean('is_published')->nullable()->default(null); //null requires attention by admin for publishing
             $table->string('name');
             $table->string('slug')->index();
             $table->unsignedSmallInteger('employees')->index();
