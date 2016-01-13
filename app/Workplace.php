@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string display_phone
  * @property string fallback_phone
  * @property string homepage
+ * @property bool|null is_published
  */
 class Workplace extends Model implements SluggableInterface
 {
@@ -45,6 +46,49 @@ class Workplace extends Model implements SluggableInterface
     ];
 
     /**
+     * Publish this workplace - to be used by admins
+     */
+    public function publish()
+    {
+        $this->is_published = true;
+        $this->save();
+    }
+
+    /**
+     * Unpublish this workplace to hide it from the front-end of the app
+     */
+    public function unpublish()
+    {
+        $this->is_published = false;
+        $this->save();
+    }
+
+    /**
+     * Request this workplace to be published by an admin
+     */
+    public function requestPublish()
+    {
+        $this->is_published = null;
+        $this->save();
+    }
+
+    /**
+     * @return bool true if workplace is published for display on the front-end of the app
+     */
+    public function isPublished()
+    {
+        return (bool)$this->is_published;
+    }
+
+    /**
+     * @return bool true if workplace is requested to be published by admin
+     */
+    public function isPublishRequested()
+    {
+        return is_null($this->is_published);
+    }
+
+    /**
      * Scope a query to only include published workplaces.
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -52,6 +96,16 @@ class Workplace extends Model implements SluggableInterface
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
+    }
+
+    /**
+     * Scope a query to only include workplaces waiting for publication.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublishRequested($query)
+    {
+        return $query->where('is_published', null);
     }
 
     public function getDisplayContactNameAttribute()
