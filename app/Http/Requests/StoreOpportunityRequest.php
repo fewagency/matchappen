@@ -54,7 +54,8 @@ class StoreOpportunityRequest extends Request
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,
             'description' => 'string|max:1000',
             'start' => 'string',
-            'minutes' => 'integer|required_with:start|in:' . implode(array_keys(trans('opportunity.minutes_options'))),
+            'minutes' => 'integer|required_with:start|in:' .
+                implode(',', array_keys(trans('opportunity.minutes_options'))),
             'registration_end' => 'string|required_with:start',
             'address' => 'string|max:400',
             'contact_name' => 'string|max:100',
