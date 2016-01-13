@@ -34,7 +34,7 @@ class OpportunityController extends Controller
     {
         $workplace = $request->user()->workplace;
 
-        $opportunity = new Opportunity();
+        $opportunity = value(new Opportunity())->workplace()->associate($workplace);
 
         return view('opportunity.create')->with(compact('opportunity', 'workplace'));
     }
