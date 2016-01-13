@@ -71,19 +71,27 @@ class Opportunity extends Model
         return $this->belongsTo('Matchappen\Workplace');
     }
 
-    public function setStartAttribute($datetime) {
+    public function setStartAttribute($datetime)
+    {
         $this->attributes['start'] = Carbon::parse($datetime);
     }
 
-    public function getMinutesAttribute() {
+    public function getMinutesAttribute()
+    {
+        if (empty($this->start)) {
+            return;
+        }
+
         return $this->start->diffInMinutes($this->end);
     }
 
-    public function setMinutesAttribute($minutes) {
+    public function setMinutesAttribute($minutes)
+    {
         $this->end = $this->start->copy()->addMinutes($minutes);
     }
 
-    public function setRegistrationEndAttribute($datetime) {
+    public function setRegistrationEndAttribute($datetime)
+    {
         $this->attributes['registration_end'] = Carbon::parse($datetime);
     }
 
