@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * @property string name
  * @property Collection users
+ * @property Collection opportunities
  * @property string address
  * @property string email
  * @property string display_email
@@ -141,6 +142,11 @@ class Workplace extends Model implements SluggableInterface
     public function users()
     {
         return $this->hasMany('Matchappen\User');
+    }
+
+    public function opportunities()
+    {
+        return $this->hasMany('Matchappen\Opportunity');
     }
 
     public function getRouteKeyName()
