@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int workplace_id
+ * @property int max_visitors
  * @property Carbon start
  * @property Carbon end
  * @property Workplace workplace
@@ -63,12 +64,60 @@ class Opportunity extends Model
     }
 
     /**
+     * Scope a query to only include opportunities in the future.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUpcoming($query)
+    {
+        return $query->where('start', '>', Carbon::now());
+    }
+
+    /**
+     * Scope a query to only include opportunities that can be viewed by front-end visitors.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeViewable($query)
+    {
+        return $query->published()->upcoming();
+    }
+
+    /**
+     * Scope a query to only include opportunities that have places left to book
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeHasPlacesLeft($query) {
+        return $query; //TODO: add conditions similar to hasPlacesLeft()
+    }
+
+    /**
+     * Scope a query to only include opportunities that can be viewed by front-end visitors.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeBookable($query)
+    {
+        return $query->viewable()->hasPlacesLeft();
+    }
+
+    /**
      * The workplace of this opportunity
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function workplace()
     {
         return $this->belongsTo('Matchappen\Workplace');
+    }
+
+    /**
+     * The bookings made on this opportunity
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function bookings()
+    {
+        return $this->hasMany('Matchappen\Booking');
     }
 
     public function setStartAttribute($datetime)
@@ -78,11 +127,9 @@ class Opportunity extends Model
 
     public function getMinutesAttribute()
     {
-        if (empty($this->start)) {
-            return;
+        if (!empty($this->start)) {
+            return $this->start->diffInMinutes($this->end);
         }
-
-        return $this->start->diffInMinutes($this->end);
     }
 
     public function setMinutesAttribute($minutes)
@@ -132,6 +179,36 @@ class Opportunity extends Model
                 'workplace' => $this->workplace->name,
                 'time' => $this->start->format('j/n G:i'),
             ]);
+    }
+
+    public function numberOfBookedVisitors()
+    {
+        return $this->bookings()->sum('visitors');
+    }
+
+    public function isPublished()
+    {
+        return $this->workplace->isPublished();
+    }
+
+    public function isUpcoming()
+    {
+        return $this->start->isFuture();
+    }
+
+    public function isViewable()
+    {
+        return $this->isPublished() and $this->isUpcoming();
+    }
+
+    public function hasPlacesLeft()
+    {
+        return $this->max_visitors > $this->numberOfBbookedVisitors();
+    }
+
+    public function isBookable()
+    {
+        return $this->isViewable() and $this->hasPlacesLeft();
     }
 
 }

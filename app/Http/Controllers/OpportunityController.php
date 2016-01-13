@@ -20,13 +20,17 @@ class OpportunityController extends Controller
 
     public function index()
     {
-        $opportunities = Opportunity::published()->get();
+        $opportunities = Opportunity::viewable()->get();
 
         return view('opportunity.index')->with(compact('opportunities'));
     }
 
     public function show(Opportunity $opportunity)
     {
+        if (!$opportunity->isViewable()) {
+            return redirect(action('OpportunityController@index'));
+        }
+
         return view('opportunity.show')->with(compact('opportunity'));
     }
 

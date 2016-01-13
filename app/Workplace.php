@@ -139,14 +139,31 @@ class Workplace extends Model implements SluggableInterface
         return $this->users->first()->phone;
     }
 
+    /**
+     * The users connected to this workplace
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function users()
     {
         return $this->hasMany('Matchappen\User');
     }
 
+    /**
+     * The opportunities of this workplace
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function opportunities()
     {
         return $this->hasMany('Matchappen\Opportunity');
+    }
+
+    /**
+     * The future opportunities of this workplace
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function upcomingOpportunities()
+    {
+        return $this->opportunities()->upcoming();
     }
 
     public function getRouteKeyName()
