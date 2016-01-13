@@ -50,7 +50,7 @@ class StoreWorkplaceRequest extends Request
             'homepage' => 'url|max:255',
             'contact_name' => 'string|max:100',
             'email' => 'email|max:50',
-            'phone' => ['string', 'max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
+            'phone' => ['string', 'max:20', 'regex:'.trans('general.local_phone_regex')],
             'address' => 'string|max:500',
         ];
         if ($exclude_id_from_unique) {
