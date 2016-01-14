@@ -25,12 +25,18 @@ class BookingController extends Controller
         }
         $booking = new Booking($request->input());
         $booking->opportunity()->associate($opportunity);
-        if (true) { //TODO: check that teacher is not logged in
-            //TODO: generate verification token and email to pupil
-            $booking->reserved_until = Carbon::parse('+1 hour'); //TODO: set reserved_until to the tokens expiry time
-        }
-        $booking->save();
+        if (false) { //TODO: check if supervisor is logged in
+            $booking->save();
 
-        return view('booking.complete');
+            return view('booking.complete'); //TODO: make the booking.complete view different for supervisors
+        } else {
+            $booking->reserved_until = Carbon::parse('+1 hour');
+            $booking->save();
+            $token = $booking->generateAccessToken($booking->email);
+
+            //TODO: email token to pupil
+
+            return view('booking.complete');
+        }
     }
 }
