@@ -1,6 +1,6 @@
 @inject('carbon', '\Carbon\Carbon')
 <form method="POST"
-      action="{{ $opportunity->exists() ? action('OpportunityController@update', $opportunity->getKey()) : action('OpportunityController@store') }}"
+      action="{{ $opportunity->exists() ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store') }}"
 >
   {!! csrf_field() !!}
 
@@ -54,7 +54,7 @@
 
   <div>
     Telefon
-    <input type="text" name="contact_phone" value="{{ old('contact_phone', $opportunity->contact_phone) }}" placeholder="{{ $opportunity->fallback_contact_phone }}">
+    <input type="tel" name="contact_phone" value="{{ old('contact_phone', $opportunity->contact_phone) }}" placeholder="{{ $opportunity->fallback_contact_phone }}">
   </div>
 
   <div>
