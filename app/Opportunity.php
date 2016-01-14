@@ -89,7 +89,7 @@ class Opportunity extends Model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeHasPlacesLeft($query) {
-        return $query; //TODO: add conditions similar to hasPlacesLeft()
+        return $query; //TODO: scopeHasPlacesLeft() should have conditions similar to hasPlacesLeft()
     }
 
     /**
