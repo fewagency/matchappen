@@ -48,7 +48,7 @@ class StoreWorkplaceRequest extends Request
             'employees' => 'integer|min:1|max:65535',
             'description' => 'string',
             'homepage' => 'url|max:255',
-            'contact_name' => 'string|max:100',
+            'contact_name' => 'string|min:5|max:100',
             'email' => 'email|max:50',
             'phone' => ['string', 'max:20', 'regex:'.trans('general.local_phone_regex')],
             'address' => 'string|max:500',
