@@ -17,6 +17,8 @@ Route::group(['prefix' => trans('general.opportunities')], function () {
     Route::post('store', 'OpportunityController@store');
     Route::get('{opportunity}/edit', 'OpportunityController@edit');
     Route::post('{opportunity}/update', 'OpportunityController@update');
+    Route::get('{opportunity}/boka', 'OpportunityController@booking');
+    Route::post('{opportunity}/boka', 'BookingController@store');
     Route::get('{opportunity}', 'OpportunityController@show');
 });
 

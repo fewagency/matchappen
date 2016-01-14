@@ -69,4 +69,13 @@ class OpportunityController extends Controller
 
         return redirect()->action('OpportunityController@edit', $opportunity->getKey());
     }
+
+    public function booking(Opportunity $opportunity)
+    {
+        if (!$opportunity->isBookable()) {
+            return redirect(action('OpportunityController@show', $opportunity));
+        }
+
+        return view('opportunity.booking')->with(compact('opportunity'));
+    }
 }
