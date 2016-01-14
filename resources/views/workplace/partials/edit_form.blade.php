@@ -31,7 +31,7 @@
 
   <div>
     Telefon
-    <input type="text" name="phone" value="{{ old('phone', $workplace->phone) }}" placeholder="{{ $workplace->fallback_phone }}">
+    <input type="tel" name="phone" value="{{ old('phone', $workplace->phone) }}" placeholder="{{ $workplace->fallback_phone }}">
   </div>
 
   <div>

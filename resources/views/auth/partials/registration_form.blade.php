@@ -36,7 +36,7 @@
 
   <div>
     Ditt telefonnummer
-    <input type="text" name="user[phone]" value="{{ old('user.phone') }}">
+    <input type="tel" name="user[phone]" value="{{ old('user.phone') }}">
   </div>
 
   <div>
