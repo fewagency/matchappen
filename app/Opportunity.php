@@ -201,9 +201,13 @@ class Opportunity extends Model
         return $this->isPublished() and $this->isUpcoming();
     }
 
+    public function placesLeft() {
+        return max(0, $this->max_visitors - $this->numberOfBookedVisitors());
+    }
+
     public function hasPlacesLeft()
     {
-        return $this->max_visitors > $this->numberOfBbookedVisitors();
+        return $this->placesLeft() > 0;
     }
 
     public function isBookable()
