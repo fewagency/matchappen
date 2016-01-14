@@ -36,6 +36,6 @@ class CreateWorkplacesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('companies');
+        Schema::drop('workplaces');
     }
 }
