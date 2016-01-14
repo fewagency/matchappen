@@ -27,6 +27,10 @@ class WorkplaceController extends Controller
 
     public function show(Workplace $workplace)
     {
+        if (!$workplace->isPublished()) {
+            return redirect(action('WorkplaceController@index'));
+        }
+
         return view('workplace.show')->with(compact('workplace'));
     }
 
