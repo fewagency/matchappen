@@ -48,6 +48,5 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('Matchappen\Services\EmailTokenGuard');
-        $this->app->singleton('Matchappen\Services\EmailTokenGate');
     }
 }
