@@ -39,4 +39,15 @@ class AuthServiceProvider extends ServiceProvider
             return $token->generateToken();
         });
     }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('Matchappen\Services\EmailTokenGuard');
+        $this->app->singleton('Matchappen\Services\EmailTokenGate');
+    }
 }
