@@ -22,6 +22,12 @@ Route::group(['prefix' => trans('general.opportunities')], function () {
     Route::get('{opportunity}', 'OpportunityController@show');
 });
 
+Route::group(['prefix' => 'bokning'], function () {
+    Route::get('reserverad', 'BookingController@reserved');
+    Route::get('klar', 'BookingController@completed');
+    Route::get('{booking}', 'BookingController@show');
+});
+
 // Dashboard for workplaces and admins
 Route::get('hem', 'UserController@dashboard')->name('dashboard');
 

@@ -2,6 +2,7 @@
 
 namespace Matchappen;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -9,6 +10,10 @@ use Illuminate\Support\Str;
 /**
  * @property string token
  * @property string email
+ * @property bool is_single_use
+ * @property Carbon valid_until
+ * @property Model|null object
+ * @property string|null object_action
  */
 class AccessToken extends Model
 {
@@ -53,5 +58,20 @@ class AccessToken extends Model
         } while (AccessToken::where(['email' => $this->email, 'token' => $this->token])->count());
 
         return (bool)$this->email;
+    }
+
+    public function setObjectActionAttribute($action)
+    {
+        $this->attributes['object_action'] = $action;
+        $this->getObjectUrl(); // Called to validate action with the object
+    }
+
+    /**
+     * Generate url to the object
+     * @return string
+     */
+    public function getObjectUrl()
+    {
+        return action($this->object_action, $this->object);
     }
 }

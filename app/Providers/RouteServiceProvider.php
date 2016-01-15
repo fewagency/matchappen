@@ -29,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $router->model('user', 'Matchappen\User');
         $router->model('opportunity', 'Matchappen\Opportunity');
+        $router->model('booking', 'Matchappen\Booking');
         $router->bind('workplace', function($value) {
             return Workplace::findBySlugOrIdOrFail($value);
         });

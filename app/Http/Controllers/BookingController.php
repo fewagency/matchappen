@@ -28,7 +28,7 @@ class BookingController extends Controller
         if (false) { //TODO: check if supervisor is logged in
             $booking->save();
 
-            return view('booking.complete'); //TODO: make the booking.complete view different for supervisors
+            return redirect(action('BookingController@show', $booking));
         } else {
             $booking->reserved_until = Carbon::parse('+1 hour');
             $booking->save();
@@ -36,7 +36,23 @@ class BookingController extends Controller
 
             //TODO: email token to pupil
 
-            return view('booking.complete');
+            return redirect(action('BookingController@reserved'))->with('reserved_booking_id', $booking->getKey());
         }
+    }
+
+    public function reserved(Request $request)
+    {
+        $booking = Booking::find($request->session()->get('reserved_booking_id'));
+        if (empty($booking)) {
+            return redirect(action('OpportunityController@index'));
+        }
+
+        return view('booking.reserved', compact('booking'));
+    }
+
+    public function show(Booking $booking)
+    {
+        //TODO: validate access to show Booking
+        return $booking;
     }
 }

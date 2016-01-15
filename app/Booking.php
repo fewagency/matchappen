@@ -38,9 +38,10 @@ class Booking extends Model
         'phone',
     ];
 
-    public function generateAccessToken($email)
+    public function generateAccessToken($email, Carbon $valid_until = null)
     {
-        $token = new AccessToken(['email' => $email, 'valid_until' => $this->reserved_until]);
+        $token = new AccessToken(['email' => $email, 'valid_until' => $valid_until ?: $this->reserved_until]);
+        $token->object_action = 'BookingController@show';
 
         return $this->accessTokens()->save($token) ? $token : false;
     }
