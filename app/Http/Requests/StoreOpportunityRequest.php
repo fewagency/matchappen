@@ -58,8 +58,8 @@ class StoreOpportunityRequest extends Request
                 implode(',', array_keys(trans('opportunity.minutes_options'))),
             'registration_end' => 'string|required_with:start',
             'address' => 'string|max:400',
-            'contact_name' => 'string|min:5|max:100',
-            'contact_phone' => ['string', 'max:20', 'regex:'.trans('general.local_phone_regex')],
+            'contact_name' => ['string', 'min:5', 'max:100', 'regex:' . trans('general.person_name_regex')],
+            'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
         ];
     }
 }

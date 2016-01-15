@@ -60,10 +60,10 @@ class User extends Model implements AuthenticatableContract,
     public static function rulesForCreate()
     {
         return [
-            'name' => 'required|string|min:3|max:255',
+            'name' => ['required', 'string', 'min:3', 'max:255', 'regex:' . trans('general.local_phone_regex')],
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|confirmed|min:6',
-            'phone' => ['required', 'string', 'max:20', 'regex:/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/'],
+            'phone' => ['required', 'string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
         ];
     }
 }
