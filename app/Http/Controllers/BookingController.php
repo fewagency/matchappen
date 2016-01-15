@@ -10,6 +10,7 @@ use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreBookingRequest;
 use Matchappen\Opportunity;
+use Matchappen\Services\EmailTokenGuard;
 
 class BookingController extends Controller
 {
@@ -18,14 +19,14 @@ class BookingController extends Controller
         $this->middleware('input.trim:name,email,supervisor_email,phone', ['only' => ['update', 'store']]);
     }
 
-    public function store(Opportunity $opportunity, StoreBookingRequest $request)
+    public function store(Opportunity $opportunity, StoreBookingRequest $request, EmailTokenGuard $guard)
     {
         if (!$opportunity->isBookable()) {
             return redirect(action('OpportunityController@show', $opportunity));
         }
         $booking = new Booking($request->input());
         $booking->opportunity()->associate($opportunity);
-        if (false) { //TODO: check if supervisor is logged in
+        if ($guard->checkSupervisor()) {
             $booking->save();
 
             return redirect(action('BookingController@show', $booking));
@@ -50,9 +51,10 @@ class BookingController extends Controller
         return view('booking.reserved', compact('booking'));
     }
 
-    public function show(Booking $booking)
+    public function show(Booking $booking, EmailTokenGuard $guard)
     {
         //TODO: validate access to show Booking
+
         return $booking;
     }
 }

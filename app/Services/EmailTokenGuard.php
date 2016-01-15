@@ -21,6 +21,37 @@ class EmailTokenGuard
     }
 
     /**
+     * Determine if an email belongs to the current authenticated user.
+     *
+     * @param string $email
+     * @return bool
+     */
+    public function checkEmail($email)
+    {
+        return $this->email() === $email;
+    }
+
+    /**
+     * Determine if the current user is a supervisor.
+     *
+     * @return bool
+     */
+    public function checkSupervisor()
+    {
+        return (bool)$this->isSupervisorEmail($this->email());
+    }
+
+    /**
+     * Determine if the supplied email address belongs to a supervisor.
+     *
+     * @return bool
+     */
+    public function isSupervisorEmail($email)
+    {
+        return (bool)preg_match(config('school.supervisor_email_regex'), $email);
+    }
+
+    /**
      * Determine if the current user is a guest.
      *
      * @return bool
