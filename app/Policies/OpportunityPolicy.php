@@ -20,12 +20,15 @@ class OpportunityPolicy
         //
     }
 
-    public function update(User $user, Opportunity $opportunity)
+    public function before($user, $ability)
     {
         if ($user->is_admin) {
             return true;
         }
+    }
 
+    public function update(User $user, Opportunity $opportunity)
+    {
         return $user->workplace_id === $opportunity->workplace_id;
     }
 }
