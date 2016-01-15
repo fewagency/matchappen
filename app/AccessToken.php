@@ -63,7 +63,7 @@ class AccessToken extends Model
     public function setObjectActionAttribute($action)
     {
         $this->attributes['object_action'] = $action;
-        $this->getObjectUrl(); // Called to validate action with the object
+        $this->getObjectUrl(); // Called here to validate action with the object
     }
 
     /**
