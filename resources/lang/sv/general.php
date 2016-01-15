@@ -10,8 +10,8 @@ return [
     'opportunity' => 'tillfälle',
     'opportunities' => 'tillfällen',
     'edu-staff' => 'skolpersonal',
-    'oportunity_at_workplace' => 'besök hos :workplace :time',
+    'opportunity_at_workplace' => 'besök hos :workplace :time',
 
     'local_phone_regex' => '/^(\+46 ?|0)[1-9]\d?-?(\d ?){5,}$/',
-    'person_name_regex' => '/^.+\s.+/',
+    'personal_name_regex' => '/^.+\s.+/',
 ];
