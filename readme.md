@@ -12,13 +12,14 @@ Built on the [Laravel](http://laravel.com/docs) 5 framework.
 ### Building assets
 We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` in the project root and then `gulo` or `gulp watch` will build the assets during development.
 
-### App structure
+## App structure
 The base PHP namespace is `Matchappen`.
 
-[Controllers](https://laravel.com/docs/controllers) are found in [app/Http/Controllers] and the routes to them in [app/Http/routes.php].
+[Controllers](https://laravel.com/docs/controllers) are found in (app/Http/Controllers) and the routes to them in
+(app/Http/routes.php).
 Route-Model binding is configured in [app/Providers/RouteServiceProvider.php].
 
-#### Models
+### Models
 Models are placed directly in the [app] directory.
 
 [Workplace](app/Workplace.php) represents companies/organisations that students can get in contact with.
@@ -33,7 +34,7 @@ If a `Booking` has `reserved_until` time set, it should be soft-deleted after th
 
 [User](app/User) represents `Workplace` users as well as system wide admins (identified by `is_admin`).
 
-#### Authentication and Authorization
+### Authentication and Authorization
 Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/authentication),
 each an instance of the `User` model.
 These users log in and out using the standard Laravel (AuthController)[app/Http/Controllers/Auth/AuthController.php]
@@ -46,9 +47,9 @@ privileges for these token-users.
 
 Authorization policies for models are defined in [app/Policies], registered in [app/Providers/AuthServiceProvider.php]
 and can be checked throughout the app's controllers, blade-views, etc the
-(standard Laravel ways)[https://laravel.com/docs/authorization#checking-policies].
+[standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
 
-#### Middleware
+### Middleware
 There's a custom created middleware for trimming excess whitespace from user input defined in
 [app/Http/Middleware/InputTrim.php].
 A good example of trim-middleware use is in the constructor of the
