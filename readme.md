@@ -15,9 +15,9 @@ We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so ru
 ## App structure
 The base PHP namespace is `Matchappen`.
 
-[Controllers](https://laravel.com/docs/controllers) are found in [app/Http/Controllers](/app/Http/Controllers) and the
-routes to them in [app/Http/routes.php](/app/Http/routes.php).
-Route-Model binding is configured in ()[app/Providers/RouteServiceProvider.php].
+[Controllers](https://laravel.com/docs/controllers) are found in [app/Http/Controllers](app/Http/Controllers) and the
+routes to them in [app/Http/routes.php](app/Http/routes.php).
+Route-Model binding is configured in [app/Providers/RouteServiceProvider.php](app/Providers/RouteServiceProvider.php).
 
 ### Models
 Models are placed directly in the [app] directory.
@@ -45,13 +45,14 @@ log in when necessary using their email address and and an `AccessToken` instanc
 The [Matchappen\Services\EmailTokenGuard](app/Services/EmailTokenGuard.php) keeps track of the current login status and
 privileges for these token-users.
 
-Authorization policies for models are defined in [app/Policies], registered in [app/Providers/AuthServiceProvider.php]
-and can be checked throughout the app's controllers, blade-views, etc the
+Authorization policies for models are defined in [app/Policies](app/Policies), registered in
+(app/Providers/AuthServiceProvider.php)[app/Providers/AuthServiceProvider.php]
+and can be checked throughout controllers, blade-views, etc using the
 [standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
 
 ### Middleware
 There's a custom created middleware for trimming excess whitespace from user input defined in
-[app/Http/Middleware/InputTrim.php].
+(app/Http/Middleware/InputTrim.php)[app/Http/Middleware/InputTrim.php].
 A good example of trim-middleware use is in the constructor of the
 [BookingController](app/Http/Controllers/BookingController.php).
 
