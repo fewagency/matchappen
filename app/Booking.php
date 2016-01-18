@@ -69,5 +69,15 @@ class Booking extends Model
         return $this->visitors > 1;
     }
 
-    // TODO: create accessors for visitor_name and supervisor_name on Booking
+    /**
+     * Determine if the supplied email address is related to the booking.
+     *
+     * @param string $email
+     * @return bool
+     */
+    public function checkEmail($email) {
+        return $this->email === $email or $this->supervisor_email === $email;
+    }
+
+    // TODO: create accessor for visitor_name on Booking
 }

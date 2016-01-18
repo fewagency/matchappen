@@ -53,7 +53,10 @@ class BookingController extends Controller
 
     public function show(Booking $booking, EmailTokenGuard $guard)
     {
-        //TODO: validate access to show Booking
+        if (!$booking->checkEmail($guard->email())) {
+            // TODO: allow user to email new token to access this booking?
+            abort(403, 'Access denied');
+        }
 
         return $booking;
     }
