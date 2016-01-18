@@ -3,6 +3,13 @@ namespace Matchappen\Services;
 
 use Session;
 
+/**
+ * An instance of this class handles the logins for token-authenticated users.
+ *
+ * This Guard is inspired by Illuminate\Contracts\Auth\Guard
+ * Because we have no user repository pattern for these token-users, this class becomes the
+ * interface for all authentication as well as privilege checking for token-users.
+ */
 class EmailTokenGuard
 {
     /**
@@ -21,7 +28,7 @@ class EmailTokenGuard
     }
 
     /**
-     * Determine if an email belongs to the current authenticated user.
+     * Determine if an email address belongs to the current authenticated user.
      *
      * @param string $email
      * @return bool
