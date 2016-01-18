@@ -10,7 +10,8 @@ Built on the [Laravel](http://laravel.com/docs) 5 framework.
 [Configure PhpStorm](https://github.com/fewagency/best-practices/blob/master/Configure%20PhpStorm%20for%20Laravel%20project.md) if relevant.
 
 ### Building assets
-We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` in the project root and then `gulo` or `gulp watch` will build the assets during development.
+We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` in the project root
+and then `gulo` or `gulp watch` will build the assets during development.
 
 ## App structure
 The base PHP namespace is `Matchappen`.
@@ -32,16 +33,16 @@ If a `Booking` has `reserved_until` time set, it should be soft-deleted after th
 
 [Occupation](app/Occupation.php) represents occupations that are related to `Workplace` and `Opportunity`.
 
-[User](app/User) represents `Workplace` users as well as system wide admins (identified by `is_admin`).
+[User](app/User.php) represents `Workplace` users as well as system wide admins (identified by `is_admin`).
 
 ### Authentication and Authorization
 Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/authentication),
 each an instance of the `User` model.
-These users log in and out using the standard Laravel (AuthController)[app/Http/Controllers/Auth/AuthController.php]
-and reset their passwords through the (PasswordController)[app/Http/Controllers/Auth/PasswordController.php]
+These users log in and out using the standard Laravel [AuthController](app/Http/Controllers/Auth/AuthController.php)
+and reset their passwords through the [PasswordController](app/Http/Controllers/Auth/PasswordController.php)
 
 Students as well as their supervisors (teachers, vocational guidance counselors _SYV_, and other school personnel)
-log in when necessary using their email address and and an `AccessToken` instance.
+log in when necessary using their email address and and an [AccessToken](app/AccessToken.php) instance.
 The [Matchappen\Services\EmailTokenGuard](app/Services/EmailTokenGuard.php) keeps track of the current login status and
 privileges for these token-users.
 
