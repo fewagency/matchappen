@@ -15,8 +15,8 @@ We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so ru
 ## App structure
 The base PHP namespace is `Matchappen`.
 
-[Controllers](https://laravel.com/docs/controllers) are found in (app/Http/Controllers) and the routes to them in
-(app/Http/routes.php).
+[Controllers](https://laravel.com/docs/controllers) are found in [/app/Http/Controllers] and the routes to them in
+(/app/Http/routes.php).
 Route-Model binding is configured in [app/Providers/RouteServiceProvider.php].
 
 ### Models
