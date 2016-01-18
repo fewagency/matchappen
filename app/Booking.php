@@ -68,4 +68,6 @@ class Booking extends Model
     {
         return $this->visitors > 1;
     }
+
+    // TODO: create accessors for visitor_name and supervisor_name on Booking
 }
