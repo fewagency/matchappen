@@ -3,16 +3,18 @@
 namespace Matchappen;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property Carbon|null reserved_until Soft-delete instances where this time has passed
- * @property string name of the visitor or the supervisor if booking for a group
+ * @property string name of the visitor - or the supervisor if booking for a group
  * @property integer visitors >1 if booking is for a group
  * @property string|null email Email to the booked pupil
  * @property string supervisor_email
  * @property string|null phone to the visitor
+ * @property Collection access_tokens generated for this Booking
  */
 class Booking extends Model
 {

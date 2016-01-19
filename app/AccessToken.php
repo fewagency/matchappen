@@ -5,6 +5,7 @@ namespace Matchappen;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Str;
 
 /**
@@ -18,6 +19,15 @@ use Illuminate\Support\Str;
 class AccessToken extends Model
 {
     use SoftDeletes;
+    /**
+     * @var string the action for authenticating tokens
+     */
+    public $token_authentication_action = 'Auth\EmailTokenController@authenticate';
+
+    /**
+     * @var string table name for log
+     */
+    protected $log_table = 'access_token_log';
 
     /**
      * The attributes that should be mutated to dates.
@@ -25,6 +35,15 @@ class AccessToken extends Model
      * @var array
      */
     protected $dates = ['deleted_at', 'valid_until'];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_single_use' => 'boolean',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +56,14 @@ class AccessToken extends Model
         'is_single_use',
         'object_action',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        if (is_null($this->is_single_use)) {
+            $this->is_single_use = true;
+        }
+    }
 
     /**
      * Relation to the object this token is valid for
@@ -73,5 +100,68 @@ class AccessToken extends Model
     public function getObjectUrl()
     {
         return action($this->object_action, $this->object);
+    }
+
+    public function getTokenUrl()
+    {
+        $parameters['token'] = $this->token;
+        if ($this->is_single_use) {
+            $parameters['email'] = $this->email;
+        }
+
+        return action($this->token_authentication_action, $parameters);
+    }
+
+    /**
+     * @return bool true if valid time has passed
+     */
+    public function isExpired()
+    {
+        return $this->valid_until->isPast();
+    }
+
+    /**
+     * @return bool true if usage limit not reached for this token
+     */
+    public function isUsable()
+    {
+        return !($this->is_single_use and $this->getUsageCount());
+    }
+
+    /**
+     * @param string $status
+     */
+    public function logUsage($status)
+    {
+        $values = [
+            'created_at' => Carbon::now(),
+            'email' => $this->email,
+            'ip' => \Request::getClientIp(),
+            'status' => $status
+        ];
+        if ($this->exists) {
+            $values['access_token_id'] = $this->getKey();
+        } else {
+            $values['token'] = $this->token;
+        }
+        \DB::table($this->log_table)->insert($values);
+    }
+
+    public function getUsageCount()
+    {
+        return $this->getLogQueryBase()->count();
+    }
+
+    public function getUsageData()
+    {
+        return $this->getLogQueryBase()->get();
+    }
+
+    /**
+     * @return Builder
+     */
+    protected function getLogQueryBase()
+    {
+        return \DB::table($this->log_table)->where('access_token_id', $this->getKey());
     }
 }

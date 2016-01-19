@@ -17,8 +17,9 @@ class CreateAccessTokenLogTable extends Migration
 
             $table->unsignedBigInteger('access_token_id')->nullable()->index();
             $table->string('email')->index();
-            $table->string('token');
+            $table->string('token')->nullable();
             $table->string('ip', 39)->index();
+            $table->enum('status', ['success', 'missing', 'expired', 'used'])->nullable();
             $table->timestamp('created_at')->index();
         });
     }

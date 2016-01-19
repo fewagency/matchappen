@@ -2,6 +2,7 @@
 namespace Matchappen\Services;
 
 use Session;
+use Matchappen\AccessToken;
 
 /**
  * An instance of this class handles the logins for token-authenticated users.
@@ -79,6 +80,54 @@ class EmailTokenGuard
     }
 
     /**
+     * Validate a user's credentials.
+     *
+     * @param string $token
+     * @param string $email
+     * @return bool if the token exists
+     */
+    public function exists($token, $email)
+    {
+        $token = $this->getToken($token, $email);
+        if ($token->exists) {
+            return true;
+        }
+
+        $token->logUsage('missing');
+
+        return false;
+    }
+
+    /**
+     * Attempt to authenticate a user using the given credentials.
+     *
+     * @param string $token
+     * @param string $email
+     * @return string|bool false if not valid for use
+     */
+    public function attempt($token, $email)
+    {
+        $token = $this->getToken($token, $email);
+
+        if (empty($token)) {
+            return false;
+        } elseif ($token->isExpired()) {
+            $token->logUsage('expired');
+
+            return false;
+        } elseif (!$token->isUsable()) {
+            $token->logUsage('used');
+
+            return false;
+        }
+
+        $this->login($email);
+        $token->logUsage('success');
+
+        return $token->object_action ? $token->getObjectUrl() : true;
+    }
+
+    /**
      * Log a user into the application.
      *
      * @param string $email to log in
@@ -97,5 +146,16 @@ class EmailTokenGuard
     {
         Session::forget($this->email_session_key);
         //TODO: forget list of authenticated entities
+    }
+
+    /**
+     * Get a stored token, or a new instance if not found
+     * @param string $token
+     * @param string $email
+     * @return AccessToken
+     */
+    protected function getToken($token, $email)
+    {
+        return AccessToken::firstOrNew(compact('token', 'email'));
     }
 }
