@@ -49,5 +49,10 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Token authentication routes...
-Route::get('token/{token}/{email?}', 'Auth\EmailTokenController@getLogin'); //TODO: validate token length in route?
-Route::post('token/{token}', 'Auth\EmailTokenController@postLogin'); //TODO: validate token length in route?
+Route::group(['prefix' => 'token'], function () {
+    Route::get('logout', 'Auth\EmailTokenController@getLogout');
+    Route::get('email', 'Auth\EmailTokenController@getEmail');
+    Route::post('email', 'Auth\EmailTokenController@postEmail');
+    Route::get('{token}/{email?}', 'Auth\EmailTokenController@getLogin'); //TODO: validate token length in route?
+    Route::post('{token}', 'Auth\EmailTokenController@postLogin'); //TODO: validate token length in route?
+});

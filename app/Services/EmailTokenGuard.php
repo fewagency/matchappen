@@ -1,6 +1,7 @@
 <?php
 namespace Matchappen\Services;
 
+use Carbon\Carbon;
 use Session;
 use Matchappen\AccessToken;
 
@@ -157,5 +158,19 @@ class EmailTokenGuard
     protected function getToken($token, $email)
     {
         return AccessToken::firstOrNew(compact('token', 'email'));
+    }
+
+    /**
+     * Generate a new token for general login
+     * @param $email
+     * @param Carbon|null $valid_until defaults to 1 hour
+     * @return AccessToken
+     */
+    public function generateAccessToken($email, Carbon $valid_until = null)
+    {
+        $token = new AccessToken(['email' => $email, 'valid_until' => $valid_until ?: Carbon::parse('+1 hour')]);
+        $token->save();
+
+        return $token;
     }
 }

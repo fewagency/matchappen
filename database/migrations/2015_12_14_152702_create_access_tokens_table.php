@@ -24,7 +24,7 @@ class CreateAccessTokensTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique('email', 'token');
+            $table->unique(['email', 'token']);
         });
     }
 

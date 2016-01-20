@@ -22,7 +22,7 @@ class AccessToken extends Model
     /**
      * @var string the action for authenticating tokens
      */
-    public $token_authentication_action = 'Auth\EmailTokenController@authenticate';
+    public $token_authentication_action = 'Auth\EmailTokenController@getLogin';
 
     /**
      * @var string table name for log

@@ -16,7 +16,7 @@ class EmailTokenController extends Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the log in of users authenticated with email and token
-    | Inspired by \Illuminate\Foundation\Auth\AuthenticatesUsers
+    | Inspired by \Illuminate\Foundation\Auth\AuthenticatesUsers and \Illuminate\Foundation\Auth\ResetsPasswords
     |
     */
 
@@ -51,7 +51,7 @@ class EmailTokenController extends Controller
         if (!$this->guard->exists($token, $email)) {
             $this->incrementLoginAttempts($request);
 
-            return back()->withErrors(['email' => trans('auth.failed')])->withInput();
+            return redirect()->back()->withErrors(['email' => trans('auth.failed')])->withInput();
         }
 
         if ($token_url = $this->guard->attempt($token, $email)) {
@@ -61,6 +61,31 @@ class EmailTokenController extends Controller
         }
 
         return view('auth.token_invalidated');
+    }
+
+    public function getEmail()
+    {
+        //TODO: save previous() url as intended url in session - check auth middleware for inspiration
+        return view('auth.token_email');
+    }
+
+    public function postEmail(Request $request, EmailTokenGuard $guard)
+    {
+        $this->validate($request, ['email' => 'required|email']); //TODO: validate email against the rules for school supervisor emails
+
+        $email = $request->get('email');
+        $token = $guard->generateAccessToken($email);
+
+        //TODO: email token to supervisor
+
+        return redirect()->back()->with('status', trans('auth.token_sent'));
+    }
+
+    public function getLogout(EmailTokenGuard $guard)
+    {
+        $guard->logout();
+
+        return redirect('/');
     }
 
     /**
@@ -78,6 +103,7 @@ class EmailTokenController extends Controller
      */
     public function redirectPath()
     {
+        //TODO: check session for intended url
         return '/';
     }
 }

@@ -15,5 +15,6 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'token_sent' => 'We have e-mailed your login link!',
     'token_invalidated' => 'The token is no longer valid.',
 ];
