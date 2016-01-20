@@ -146,7 +146,7 @@ class EmailTokenGuard
     public function logout()
     {
         Session::forget($this->email_session_key);
-        //TODO: Also forget list of authenticated entities - if we create that feature
+        //Also forget list of authenticated entities - if we create that feature
     }
 
     /**
