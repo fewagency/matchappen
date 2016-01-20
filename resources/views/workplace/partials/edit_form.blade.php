@@ -14,11 +14,14 @@
     <input type="text" name="name" value="{{ old('name', $workplace->name) }}">
   </div>
 
+
+  @if($workplace->is_published !== null && \Auth::user()->is_admin)
   <div>
     Publicerat:
     <input type="hidden" name="is_published" value="0" />
     <input type="checkbox" name="is_published" value="1" {{ $workplace->is_published === 1 ? ' checked="checked"' : '' }} />
   </div>
+  @endif
 
   <div>
     Antal anställda

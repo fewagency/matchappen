@@ -8,7 +8,7 @@
 
   @include('workplace.partials.admin_edit_link')
 
-  @if(\Auth::user()->is_admin)
+  @if($workplace->is_published !== null && \Auth::user()->is_admin)
 
     <p>Publicerat: {{ $workplace->is_published === 1 ? 'Ja' : 'Nej' }}</p>
 
