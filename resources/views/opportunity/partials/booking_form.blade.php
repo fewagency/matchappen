@@ -1,4 +1,6 @@
 @if($opportunity->isBookable())
+  @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
+
   <form method="POST" action="{{ action('BookingController@store', $opportunity) }}">
     {!! csrf_field() !!}
 
@@ -15,14 +17,27 @@
       <input type="text" name="name" value="{{ old('name') }}">
     </div>
 
+    @if($token_guard->checkSupervisor())
+      <div>
+        Antal deltagare
+        <input type="number" name="visitors" value="{{ old('visitors', 1) }}" max="{{ $opportunity->placesLeft() }}">
+      </div>
+    @endif
     <div>
-      Din epost
+      @if($token_guard->checkSupervisor())
+        Elevens epost (om du bokar till en elev)
+      @else
+        Din epost
+      @endif
       <input type="email" name="email" value="{{ old('email') }}">
     </div>
-
     <div>
-      Din lärares epost (mentor eller SYV går också bra)
-      <input type="email" name="supervisor_email" value="{{ old('supervisor_email') }}">
+      @if($token_guard->checkSupervisor())
+        Din epost
+      @else
+        Din lärares epost (mentor eller SYV går också bra)
+      @endif
+      <input type="email" name="supervisor_email" value="{{ old('supervisor_email', $token_guard->email()) }}" @if($token_guard->checkSupervisor()) readonly @endif >
     </div>
 
     <div>
@@ -36,5 +51,10 @@
     <div>
       <button type="submit">Boka</button>
     </div>
+
+    @if(!$token_guard->checkSupervisor())
+      <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som skolpersonal?</a>
+    @endif
+
   </form>
 @endif

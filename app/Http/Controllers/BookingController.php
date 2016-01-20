@@ -29,6 +29,8 @@ class BookingController extends Controller
         if ($guard->checkSupervisor()) {
             $booking->save();
 
+            //TODO: email booking link to supervisor
+
             return redirect(action('BookingController@show', $booking));
         } else {
             $booking->reserved_until = Carbon::parse('+1 hour');
@@ -58,6 +60,7 @@ class BookingController extends Controller
             abort(403, 'Access denied');
         }
 
+        // TODO: create view for managing a booking
         return $booking;
     }
 }

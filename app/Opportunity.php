@@ -88,7 +88,8 @@ class Opportunity extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeHasPlacesLeft($query) {
+    public function scopeHasPlacesLeft($query)
+    {
         return $query; //TODO: scopeHasPlacesLeft() should have conditions similar to hasPlacesLeft()
     }
 
@@ -201,7 +202,8 @@ class Opportunity extends Model
         return $this->isPublished() and $this->isUpcoming();
     }
 
-    public function placesLeft() {
+    public function placesLeft()
+    {
         return max(0, $this->max_visitors - $this->numberOfBookedVisitors());
     }
 

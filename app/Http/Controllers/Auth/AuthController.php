@@ -50,6 +50,7 @@ class AuthController extends Controller
 
     //TODO: make postLogin() redirect to getRegister() withInput if user has triggered register action
     //TODO: make postLogin() redirect to Auth\PasswordController@getEmail withInput if user has triggered forgotten password action
+    //TODO: make postLogin() redirect to Auth\EmailTokenController@getEmail withInput if login failed and email matches supervisor email pattern
 
     /**
      * Get a validator for an incoming registration request.
