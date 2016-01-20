@@ -51,8 +51,7 @@ class EmailTokenController extends Controller
         if (!$this->guard->exists($token, $email)) {
             $this->incrementLoginAttempts($request);
 
-            //TODO: is there a better way to redirect to previous url from controllers?
-            return redirect(app(UrlGenerator::class)->previous())->withErrors(['email' => trans('auth.failed')])->withInput();
+            return back()->withErrors(['email' => trans('auth.failed')])->withInput();
         }
 
         if ($token_url = $this->guard->attempt($token, $email)) {
