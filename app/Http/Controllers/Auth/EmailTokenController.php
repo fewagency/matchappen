@@ -33,11 +33,46 @@ class EmailTokenController extends Controller
         $this->guard = $guard;
     }
 
+    /**
+     * Enter email to trigger token generation
+     */
+    public function getEmail(Request $request)
+    {
+        if (!session('status')) {
+            $request->session()->put('url.intended', \URL::previous());
+        }
+
+        return view('auth.token_email');
+    }
+
+    /**
+     * Generate token
+     */
+    public function postEmail(Request $request, EmailTokenGuard $guard)
+    {
+        $this->validate($request,
+            ['email' => ['required', 'email', 'regex:' . config('school.supervisor_email_regex')]]
+        );
+
+        $email = $request->get('email');
+        $token = $guard->generateAccessToken($email);
+
+        //TODO: email token to supervisor
+
+        return redirect()->back()->with('status', trans('auth.token_sent'));
+    }
+
+    /**
+     * Token link leads here for email+token validation
+     */
     public function getLogin($token, $email = null)
     {
         return view('auth.token_login')->with(compact('email', 'token'));
     }
 
+    /**
+     * Validates email+token and logs in
+     */
     public function postLogin(Request $request, $token)
     {
         $this->validate($request, ['email' => 'required|email']);
@@ -57,30 +92,19 @@ class EmailTokenController extends Controller
         if ($token_url = $this->guard->attempt($token, $email)) {
             $this->clearLoginAttempts($request);
 
-            return redirect(is_string($token_url) ? $token_url : $this->redirectPath());
+            if (is_string($token_url)) {
+                return redirect($token_url);
+            }
+
+            return redirect()->intended();
         }
 
         return view('auth.token_invalidated');
     }
 
-    public function getEmail()
-    {
-        //TODO: save previous() url as intended url in session - check auth middleware for inspiration
-        return view('auth.token_email');
-    }
-
-    public function postEmail(Request $request, EmailTokenGuard $guard)
-    {
-        $this->validate($request, ['email' => 'required|email']); //TODO: validate email against the rules for school supervisor emails
-
-        $email = $request->get('email');
-        $token = $guard->generateAccessToken($email);
-
-        //TODO: email token to supervisor
-
-        return redirect()->back()->with('status', trans('auth.token_sent'));
-    }
-
+    /**
+     * Log out token user
+     */
     public function getLogout(EmailTokenGuard $guard)
     {
         $guard->logout();
@@ -96,14 +120,5 @@ class EmailTokenController extends Controller
     public function loginUsername()
     {
         return 'email';
-    }
-
-    /**
-     * @return string url for redirect after successful login
-     */
-    public function redirectPath()
-    {
-        //TODO: check session for intended url
-        return '/';
     }
 }

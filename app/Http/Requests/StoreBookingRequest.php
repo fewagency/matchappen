@@ -25,12 +25,22 @@ class StoreBookingRequest extends Request
     {
         $opportunity = $this->route('opportunity');
 
-        //TODO: validate email and supervisor email against the rules for school emails
-
         return [
             'name' => ['required', 'max:255', 'regex:' . trans('general.personal_name_regex')],
-            'email' => 'required_without:visitors|required_if:visitors,1|email|max:255|unique:bookings,email,NULL,NULL,opportunity_id,' . $opportunity->getKey(),
-            'supervisor_email' => 'required|email|different:email',
+            'email' => [
+                'required_without:visitors',
+                'required_if:visitors,1',
+                'email',
+                'max:255',
+                'regex:' . config('school.supervisor_email_regex'),
+                'unique:bookings,email,NULL,NULL,opportunity_id,' . $opportunity->getKey(),
+            ],
+            'supervisor_email' => [
+                'required',
+                'email',
+                'different:email',
+                'regex:' . config('school.supervisor_email_regex'),
+            ],
             'phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
             'visitors' => 'int|min:1|max:' . $opportunity->placesLeft(),
         ];
