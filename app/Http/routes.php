@@ -49,4 +49,5 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Token authentication routes...
-Route::any('token/{token}/{email?}', 'Auth\EmailTokenController@authenticate'); //TODO: validate token length in route?
+Route::get('token/{token}/{email?}', 'Auth\EmailTokenController@getLogin'); //TODO: validate token length in route?
+Route::post('token/{token}', 'Auth\EmailTokenController@postLogin'); //TODO: validate token length in route?

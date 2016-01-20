@@ -125,7 +125,7 @@ class AccessToken extends Model
      */
     public function isUsable()
     {
-        return !($this->is_single_use and $this->getUsageCount());
+        return $this->exists and !($this->is_single_use and $this->getUsageCount());
     }
 
     /**

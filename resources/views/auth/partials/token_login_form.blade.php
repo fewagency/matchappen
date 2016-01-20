@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" action="{{ action('Auth\EmailTokenController@postLogin', $token) }}">
   {!! csrf_field() !!}
 
   @if (count($errors) > 0)
@@ -11,7 +11,7 @@
 
   <div>
     Email
-    <input type="email" name="email" value="{{ old('email') }}">
+    <input type="email" name="email" value="{{ old('email', $email) }}">
   </div>
 
   <div>

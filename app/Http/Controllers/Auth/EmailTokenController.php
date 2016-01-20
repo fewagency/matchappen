@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Matchappen\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Matchappen\Services\EmailTokenGuard;
+use Illuminate\Routing\UrlGenerator;
 
 class EmailTokenController extends Controller
 {
@@ -15,6 +16,7 @@ class EmailTokenController extends Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles the log in of users authenticated with email and token
+    | Inspired by \Illuminate\Foundation\Auth\AuthenticatesUsers
     |
     */
 
@@ -31,27 +33,29 @@ class EmailTokenController extends Controller
         $this->guard = $guard;
     }
 
-    public function authenticate(Request $request, $token_string, $email = null)
+    public function getLogin($token, $email = null)
     {
+        return view('auth.token_login')->with(compact('email', 'token'));
+    }
+
+    public function postLogin(Request $request, $token)
+    {
+        $this->validate($request, ['email' => 'required|email']);
+
         if ($this->hasTooManyLoginAttempts($request)) {
             return $this->sendLockoutResponse($request);
         }
 
-        $this->validate($request, ['email' => 'email']);
+        $email = $request->input('email');
 
-        $email = $request->input('email', $email);
-
-        if (empty($email)) {
-            return view('auth.token_login');
-        }
-
-        if (!$this->guard->exists($token_string, $email)) {
+        if (!$this->guard->exists($token, $email)) {
             $this->incrementLoginAttempts($request);
 
-            return redirect($request->url())->withErrors(['email' => trans('auth.failed')])->withInput();
+            //TODO: is there a better way to redirect to previous url from controllers?
+            return redirect(app(UrlGenerator::class)->previous())->withErrors(['email' => trans('auth.failed')])->withInput();
         }
 
-        if ($token_url = $this->guard->attempt($token_string, $email)) {
+        if ($token_url = $this->guard->attempt($token, $email)) {
             $this->clearLoginAttempts($request);
 
             return redirect(is_string($token_url) ? $token_url : $this->redirectPath());
