@@ -44,6 +44,7 @@ class Workplace extends Model implements SluggableInterface
         'phone',
         'address',
         'homepage',
+        'is_published'
     ];
 
     /**

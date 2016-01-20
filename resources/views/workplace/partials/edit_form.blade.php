@@ -15,6 +15,12 @@
   </div>
 
   <div>
+    Publicerat:
+    <input type="hidden" name="is_published" value="0" />
+    <input type="checkbox" name="is_published" value="1" {{ $workplace->is_published === 1 ? ' checked="checked"' : '' }} />
+  </div>
+
+  <div>
     Antal anställda
     <input type="number" name="employees" min="1" max="65535" value="{{ old('employees', $workplace->employees) }}">
   </div>

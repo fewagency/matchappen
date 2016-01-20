@@ -12,10 +12,18 @@ class UserController extends Controller
     public function dashboard(Request $request)
     {
         $user = $request->user();
+
         if ($user->is_admin) {
-            return view('user.dashboard_admin')->with(['user' => $user]);
+
+            return view('user.dashboard_admin')->with([
+                'user' => $user,
+                'new_workplaces' => \Matchappen\Workplace::publishRequested()->get()
+            ]);
+
         } else {
+
             return view('user.dashboard_workplace')->with(['user' => $user, 'workplace' => $user->workplace]);
+
         }
     }
 }
