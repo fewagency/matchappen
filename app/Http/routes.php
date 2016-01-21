@@ -26,6 +26,7 @@ Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function 
 Route::group(['prefix' => 'bokning'], function () {
     Route::get('reserverad', 'BookingController@reserved');
     Route::get('klar', 'BookingController@completed');
+    Route::post('{booking}/avboka', 'BookingController@postCancel');
     Route::get('{booking}', 'BookingController@show');
 });
 

@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string display_contact_phone
  * @property string fallback_contact_phone
  * @property Collection bookings
+ * @property Carbon registration_end
  */
 class Opportunity extends Model
 {
@@ -218,7 +219,7 @@ class Opportunity extends Model
 
     public function isBookable()
     {
-        return $this->isViewable() and $this->hasPlacesLeft();
+        return !$this->isRegistrationClosed() and $this->hasPlacesLeft();
     }
 
     public function clearExpiredBookings()
@@ -226,6 +227,11 @@ class Opportunity extends Model
         $this->bookings->each(function (Booking $booking) {
             $booking->clearIfExpired();
         });
+    }
+
+    public function isRegistrationClosed()
+    {
+        return $this->registration_end->isPast();
     }
 
 }

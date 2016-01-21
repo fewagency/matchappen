@@ -9,6 +9,7 @@ use Matchappen\Booking;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreBookingRequest;
+use Matchappen\Http\Requests\CancelBookingRequest;
 use Matchappen\Opportunity;
 use Matchappen\Services\EmailTokenGuard;
 
@@ -66,7 +67,15 @@ class BookingController extends Controller
             // TODO: email admin link to pupil
         }
 
-        // TODO: create view for managing a booking
-        return $booking;
+        $opportunity = $booking->opportunity;
+
+        return view('booking.edit')->with(compact('booking', 'opportunity'));
+    }
+
+    public function postCancel(Booking $booking, CancelBookingRequest $request)
+    {
+        //TODO: cancel booking (soft-delete)
+        //TODO: notify supervisor
+        //TODO: redirect to user's list of bookings, a dashboard, with a status message
     }
 }

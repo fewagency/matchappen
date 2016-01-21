@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string supervisor_email
  * @property string|null phone to the visitor
  * @property Collection access_tokens generated for this Booking
+ * @property Opportunity opportunity
  */
 class Booking extends Model
 {
@@ -144,5 +145,11 @@ class Booking extends Model
         return $this->reserved_until and $this->reserved_until->isPast();
     }
 
-
+    /**
+     * @return bool true if the booking can be cancelled
+     */
+    public function isCancelable()
+    {
+        return !$this->opportunity->isRegistrationClosed();
+    }
 }

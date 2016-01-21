@@ -2,14 +2,12 @@
 
   <div style="border: solid 2px red; padding: 8px">
 
-    <form action="{{ action('WorkplaceController@approve', $workplace->getKey()) }}" method="post">
+    <form action="{{ action('WorkplaceController@approve', $workplace->getKey()) }}" method="POST">
+      {!! csrf_field() !!}
 
       <p>{{ trans('workplace.not-approved') }}</p>
 
       <input type="submit" value="{{ trans('workplace.approve-btn-text') }}">
-
-      {!! csrf_field() !!}
-
     </form>
 
   </div>
