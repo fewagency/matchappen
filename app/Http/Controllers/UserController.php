@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
+use Matchappen\Workplace;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
 
             return view('user.dashboard_admin')->with([
                 'user' => $user,
-                'new_workplaces' => \Matchappen\Workplace::publishRequested()->get()
+                'new_workplaces' => Workplace::publishRequested()->get()
             ]);
 
         } else {
