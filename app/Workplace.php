@@ -51,8 +51,10 @@ class Workplace extends Model implements SluggableInterface
      */
     public function publish()
     {
-        $this->is_published = true;
-        $this->save();
+        if($this->exists) {
+            $this->is_published = true;
+            $this->save();
+        }
     }
 
     /**
@@ -60,8 +62,10 @@ class Workplace extends Model implements SluggableInterface
      */
     public function unpublish()
     {
-        $this->is_published = false;
-        $this->save();
+        if($this->exists) {
+            $this->is_published = false;
+            $this->save();
+        }
     }
 
     /**
@@ -69,8 +73,10 @@ class Workplace extends Model implements SluggableInterface
      */
     public function requestPublish()
     {
-        $this->is_published = null;
-        $this->save();
+        if($this->exists) {
+            $this->is_published = null;
+            $this->save();
+        }
     }
 
     /**

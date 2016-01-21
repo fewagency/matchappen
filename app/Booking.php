@@ -66,9 +66,20 @@ class Booking extends Model
         return $this->morphMany('Matchappen\AccessToken', 'object');
     }
 
+    /**
+     * @return bool true if this booking is for a group
+     */
     public function isGroup()
     {
         return $this->visitors > 1;
+    }
+
+    /**
+     * @return bool true if this booking is confirmed, by visitor or supervisor
+     */
+    public function isConfirmed()
+    {
+        return $this->exists and !$this->reserved_until;
     }
 
     /**
@@ -77,9 +88,61 @@ class Booking extends Model
      * @param string $email
      * @return bool
      */
-    public function checkEmail($email) {
-        return $this->email === $email or $this->supervisor_email === $email;
+    public function checkEmail($email)
+    {
+        return $this->checkVisitorEmail($email) or $this->checkSupervisorEmail($email);
     }
 
-    // TODO: create accessor for visitor_name on Booking
+    /**
+     * Determine if the supplied email address matches the visitor address
+     *
+     * @param string $email
+     * @return bool
+     */
+    public function checkVisitorEmail($email)
+    {
+        return $this->email === $email;
+    }
+
+    /**
+     * Determine if the supplied email address matches the supervisor address
+     *
+     * @param string $email
+     * @return bool
+     */
+    public function checkSupervisorEmail($email)
+    {
+        return $this->supervisor_email === $email;
+    }
+
+    /**
+     * Mark this booking as confirmed by visitor
+     */
+    public function confirm()
+    {
+        if ($this->exists and !$this->isConfirmed()) {
+            $this->reserved_until = null;
+            $this->save();
+        }
+    }
+
+    /**
+     * Soft-delete this booking if its reservation is no longer valid
+     */
+    public function clearIfExpired()
+    {
+        if ($this->isExpired() and $this->exists) {
+            $this->delete();
+        }
+    }
+
+    /**
+     * @return bool true if reservation time has passed
+     */
+    public function isExpired()
+    {
+        return $this->reserved_until and $this->reserved_until->isPast();
+    }
+
+
 }

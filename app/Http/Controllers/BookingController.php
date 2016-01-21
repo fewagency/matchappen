@@ -60,6 +60,12 @@ class BookingController extends Controller
             abort(403, 'Access denied');
         }
 
+        if (!$booking->isConfirmed() and $booking->checkVisitorEmail($guard->email())) {
+            $booking->confirm();
+            // TODO: email supervisor
+            // TODO: email admin link to pupil
+        }
+
         // TODO: create view for managing a booking
         return $booking;
     }

@@ -3,6 +3,7 @@
 namespace Matchappen;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -21,6 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string contact_phone
  * @property string display_contact_phone
  * @property string fallback_contact_phone
+ * @property Collection bookings
  */
 class Opportunity extends Model
 {
@@ -184,6 +186,8 @@ class Opportunity extends Model
 
     public function numberOfBookedVisitors()
     {
+        $this->clearExpiredBookings();
+
         return $this->bookings()->sum('visitors');
     }
 
@@ -215,6 +219,13 @@ class Opportunity extends Model
     public function isBookable()
     {
         return $this->isViewable() and $this->hasPlacesLeft();
+    }
+
+    public function clearExpiredBookings()
+    {
+        $this->bookings->each(function (Booking $booking) {
+            $booking->clearIfExpired();
+        });
     }
 
 }
