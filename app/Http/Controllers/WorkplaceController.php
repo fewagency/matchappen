@@ -27,7 +27,9 @@ class WorkplaceController extends Controller
 
     public function show(Workplace $workplace)
     {
-        if (!$workplace->isPublished()) {
+
+        // Dont display unpublished workplaces to non-administrators
+        if (!$workplace->isPublished() && !\Auth::user()->is_admin) {
             return redirect(action('WorkplaceController@index'));
         }
 
@@ -43,10 +45,26 @@ class WorkplaceController extends Controller
 
     public function update(Workplace $workplace, StoreWorkplaceRequest $request)
     {
+
         $workplace->update($request->input());
 
         //TODO: trigger email on workplace update
 
         return redirect()->action('WorkplaceController@edit', $workplace->getKey());
+    }
+
+    /**
+     * @param Workplace $workplace
+     */
+    public function approve(Workplace $workplace)
+    {
+
+        if (!$workplace->isPublished() && \Auth::user()->is_admin) {
+
+            $workplace->publish();
+            return \Redirect::back()->with('workplaceapprovedmsg', trans('messages.workplace-approved'));
+
+        }
+
     }
 }

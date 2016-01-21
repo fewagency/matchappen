@@ -4,7 +4,15 @@
 
   <h1>{{ $workplace->name }}</h1>
 
+  @include('workplace.partials.approve')
+
   @include('workplace.partials.admin_edit_link')
+
+  @if($workplace->is_published !== null && \Auth::user()->is_admin)
+
+    <p>Publicerat: {{ $workplace->is_published === 1 ? 'Ja' : 'Nej' }}</p>
+
+  @endif
 
   @if($workplace->description)
     <p>Beskrivning: {{ $workplace->description }}</p>

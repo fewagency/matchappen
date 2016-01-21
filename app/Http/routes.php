@@ -8,6 +8,7 @@ Route::group(['prefix' => trans('general.workplaces')], function () {
     Route::get('/', 'WorkplaceController@index');
     Route::get('{workplace}/edit', 'WorkplaceController@edit');
     Route::post('{workplace}/update', 'WorkplaceController@update');
+    Route::post('{workplace}/approve', 'WorkplaceController@approve');
 });
 Route::get(trans('general.workplace') . '/{workplace}', 'WorkplaceController@show');
 
