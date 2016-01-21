@@ -8,9 +8,9 @@
 
   @include('workplace.partials.admin_edit_link')
 
-  @if($workplace->is_published !== null && \Auth::user()->is_admin)
+  @if(!$workplace->isPublished() and Gate::allows('publish', $workplace))
 
-    <p>Publicerat: {{ $workplace->is_published === 1 ? 'Ja' : 'Nej' }}</p>
+  <p>Publicerad: {{ $workplace->isPublished() ? 'Ja' : 'Nej' }}</p>
 
   @endif
 

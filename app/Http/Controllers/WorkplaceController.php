@@ -2,6 +2,7 @@
 
 namespace Matchappen\Http\Controllers;
 
+use Gate;
 use Illuminate\Http\Request;
 
 use Matchappen\Http\Requests;
@@ -25,11 +26,10 @@ class WorkplaceController extends Controller
         return view('workplace.index')->with(compact('workplaces'));
     }
 
-    public function show(Workplace $workplace)
+    public function show(Request $request, Workplace $workplace)
     {
-
-        // Dont display unpublished workplaces to non-administrators
-        if (!$workplace->isPublished() && !\Auth::user()->is_admin) {
+        // Don't display unpublished workplaces to non-administrators
+        if (!$workplace->isPublished() and Gate::denies('update', $workplace)) {
             return redirect(action('WorkplaceController@index'));
         }
 
@@ -45,7 +45,6 @@ class WorkplaceController extends Controller
 
     public function update(Workplace $workplace, StoreWorkplaceRequest $request)
     {
-
         $workplace->update($request->input());
 
         //TODO: trigger email on workplace update
@@ -53,18 +52,12 @@ class WorkplaceController extends Controller
         return redirect()->action('WorkplaceController@edit', $workplace->getKey());
     }
 
-    /**
-     * @param Workplace $workplace
-     */
     public function approve(Workplace $workplace)
     {
+        $this->authorize('publish', $workplace);
+        $workplace->publish();
 
-        if (!$workplace->isPublished() && \Auth::user()->is_admin) {
-
-            $workplace->publish();
-            return \Redirect::back()->with('workplaceapprovedmsg', trans('messages.workplace-approved'));
-
-        }
+        return redirect()->back()->with('workplaceapprovedmsg', trans('messages.workplace-approved'));
 
     }
 }

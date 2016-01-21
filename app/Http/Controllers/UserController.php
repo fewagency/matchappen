@@ -18,7 +18,8 @@ class UserController extends Controller
 
             return view('user.dashboard_admin')->with([
                 'user' => $user,
-                'new_workplaces' => Workplace::publishRequested()->get()
+                'new_workplaces' => Workplace::publishRequested()->get(),
+                'unpublished_workplaces' => Workplace::unpublished()->get(),
             ]);
 
         } else {

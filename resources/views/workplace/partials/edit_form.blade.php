@@ -15,12 +15,12 @@
   </div>
 
 
-  @if($workplace->is_published !== null && \Auth::user()->is_admin)
-  <div>
-    Publicerat:
-    <input type="hidden" name="is_published" value="0" />
-    <input type="checkbox" name="is_published" value="1" {{ $workplace->is_published === 1 ? ' checked="checked"' : '' }} />
-  </div>
+  @if(!$workplace->isPublishRequested() and Gate::allows('publish', $workplace))
+    <div>
+      Publicerat:
+      <input type="hidden" name="is_published" value="0"/>
+      <input type="checkbox" name="is_published" value="1" @if($workplace->isPublished()) checked="checked" @endif />
+    </div>
   @endif
 
   <div>
@@ -30,17 +30,20 @@
 
   <div>
     Kontaktperson
-    <input type="text" name="contact_name" value="{{ old('contact_name', $workplace->contact_name) }}" placeholder="{{ $workplace->fallback_contact_name }}">
+    <input type="text" name="contact_name" value="{{ old('contact_name', $workplace->contact_name) }}"
+           placeholder="{{ $workplace->fallback_contact_name }}">
   </div>
 
   <div>
     Email
-    <input type="email" name="email" value="{{ old('email', $workplace->email) }}" placeholder="{{ $workplace->fallback_email }}">
+    <input type="email" name="email" value="{{ old('email', $workplace->email) }}"
+           placeholder="{{ $workplace->fallback_email }}">
   </div>
 
   <div>
     Telefon
-    <input type="tel" name="phone" value="{{ old('phone', $workplace->phone) }}" placeholder="{{ $workplace->fallback_phone }}">
+    <input type="tel" name="phone" value="{{ old('phone', $workplace->phone) }}"
+           placeholder="{{ $workplace->fallback_phone }}">
   </div>
 
   <div>

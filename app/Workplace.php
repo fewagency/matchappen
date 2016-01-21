@@ -44,7 +44,7 @@ class Workplace extends Model implements SluggableInterface
         'phone',
         'address',
         'homepage',
-        'is_published'
+        'is_published',
     ];
 
     /**
@@ -104,6 +104,16 @@ class Workplace extends Model implements SluggableInterface
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
+    }
+
+    /**
+     * Scope a query to only include not published workplaces.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnpublished($query)
+    {
+        return $query->where('is_published', false);
     }
 
     /**

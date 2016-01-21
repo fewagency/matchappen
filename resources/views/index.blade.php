@@ -8,5 +8,4 @@
 
   <a href="{{ action('OpportunityController@index') }}">{{ trans_choice('opportunity.opportunity', \Matchappen\Opportunity::published()->count()) }}</a>
 
-  @include('user.partials.login_info')
 @endsection

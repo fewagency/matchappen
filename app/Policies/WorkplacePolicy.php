@@ -31,4 +31,9 @@ class WorkplacePolicy
     {
         return $user->workplace_id === $workplace->getKey();
     }
+
+    public function publish(User $user, Workplace $workplace)
+    {
+        return $user->is_admin;
+    }
 }

@@ -15,6 +15,9 @@ class StoreWorkplaceRequest extends Request
     public function authorize()
     {
         $workplace = $this->route('workplace');
+        if ($this->input('is_published') and Gate::denies('publish', $workplace)) {
+            return false;
+        }
 
         return Gate::allows('update', $workplace);
     }

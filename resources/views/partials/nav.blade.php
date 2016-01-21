@@ -1,7 +1,10 @@
 <nav>
   <a href="/">Index</a>
 
-  @if(\Auth::user())
-    - <a href="/hem">Dashboard</a>
+  @if(Auth::check())
+    <a href="{{ route('dashboard') }}">Dashboard</a>
   @endif
+
+  @include('user.partials.login_info')
+
 </nav>

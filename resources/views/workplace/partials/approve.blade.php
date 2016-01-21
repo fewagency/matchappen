@@ -1,4 +1,4 @@
-@if($workplace->isPublishRequested() && \Auth::user()->is_admin)
+@if($workplace->isPublishRequested() and Gate::allows('publish', $workplace))
 
   <div style="border: solid 2px red; padding: 8px">
 
