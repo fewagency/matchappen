@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <h1>{{ trans('general.opportunities') }}</h1>
+  <h1>{{ trans_choice('opportunity.opportunity', \Matchappen\Opportunity::published()->count()) }}</h1>
 
   @include('opportunity.partials.list')
 

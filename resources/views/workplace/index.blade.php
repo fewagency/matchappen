@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <h1>{{ trans('general.workplaces') }}</h1>
+  <h1>{{ trans_choice('workplace.workplace', \Matchappen\Workplace::published()->count()) }}</h1>
 
   @include('workplace.partials.list')
 

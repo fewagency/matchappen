@@ -53,7 +53,7 @@
     </div>
 
     @if(!$token_guard->checkSupervisor())
-      <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som skolpersonal?</a>
+      <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som {{ trans('general.edu-staff') }}?</a>
     @endif
 
   </form>

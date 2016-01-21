@@ -4,15 +4,15 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::group(['prefix' => trans('general.workplaces')], function () {
+Route::group(['prefix' => trans_choice('workplace.workplace', 1)], function () {
     Route::get('/', 'WorkplaceController@index');
     Route::get('{workplace}/edit', 'WorkplaceController@edit');
     Route::post('{workplace}/update', 'WorkplaceController@update');
     Route::post('{workplace}/approve', 'WorkplaceController@approve');
 });
-Route::get(trans('general.workplace') . '/{workplace}', 'WorkplaceController@show');
+Route::get(trans_choice('workplace.workplace', 2) . '/{workplace}', 'WorkplaceController@show');
 
-Route::group(['prefix' => trans('general.opportunities')], function () {
+Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function () {
     Route::get('/', 'OpportunityController@index');
     Route::get('create', 'OpportunityController@create');
     Route::post('store', 'OpportunityController@store');

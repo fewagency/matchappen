@@ -177,7 +177,7 @@ class Opportunity extends Model
 
     public function getNameAttribute()
     {
-        return trans('general.opportunity_at_workplace',
+        return trans('opportunity.opportunity_at_workplace',
             [
                 'workplace' => $this->workplace->name,
                 'time' => $this->start->format('j/n G:i'),

@@ -4,9 +4,9 @@
 
   <h1>{{ trans('general.appname') }}</h1>
 
-  <a href="{{ action('WorkplaceController@index') }}">{{ trans('general.workplaces') }}</a>
+  <a href="{{ action('WorkplaceController@index') }}">{{ trans_choice('workplace.workplace', \Matchappen\Workplace::published()->count()) }}</a>
 
-  <a href="{{ action('OpportunityController@index') }}">{{ trans('general.opportunities') }}</a>
+  <a href="{{ action('OpportunityController@index') }}">{{ trans_choice('opportunity.opportunity', \Matchappen\Opportunity::published()->count()) }}</a>
 
   @include('user.partials.login_info')
 @endsection
