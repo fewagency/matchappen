@@ -53,10 +53,10 @@ class StoreOpportunityRequest extends Request
         return [
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,
             'description' => 'string|max:1000',
-            'start' => 'string',
+            'start' => 'string', //TODO: add rule: opportunity must start between now and +6 months
             'minutes' => 'integer|required_with:start|in:' .
                 implode(',', array_keys(trans('opportunity.minutes_options'))),
-            'registration_end' => 'string|required_with:start',
+            'registration_end' => 'string|required_with:start', //TODO: add rule: opportunity must have registration_end between now and start
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
