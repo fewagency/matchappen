@@ -2,24 +2,25 @@
 <html lang="{{ App::getLocale() }}">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ $title or trans('general.appname') }}</title>
+
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title>{{ $title or trans('general.appname') }} – Malmö stad</title>
+  <!--[if IE]><meta content='IE=edge' http-equiv='X-UA-Compatible'/><![endif]-->
+  <!--[if lte IE 8]><script src='//assets.malmo.se/external/v4/html5shiv-printshiv.js' type='text/javascript'></script><![endif]-->
+  <link href='//assets.malmo.se/external/v4/malmo.css' media='all' rel='stylesheet' type='text/css'/>
   <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
-  <!--[if lt IE 9]>
-  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <!--[if lte IE 8]><link href='//assets.malmo.se/external/v4/legacy/ie8.css' media='all' rel='stylesheet' type='text/css'/><![endif]-->
+  <noscript><link href="//assets.malmo.se/external/v4/icons.fallback.css" rel="stylesheet"></noscript>
+  <link rel='icon' type='image/x-icon' href='//assets.malmo.se/external/v4/favicon.ico'/>
+
 </head>
-<body class="{{ $body_class or '' }}">
+<body class="mf-v4 {{ $body_class or '' }}">
 
 @include('partials.nav')
 
 @yield('content')
 
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<!--
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
--->
+<script src='//assets.malmo.se/external/v4/malmo.js'></script>
+<!--<script src='/your_own_javascript.js'></script>-->
 </body>
 </html>
