@@ -9,8 +9,8 @@ Route::group(['prefix' => trans_choice('workplace.workplace', 1)], function () {
     Route::get('{workplace}/edit', 'WorkplaceController@edit');
     Route::post('{workplace}/update', 'WorkplaceController@update');
     Route::post('{workplace}/approve', 'WorkplaceController@approve');
+    Route::get('{workplace}', 'WorkplaceController@show');
 });
-Route::get(trans_choice('workplace.workplace', 2) . '/{workplace}', 'WorkplaceController@show');
 
 Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function () {
     Route::get('/', 'OpportunityController@index');
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'bokning'], function () {
     Route::get('{booking}', 'BookingController@show');
 });
 
-// Dashboard for workplaces and admins
+// Dashboard for workplaces, admins, supervisors, and students too!
 Route::get('hem', 'UserController@dashboard')->name('dashboard');
 
 // Authentication routes...
