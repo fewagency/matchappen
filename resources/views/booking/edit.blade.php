@@ -13,7 +13,7 @@
   <p>Kontaktperson: {{ $opportunity->display_contact_name }}</p>
   <p>Telefon: {{ $opportunity->display_contact_phone }}</p>
 
-
+  <!-- TODO: show details about booking -->
 
   @include('booking.partials.cancel_form')
 
