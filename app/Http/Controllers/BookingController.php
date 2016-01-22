@@ -69,7 +69,7 @@ class BookingController extends Controller
 
         $opportunity = $booking->opportunity;
 
-        return view('booking.edit')->with(compact('booking', 'opportunity'));
+        return view('booking.show')->with(compact('booking', 'opportunity'));
     }
 
     public function postCancel(Booking $booking, CancelBookingRequest $request)
