@@ -30,7 +30,7 @@ class WorkplaceController extends Controller
     {
         // Don't display unpublished workplaces to non-administrators
         if (!$workplace->isPublished() and Gate::denies('update', $workplace)) {
-            return redirect(action('WorkplaceController@index'));
+            return redirect()->action('WorkplaceController@index');
         }
 
         return view('workplace.show')->with(compact('workplace'));
@@ -57,7 +57,7 @@ class WorkplaceController extends Controller
         $this->authorize('publish', $workplace);
         $workplace->publish();
 
-        return redirect()->back()->with('workplaceapprovedmsg', trans('messages.workplace-approved'));
+        return redirect()->back()->with('status', trans('messages.workplace-approved'));
 
     }
 }
