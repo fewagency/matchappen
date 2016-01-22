@@ -10,7 +10,7 @@
 
   @if(!$workplace->isPublished() and Gate::allows('publish', $workplace))
 
-  <p>Publicerad: {{ $workplace->isPublished() ? 'Ja' : 'Nej' }}</p>
+    <p>Publicerad: {{ $workplace->isPublished() ? 'Ja' : 'Nej' }}</p>
 
   @endif
 
@@ -26,7 +26,7 @@
   <p>Kontaktperson: {{ $workplace->display_contact_name }}</p>
   <p>Epost: <a href="mailto:{{ $workplace->display_email }}">{{ $workplace->display_email }}</a></p>
   <p>Telefon: {{ $workplace->display_phone }}</p>
-  <address>{{ $workplace->address }}</address>
+  <address>{!! nl2br(e($workplace->address)) !!}</address>
 
   @include('opportunity.partials.list', ['opportunities' => $workplace->opportunities])
 

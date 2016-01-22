@@ -13,7 +13,7 @@
   @endif
 
   <p>Längd: {{ $opportunity->minutes }} minuter</p>
-  <address>{{ $opportunity->display_address }}</address>
+  <address>{!! nl2br(e($opportunity->display_address)) !!}</address>
   <p>Kontaktperson: {{ $opportunity->display_contact_name }}</p>
   <p>Telefon: {{ $opportunity->display_contact_phone }}</p>
   <p>Sista anmälan: {{ $opportunity->registration_end->format('j/n') }}</p>
