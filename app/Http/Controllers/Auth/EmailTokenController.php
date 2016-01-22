@@ -96,7 +96,7 @@ class EmailTokenController extends Controller
                 return redirect($token_url);
             }
 
-            return redirect()->intended();
+            return redirect()->intended($this->redirectPath());
         }
 
         return view('auth.token_invalidated');
@@ -120,5 +120,13 @@ class EmailTokenController extends Controller
     public function loginUsername()
     {
         return 'email';
+    }
+
+    /**
+     * @return string url for redirect after successful login or registration
+     */
+    public function redirectPath()
+    {
+        return route('dashboard');
     }
 }
