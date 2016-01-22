@@ -1,0 +1,19 @@
+{
+  "name": "matchappen",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/fewagency/matchappen",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "malmo_shared_assets": "malmostad/shared_assets"
+  }
+}
