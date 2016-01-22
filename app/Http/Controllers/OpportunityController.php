@@ -28,7 +28,7 @@ class OpportunityController extends Controller
     public function show(Opportunity $opportunity)
     {
         if (!$opportunity->isViewable()) {
-            return redirect(action('OpportunityController@index'));
+            return redirect()->action('OpportunityController@index');
         }
 
         return view('opportunity.show')->with(compact('opportunity'));
@@ -73,7 +73,7 @@ class OpportunityController extends Controller
     public function booking(Opportunity $opportunity)
     {
         if (!$opportunity->isBookable()) {
-            return redirect(action('OpportunityController@show', $opportunity));
+            return redirect()->action('OpportunityController@show', $opportunity);
         }
 
         return view('opportunity.booking')->with(compact('opportunity'));
