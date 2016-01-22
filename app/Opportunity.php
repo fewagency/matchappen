@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string fallback_contact_phone
  * @property Collection bookings
  * @property Carbon registration_end
+ * @property string name
  */
 class Opportunity extends Model
 {
