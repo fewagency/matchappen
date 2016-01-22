@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+  @include('partials.status')
 
   <h1>{{ $workplace->name }}</h1>
 

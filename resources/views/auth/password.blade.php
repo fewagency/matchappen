@@ -2,7 +2,7 @@
 
 @section('content')
   @if(session('status'))
-    {{ session('status') }}
+    @include('partials.status')
   @else
     @include('auth.partials.password_form')
 

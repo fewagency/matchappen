@@ -1,6 +1,5 @@
 @if($workplace->isPublishRequested() and Gate::allows('publish', $workplace))
-
-  <div style="border: solid 2px red; padding: 8px">
+  <div class="warning">
 
     <form action="{{ action('WorkplaceController@approve', $workplace->getKey()) }}" method="POST">
       {!! csrf_field() !!}
@@ -11,11 +10,4 @@
     </form>
 
   </div>
-
-@elseif(session('workplaceapprovedmsg'))
-
-  <div style="border: solid 2px green; padding: 8px">
-    {{ session('workplaceapprovedmsg') }}
-  </div>
-
 @endif
