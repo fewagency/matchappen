@@ -17,6 +17,7 @@
 <body class="mf-v4 {{ $body_class or '' }}">
 
 @include('partials.nav')
+@include('partials.warning')
 
 @yield('content')
 
