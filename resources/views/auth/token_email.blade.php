@@ -3,7 +3,7 @@
 @section('content')
   @include('partials.status')
   @if(session('status'))
-    <div class="danger">
+    <div class="error">
       <!-- TODO: remove this token link from template! This is just for testing! -->
       <a href="{{ \Matchappen\AccessToken::orderBy('created_at', 'desc')->first()->getTokenUrl() }}">
         Test the emailed token link
