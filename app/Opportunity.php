@@ -78,6 +78,26 @@ class Opportunity extends Model
     }
 
     /**
+     * Scope a query to only include opportunities in the past.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePassed($query)
+    {
+        return $query->where('start', '<', Carbon::now())->orderBy('start', 'desc');
+    }
+
+    /**
+     * Scope a query to only include opportunities in the recent past.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRecentlyPassed($query)
+    {
+        return $query->passed()->where('start', '>', Carbon::parse('-1 month'));
+    }
+
+    /**
      * Scope a query to only include opportunities that can be viewed by front-end visitors.
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -201,6 +221,11 @@ class Opportunity extends Model
     public function isUpcoming()
     {
         return $this->start->isFuture();
+    }
+
+    public function isPassed()
+    {
+        return $this->start->isPast();
     }
 
     public function isViewable()

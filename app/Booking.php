@@ -152,4 +152,78 @@ class Booking extends Model
     {
         return !$this->opportunity->isRegistrationClosed();
     }
+
+    /**
+     * Scope a query to only include bookings for a specified supervisor.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $email
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForSupervisor($query, $email)
+    {
+        return $query->confirmed()->where('supervisor_email', $email);
+    }
+
+    /**
+     * Scope a query to only include bookings for a specified student.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param string $email
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeForStudent($query, $email)
+    {
+        return $query->where('email', $email);
+    }
+
+    /**
+     * Scope a query to only include confirmed bookings.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeConfirmed($query)
+    {
+        return $query->where('reserved_until', null);
+    }
+
+    /**
+     * Scope a query to only include bookings with opportunities in the future.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUpcoming($query)
+    {
+        return $query->whereHas('opportunity', function ($query) {
+            $query->upcoming();
+        });
+    }
+
+    /**
+     * Scope a query to only include bookings for opportunities in the past.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePassed($query)
+    {
+        return $query->whereHas('opportunity', function ($query) {
+            $query->passed();
+        });
+    }
+
+    /**
+     * Scope a query to only include bookings with opportunities in the recent past.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRecentlyPassed($query)
+    {
+        return $query->whereHas('opportunity', function ($query) {
+            $query->recentlyPassed();
+        });
+    }
 }
