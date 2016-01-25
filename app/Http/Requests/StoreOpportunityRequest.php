@@ -50,6 +50,7 @@ class StoreOpportunityRequest extends Request
 
     public static function rulesForUpdate()
     {
+        //TODO: validating dates may need to be done in controller, unless we parse dates in middleware first
         return [
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,
             'description' => 'string|max:1000',
