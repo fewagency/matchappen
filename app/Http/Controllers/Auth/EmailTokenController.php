@@ -38,8 +38,9 @@ class EmailTokenController extends Controller
      */
     public function getEmail(Request $request)
     {
-        if (!session('status')) {
-            $request->session()->put('url.intended', \URL::previous());
+        $intended_url = \URL::previous();
+        if (!session('status') and $intended_url != action('Auth\AuthController@getLogin')) {
+            $request->session()->put('url.intended', $intended_url);
         }
 
         return view('auth.token_email');
