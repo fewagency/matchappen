@@ -30,7 +30,7 @@ class BookingController extends Controller
         if ($guard->checkSupervisor()) {
             $booking->save();
 
-            //TODO: email booking link to supervisor
+            //TODO: email manage-booking link to supervisor
 
             return redirect()->action('BookingController@show', $booking);
         } else {
@@ -38,7 +38,7 @@ class BookingController extends Controller
             $booking->save();
             $token = $booking->generateAccessToken($booking->email);
 
-            //TODO: email token to pupil
+            //TODO: email booking confirmation token to pupil
 
             return redirect()->action('BookingController@reserved')->with('reserved_booking_id', $booking->getKey());
         }
@@ -63,8 +63,8 @@ class BookingController extends Controller
 
         if (!$booking->isConfirmed() and $booking->checkVisitorEmail($guard->email())) {
             $booking->confirm();
-            // TODO: email supervisor
-            // TODO: email admin link to pupil
+            // TODO: email supervisor about student's confirmed booking
+            // TODO: email admin link to student
         }
 
         $opportunity = $booking->opportunity;
@@ -77,7 +77,7 @@ class BookingController extends Controller
         //Cancel booking (soft-delete)
         $booking->delete();
 
-        //TODO: notify supervisor
+        //TODO: notify supervisor about cancellation
 
         return redirect()->route('dashboard')->with('status',
             trans('booking.cancelled', ['booking' => $booking->opportunity->name])
