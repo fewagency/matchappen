@@ -112,19 +112,21 @@ class Opportunity extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeHasPlacesLeft($query)
+    public function scopeWithPlacesLeft($query)
     {
-        return $query; //TODO: scopeHasPlacesLeft() should have conditions similar to hasPlacesLeft()
+        //TODO: add check for max_visitors > sum(bookings.visitors where reserved_until isnull) to scope
+        dd($this->bookings()->getBaseQuery());
+        return $query;
     }
 
     /**
-     * Scope a query to only include opportunities that can be viewed by front-end visitors.
+     * Scope a query to only include opportunities that can be booked by front-end visitors.
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeBookable($query)
     {
-        return $query->viewable()->hasPlacesLeft();
+        return $query->viewable()->withPlacesLeft();
     }
 
     /**
