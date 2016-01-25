@@ -17,5 +17,5 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
     'token_sent' => 'We have e-mailed your login link!',
     'token_invalidated' => 'The token is no longer valid.',
-    'csrf_mismatch' => 'Your session had expired, please try again!',
+    'csrf_mismatch' => 'Your session expired, please try again!',
 ];
