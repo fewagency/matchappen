@@ -1,7 +1,8 @@
+@inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 <nav>
   <a href="/">Index</a>
 
-  @if(Auth::check())
+  @if(Auth::check() or $token_guard->check())
     <a href="{{ route('dashboard') }}">Dashboard</a>
   @endif
 
