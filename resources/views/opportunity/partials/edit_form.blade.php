@@ -1,6 +1,6 @@
 @inject('carbon', '\Carbon\Carbon')
 <form method="POST"
-      action="{{ $opportunity->exists() ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store') }}"
+      action="{{ $opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store') }}"
 >
   {!! csrf_field() !!}
 
