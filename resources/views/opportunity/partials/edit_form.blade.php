@@ -44,7 +44,7 @@
 
   <div>
     Adress
-    <textarea name="address" placeholder="{{ $opportunity->fallback_address }}">{{ old('address', $opportunity->address) }}</textarea>
+    <textarea name="address" placeholder="{{ str_replace("\n"," ",$opportunity->fallback_address) }}">{{ old('address', $opportunity->address) }}</textarea>
   </div>
 
   <div>
