@@ -47,18 +47,18 @@ class EmailTokenController extends Controller
     }
 
     /**
-     * Generate token
+     * Email a new token for login
      */
     public function postEmail(Request $request, EmailTokenGuard $guard)
     {
         $this->validate($request,
-            ['email' => ['required', 'email', 'regex:' . config('school.supervisor_email_regex')]]
+            ['email' => ['required', 'email', 'regex:' . config('school.edu_email_regex')]]
         );
 
         $email = $request->get('email');
         $token = $guard->generateAccessToken($email);
 
-        //TODO: email token to supervisor
+        //TODO: email token to user
 
         return redirect()->back()->with('status', trans('auth.token_sent'));
     }

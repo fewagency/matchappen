@@ -7,5 +7,5 @@
 
   <a href="{{ action('Auth\PasswordController@getEmail') }}">Glömt lösenordet?</a>
 
-  <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Logga in som {{ trans('general.edu-staff') }}!</a>
+  <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Logga in som {{ trans_choice('general.student', 1) }} eller {{ trans('general.edu-staff') }}!</a>
 @endsection

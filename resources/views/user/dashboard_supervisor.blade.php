@@ -19,7 +19,7 @@
     <p>
       Du har inga aktuella bokningar under ditt ansvar.
       Om du <a href="{{ action('OpportunityController@index') }}">gör egna {{ trans_choice('booking.booking', 2) }}</a>
-      eller om studenter gör {{ trans_choice('booking.booking', 2) }} med dig som referens kommer de visas här.
+      eller om {{ trans_choice('general.student', 2) }} gör {{ trans_choice('booking.booking', 2) }} med dig som referens kommer de visas här.
     </p>
   @endif
 

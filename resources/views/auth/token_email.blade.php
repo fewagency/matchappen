@@ -10,7 +10,7 @@
       </a>
     </div>
   @else
-    <h1>Logga in som {{ trans('general.edu-staff') }}</h1>
+    <h1>Logga in som {{ trans_choice('general.student', 1) }} eller {{ trans('general.edu-staff') }}</h1>
     @include('auth.partials.token_email_form')
 
     <a href="{{ action('Auth\AuthController@getLogin') }}">
