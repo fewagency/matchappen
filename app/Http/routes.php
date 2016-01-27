@@ -55,6 +55,6 @@ Route::group(['prefix' => 'token'], function () {
     Route::get('logout', 'Auth\EmailTokenController@getLogout');
     Route::get('email', 'Auth\EmailTokenController@getEmail');
     Route::post('email', 'Auth\EmailTokenController@postEmail');
-    Route::get('{token}/{email?}', 'Auth\EmailTokenController@getLogin'); //TODO: validate token length in route?
-    Route::post('{token}', 'Auth\EmailTokenController@postLogin'); //TODO: validate token length in route?
+    Route::get('{token}/{email?}', 'Auth\EmailTokenController@getLogin');
+    Route::post('{token}', 'Auth\EmailTokenController@postLogin');
 });
