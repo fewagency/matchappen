@@ -88,6 +88,8 @@ class AuthController extends Controller
         $user->workplace()->associate($workplace);
         $user->save();
 
+        //TODO: catch occupations, add new ones, and sync them with the workplace
+
         //TODO: email admin after new workplace registration
 
         return $user;

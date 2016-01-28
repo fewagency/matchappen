@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreWorkplaceRequest;
+use Matchappen\Occupation;
 use Matchappen\Workplace;
 
 class WorkplaceController extends Controller
@@ -46,6 +47,9 @@ class WorkplaceController extends Controller
     public function update(Workplace $workplace, StoreWorkplaceRequest $request)
     {
         $workplace->update($request->input());
+
+        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $workplace->occupations()->sync($occupations);
 
         //TODO: trigger email on workplace update
 

@@ -24,6 +24,11 @@
   @endif
 
   <div>
+    Yrken
+    <textarea name="occupations">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
+  </div>
+
+  <div>
     Antal anställda
     <input type="number" name="employees" min="1" max="65535" value="{{ old('employees', $workplace->employees) }}">
   </div>
