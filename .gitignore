@@ -7,8 +7,8 @@ Homestead.json
 .env.behat
 _ide_helper.php
 /public/build/
-/public/css/app.css
-/public/css/app.css.map
+/public/css/
+/public/js/
 .idea
 bower_components
 .DS_Store
