@@ -9,6 +9,13 @@ class Occupation extends Model
 {
     use SoftDeletes;
 
-    //TODO: create occupation_workplace table and relation
-    //TODO: create occupation_opportunity table and relation
+    public function workplaces()
+    {
+        return $this->belongsToMany('Matchappen\Workplace');
+    }
+
+    public function opportunities()
+    {
+        return $this->belongsToMany('Matchappen\Opportunity');
+    }
 }

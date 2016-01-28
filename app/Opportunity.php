@@ -116,6 +116,7 @@ class Opportunity extends Model
     {
         //TODO: add check for max_visitors > sum(bookings.visitors where reserved_until isnull) to scope
         dd($this->bookings()->getBaseQuery());
+
         return $query;
     }
 
@@ -136,6 +137,15 @@ class Opportunity extends Model
     public function workplace()
     {
         return $this->belongsTo('Matchappen\Workplace');
+    }
+
+    /**
+     * The occupations relevant for this opportunity
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function occupations()
+    {
+        return $this->belongsToMany('Matchappen\Occupation');
     }
 
     /**

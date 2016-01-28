@@ -52,7 +52,7 @@ class Workplace extends Model implements SluggableInterface
      */
     public function publish()
     {
-        if($this->exists) {
+        if ($this->exists) {
             $this->is_published = true;
             $this->save();
         }
@@ -63,7 +63,7 @@ class Workplace extends Model implements SluggableInterface
      */
     public function unpublish()
     {
-        if($this->exists) {
+        if ($this->exists) {
             $this->is_published = false;
             $this->save();
         }
@@ -74,7 +74,7 @@ class Workplace extends Model implements SluggableInterface
      */
     public function requestPublish()
     {
-        if($this->exists) {
+        if ($this->exists) {
             $this->is_published = null;
             $this->save();
         }
@@ -183,6 +183,15 @@ class Workplace extends Model implements SluggableInterface
         return $this->opportunities()->upcoming();
     }
 
+    /**
+     * The occupations represented at this workplace
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function occupations()
+    {
+        return $this->belongsToMany('Matchappen\Occupation');
+    }
+
     public function getRouteKeyName()
     {
         $config = $this->getSluggableConfig();
@@ -194,6 +203,5 @@ class Workplace extends Model implements SluggableInterface
     {
         return $this->name;
     }
-
 
 }
