@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "malmo_shared_assets": "malmostad/shared_assets"
+    "malmo_shared_assets": "malmostad/shared_assets",
+    "jquery-1.12.0.min": "http://code.jquery.com/jquery-1.12.0.min.js"
   }
 }
