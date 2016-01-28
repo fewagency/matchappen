@@ -1,0 +1,52 @@
+.mega-nav-item {
+
+  &--companies {
+    @extend .color-scheme-1;
+  }
+
+}
+
+.mega-nav-item__intro {
+  padding: 18px 0;
+  text-align: center;
+  min-height: 20vh;
+}
+
+.mega-nav-item__intro-headline {
+  text-transform: uppercase;
+ // text-decoration: underline;
+}
+
+.mega-nav-item__link {
+  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.mega-nav-item__sub-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #000;
+  color: #494949;
+}
+
+.mega-nav-item__sub-item {
+  height: 70px;
+  margin: 0;
+  padding: 12px 0;
+  width: 100%;
+  transition: all 0.4s ease-out;
+  background: #fff;
+}
+
+.mega-nav-item__sub-item-wrapper-1 {
+  @extend .wrapper;
+  border-left: solid 2px black;
+}
+
+.mega-nav-item__sub-item-headline {
+  display: block;
+}
+
+.mega-nav-item__sub-item-link {
+  display: block;
+}

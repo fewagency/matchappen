@@ -1,6 +1,21 @@
-@import "../../../bower_components/malmo_shared_assets/stylesheets/malmo_external.scss";
+@import "_bootstrap-variables";
+
+//@import "../../../bower_components/malmo_shared_assets/stylesheets/malmo_external";
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
+
+@import "_colors";
+@import "_variables";
+
+@import "_few-accordion";
+@import "_mega-nav";
 
 body {
   padding-top: 50px;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 67em;
+  padding: 0 1em;
 }
 

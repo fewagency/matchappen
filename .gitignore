@@ -9,5 +9,7 @@ _ide_helper.php
 /public/build/
 /public/css/app.css
 /public/css/app.css.map
-/storage/debugbar
 .idea
+bower_components
+.DS_Store
+storage/debugbar
