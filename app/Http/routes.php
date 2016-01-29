@@ -4,6 +4,10 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::group(['prefix' => 'yrken'], function () {
+    Route::get('/', 'OccupationController@getList');
+});
+
 Route::group(['prefix' => trans_choice('workplace.workplace', 1)], function () {
     Route::get('/', 'WorkplaceController@index');
     Route::get('{workplace}/edit', 'WorkplaceController@edit');
