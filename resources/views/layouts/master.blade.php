@@ -20,36 +20,8 @@
 
 @include('partials.nav')
 @include('partials.warning')
-  <div class="main">
-  @include('partials.nav')
-  </div>
 
 @yield('content')
-
-
-  @include('partials.mega-nav-item', [
-    'itemModifier' => 'companies',
-    'headline' => 'Spännande företag',
-    'introText' => 'Läs om lorem ipsum dolor sit amet',
-    'sub_items' => [
-        [
-          'headline' => 'AD Headline',
-          'text' => 'AD Text',
-          'href' => '#adhref'
-        ],
-[
-          'headline' => 'AD Headline 2',
-          'text' => 'AD Text 2',
-          'href' => '#adhref'
-        ]
-      ]
-    ])
-
-
-
-
-
-</div>
 
 {{-- <script src='//assets.malmo.se/external/v4/malmo.js'></script> --}}
 <script src='{{ elixir('js/all.js') }}'></script>

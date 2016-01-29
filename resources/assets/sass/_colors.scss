@@ -4,10 +4,10 @@ $color-blue-2: #eef7fa;
 .color-scheme-1 {
 
   background: $color-blue-1;
-  color: #eef7fa;
+  color: $color-blue-2;
 
   a {
-    color: #eef7fa;
+    color: $color-blue-2;
   }
 
 }

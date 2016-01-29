@@ -1,32 +1,103 @@
+$shadow-down: 0px 2px 0px rgba(0, 0, 0, 0.1);
+$shadow-up: 0px -2px 0px rgba(0, 0, 0, 0.1);
+
 .mega-nav-item {
 
+  padding-top: 40px;
+  text-align: center;
+
   &--companies {
+
+    .mega-nav-item__link {
+
+      svg {
+        fill: $color-blue-2;
+      }
+
+    }
+
     @extend .color-scheme-1;
+
+    .mega-nav-item__sub-item-wrapper-1 {
+      border-color: $color-blue-1;
+    }
+
+    .mega-nav-item__intro-headline {
+      border-color: $color-blue-2;
+    }
+
   }
 
 }
 
 .mega-nav-item__intro {
-  padding: 18px 0;
   text-align: center;
   min-height: 20vh;
+
+  svg {
+    display: block;
+    width: 62px;
+    height: auto;
+    margin: 0 auto 10px auto;
+  }
+
 }
 
 .mega-nav-item__intro-headline {
+  font-size: 24px;
+  padding: 0;
+  margin: 0 0 4px;
   text-transform: uppercase;
- // text-decoration: underline;
+  display: inline-block;
+  border-bottom: solid 2px #fff;
+  box-shadow: $shadow-down;
 }
 
 .mega-nav-item__link {
-  text-shadow: 0px 2px 0px rgba(0, 0, 0, 0.1);
+
+  background-size: 63px auto;
+  @extend %semibold;
+  background-repeat: no-repeat;
+  background-position: center top;
+  text-shadow: $shadow-down;
+  display: inline-block;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+
+  svg {
+    filter: drop-shadow( $shadow-down );
+  }
+
+}
+
+.mega-nav-item__arrow-down {
+
+  svg {
+    transform: rotate(180deg);
+    filter: drop-shadow($shadow-up);
+    width: 58px;
+    height: auto;
+  }
+
 }
 
 .mega-nav-item__sub-items {
+  text-align: left;
   list-style-type: none;
   padding: 0;
   margin: 0;
   background: #000;
   color: #494949;
+
+  a {
+    color: $text-color;
+  }
+
 }
 
 .mega-nav-item__sub-item {
@@ -39,8 +110,8 @@
 }
 
 .mega-nav-item__sub-item-wrapper-1 {
-  @extend .wrapper;
-  border-left: solid 2px black;
+  @extend .container;
+  border-left: solid 2px;
 }
 
 .mega-nav-item__sub-item-headline {

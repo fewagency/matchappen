@@ -4,9 +4,11 @@
 
     <a href="#" class="mega-nav-item__link" data-fewaccordiontarget="few-paperfold-1">
       <div class="mega-nav-item__intro">
+        <?php include(base_path() . '/public/images/portfolio.svg'); ?>
         <h2 class="mega-nav-item__intro-headline">{{ $headline }}</h2>
         <div class="mega-nav-item__intro-text">{{ $introText }}</div>
       </div>
+      <div class="mega-nav-item__arrow-down"><?php include(base_path() . '/public/images/arrow-1.svg'); ?></div>
     </a>
 
   </div>
