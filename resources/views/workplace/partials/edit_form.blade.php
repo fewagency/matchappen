@@ -25,7 +25,7 @@
 
   <div>
     Yrken
-    <textarea name="occupations" data-optionsurl="{{ action('OccupationController@getList') }}">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
+    <textarea name="occupations" data-optionsurl="{{ action('OccupationController@index') }}">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
   </div>
 
   <div>

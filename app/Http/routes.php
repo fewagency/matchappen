@@ -5,7 +5,8 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'yrken'], function () {
-    Route::get('/', 'OccupationController@getList');
+    Route::get('/', 'OccupationController@index');
+    Route::get('{occupation}', 'OccupationController@show');
 });
 
 Route::group(['prefix' => trans_choice('workplace.workplace', 1)], function () {

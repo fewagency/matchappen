@@ -10,7 +10,7 @@ use Matchappen\Occupation;
 
 class OccupationController extends Controller
 {
-    public function getList(Request $request)
+    public function index(Request $request)
     {
         $occupations = Occupation::where('name', 'like', $request->get('q') . '%')->orderBy('name')->get();
         if ($request->ajax()) {
@@ -19,4 +19,10 @@ class OccupationController extends Controller
 
         return view('occupation.index')->with(compact('occupations'));
     }
+
+    public function show(Occupation $occupation)
+    {
+        return view('occupation.show')->with(compact('occupation'));
+    }
+
 }

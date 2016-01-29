@@ -2,13 +2,18 @@
 
 namespace Matchappen;
 
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Occupation extends Model
+/**
+ * @property string name
+ */
+class Occupation extends Model implements SluggableInterface
 {
-    use SoftDeletes;
+    use SoftDeletes, SluggableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +58,18 @@ class Occupation extends Model
         return $this->belongsTo('Matchappen\User', 'created_by');
     }
 
+    public function getRouteKeyName()
+    {
+        $config = $this->getSluggableConfig();
+
+        return $config['save_to'];
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @param string $names
      * @param User|null $user
@@ -67,7 +84,7 @@ class Occupation extends Model
         $existing = $instance->newQuery()->whereIn('name', $names)->get();
         if ($user and $user->exists) {
             $names->diff($existing->pluck('name'))->each(function ($name) use ($existing, $user) {
-                if(mb_strlen($name) < 4) {
+                if (mb_strlen($name) < 4) {
                     //Don't add names shorter than 4 chars
                     return;
                 }

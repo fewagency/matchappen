@@ -4,6 +4,7 @@ namespace Matchappen\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Matchappen\Occupation;
 use Matchappen\Workplace;
 
 class RouteServiceProvider extends ServiceProvider
@@ -32,6 +33,9 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('booking', 'Matchappen\Booking');
         $router->bind('workplace', function($value) {
             return Workplace::findBySlugOrIdOrFail($value);
+        });
+        $router->bind('occupation', function($value) {
+            return Occupation::findBySlugOrIdOrFail($value);
         });
     }
 
