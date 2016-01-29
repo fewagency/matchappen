@@ -20,6 +20,13 @@ class Occupation extends Model
     ];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'name'];
+
+    /**
      * Relationship to workplaces where this occupation is represented
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -60,6 +67,10 @@ class Occupation extends Model
         $existing = $instance->newQuery()->whereIn('name', $names)->get();
         if ($user and $user->exists) {
             $names->diff($existing->pluck('name'))->each(function ($name) use ($existing, $user) {
+                if(mb_strlen($name) < 4) {
+                    //Don't add names shorter than 4 chars
+                    return;
+                }
                 $new = new self(compact('name'));
                 $new->createdBy()->associate($user);
                 $new->save();
