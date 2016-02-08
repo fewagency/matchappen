@@ -3,6 +3,9 @@ $(function () {
     valueField: 'name',
     labelField: 'name',
     searchField: 'name',
+    create: true,
+    createFilter: /.{4,}/,
+    persist: false,
     load: function (query, callback) {
       if (!query.length) return callback();
       $.ajax({
