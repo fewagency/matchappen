@@ -15,24 +15,30 @@ require('laravel-elixir-imagemin');
 
 elixir(function (mix) {
 
-  mix.sass('app.scss');
-
-  mix.scripts([
-    '../../../bower_components/jquery/dist/jquery.min.js',
-    'vendor/modernizr.js',
-    'vendor/paperfold.js',
-    'MegaNav.js',
-    'FewPaperfold.js',
-    'app.js'
-  ]);
-
-  mix.version([
-    'css/app.css',
-    'js/all.js'
-  ]);
-
-  mix.imagemin();
-
-  mix.copy('resources/assets/images', 'public/images');
+  mix
+    .sass('app.scss')
+    .scripts([
+      //'vendor/modernizr.js',
+      '../../../bower_components/jquery/dist/jquery.min.js',
+      '../../../bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
+      'vendor/paperfold.js',
+      'MegaNav.js',
+      'FewPaperfold.js',
+      'app.js'
+    ])
+    .version([
+      'css/app.css',
+      'js/all.js'
+    ])
+    .imagemin()
+    .copy(
+      'resources/assets/images', 'public/images'
+    )
+    .copy(
+      'resources/assets/js/vendor/modernizr.js', 'public/build/js/modernizr.js'
+    )
+    .browserSync({
+      proxy: 'matchappen.local'
+    });
 
 });

@@ -1,6 +1,15 @@
 $color-blue-1: #b3dfec;
 $color-blue-2: #eef7fa;
 
+$color-orange-1: #fac458;
+$color-orange-2: #fef0d5;
+
+$color-green-1: #dedc49;
+$color-green-2: #f5f6ce;
+
+$color-purple-1: #d699bf;
+$color-purple-2: #f4e6f0;
+
 .color-scheme-1 {
 
   background: $color-blue-1;
@@ -8,6 +17,39 @@ $color-blue-2: #eef7fa;
 
   a {
     color: $color-blue-2;
+  }
+
+}
+
+.color-scheme-2 {
+
+  background: $color-orange-1;
+  color: $color-orange-2;
+
+  a {
+    color: $color-orange-2;
+  }
+
+}
+
+.color-scheme-3 {
+
+  background: $color-green-1;
+  color: $color-green-2;
+
+  a {
+    color: $color-green-2;
+  }
+
+}
+
+.color-scheme-4 {
+
+  background: $color-purple-1;
+  color: $color-purple-2;
+
+  a {
+    color: $color-purple-2;
   }
 
 }

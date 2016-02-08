@@ -1,0 +1,28 @@
+.site-top-bar {
+
+  &,
+  div {
+    height: 3px;
+    font-size: 1px;
+    overflow: hidden;
+  }
+
+  div {
+    width: 33%;
+    display: inline-block;
+  }
+
+  div:nth-of-type(1) {
+    background: $color-blue-1;
+  }
+
+  div:nth-of-type(2) {
+    width: 34%;
+    background: $color-orange-1;
+  }
+
+  div:nth-of-type(3) {
+    background: $color-green-1;
+  }
+
+}

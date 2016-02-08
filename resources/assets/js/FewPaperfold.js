@@ -10,19 +10,46 @@ FewPaperfold = {
 
     $('[data-fewaccordiontarget]').each(function() {
 
-      var $targetElm = $('.' + $(this).attr('data-fewaccordiontarget'));
+      $(this).data('status', 'closed');
 
-      console.log($targetElm);
+      var $targetElm = $('#' + $(this).attr('data-fewaccordiontarget'));
+
+      $('.mega-nav-item__sub-item-text', $targetElm).each(function() {
+
+        $(this).dotdotdot({
+          watch: "window"
+        });
+
+      });
 
       var paperfold = $targetElm.paperfold({
-        duration: 240,
+        duration: 300,
         folds: ($('.few-paperfold-item', $targetElm).length / 2)
       });
 
       $(this).on('click', function(event) {
 
         event.preventDefault();
-        paperfold.toggle();
+
+        var $eventTriggerElm = $(this);
+
+        var status = $eventTriggerElm.data('status');
+
+        if(status == 'closed') {
+
+          $eventTriggerElm.addClass('few-paperfold--open');
+          $eventTriggerElm.data('status', 'open');
+          paperfold.open();
+
+        } else {
+
+          $eventTriggerElm.removeClass('few-paperfold--open');
+          $eventTriggerElm.data('status', 'closed');
+          paperfold.close();
+
+        }
+
+
 
       });
 

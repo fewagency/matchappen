@@ -1,0 +1,78 @@
+.main-nav-wrapper {
+  background: #000;
+}
+
+.main-nav {
+
+}
+
+.main-nav__items {
+
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  @include clearfix();
+
+  /* Three items */
+  li:nth-child(1):nth-last-child(3),
+  li:nth-child(3):nth-last-child(1) {
+    width: 33%;
+  }
+
+  li:nth-child(2):nth-last-child(2) {
+    width: 34%;
+  }
+
+  /* Four items */
+  li:nth-child(1):nth-last-child(4),
+  li:nth-child(2):nth-last-child(3),
+  li:nth-child(3):nth-last-child(2),
+  li:nth-child(4):nth-last-child(1) {
+    width: 25%;
+  }
+
+  /* Five items */
+  li:nth-child(1):nth-last-child(5),
+  li:nth-child(2):nth-last-child(4),
+  li:nth-child(3):nth-last-child(3),
+  li:nth-child(4):nth-last-child(2),
+  li:nth-child(5):nth-last-child(1) {
+    width: 20%;
+  }
+
+}
+
+.main-nav__item {
+  display: block;
+  float: left;
+  text-align: center;
+}
+
+.main-nav__item-link {
+
+  color: #fff;
+  display: block;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  svg {
+    width: auto;
+    height: 40px;
+    fill: #fff;
+
+    @media (min-width: $screen-sm-min) {
+
+    }
+
+  }
+
+  span {
+    display: block;
+  }
+
+}
