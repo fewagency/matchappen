@@ -78,7 +78,7 @@ class Occupation extends Model implements SluggableInterface
     public static function getOrCreateFromCommaSeparatedNames($names, User $user = null)
     {
         $names = collect(explode(',', $names))->map(function ($item) {
-            return trim($item);
+            return trim($item); //TODO: strip all double non-word chars from occupation name
         })->filter();
         $instance = new static;
         $existing = $instance->newQuery()->whereIn('name', $names)->get();
