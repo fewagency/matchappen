@@ -21,12 +21,16 @@ MegaNav.init();
     // All pages
     'common': {
       init: function() {
+
         // JavaScript to be fired on all pages
         FewPaperfold.init();
 
       },
       finalize: function() {
         // JavaScript to be fired on all pages, after page specific JS is fired
+
+        $('body').removeClass('loading');
+
       }
     },
 
@@ -65,6 +69,7 @@ MegaNav.init();
       }
     },
     loadEvents: function() {
+
       // Fire common init JS
       UTIL.fire('common');
 

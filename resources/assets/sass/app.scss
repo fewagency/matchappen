@@ -3,19 +3,42 @@
 //@import "../../../bower_components/malmo_shared_assets/stylesheets/malmo_external";
 @import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap";
 
-@import "_colors.scss";
+@import "_colors";
 @import "_variables";
+@import "_typography";
 
-@import "_few-accordion";
+@import "_loading-indicator";
+@import "_few-paperfold";
 @import "_mega-nav";
 
-body {
-  padding-top: 50px;
-}
+@import "_site-top-bar";
+@import "_site-header";
+@import "_main-nav";
 
-.wrapper {
-  margin: 0 auto;
-  max-width: 67em;
-  padding: 0 1em;
-}
+@import "_text-block-1";
 
+.js {
+
+  body.loading {
+
+    background: #fff;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: #fff no-repeat center center;
+
+    > * {
+      visibility: hidden;
+    }
+
+    #loading-indicator {
+      display: block;
+      visibility: visible;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -71px 0 0 -71px;
+    }
+
+  }
+}
