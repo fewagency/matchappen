@@ -6,7 +6,7 @@ $(function () {
     load: function (query, callback) {
       if (!query.length) return callback();
       $.ajax({
-        url: $('textarea[name="occupations"]').data('optionsurl').first(),
+        url: $('textarea[name="occupations"]').data('optionsurl'),
         type: 'GET',
         data: {
           q: query,
@@ -20,4 +20,4 @@ $(function () {
       });
     }
   });
-}
+});

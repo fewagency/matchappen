@@ -22,8 +22,10 @@ elixir(function (mix) {
       '../../../bower_components/jquery/dist/jquery.min.js',
       '../../../bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
       'vendor/paperfold.js',
+      '../../../bower_components/selectize/dist/js/standalone/selectize.min.js',
       'MegaNav.js',
       'FewPaperfold.js',
+      'selectize.js',
       'app.js'
     ])
     .version([
