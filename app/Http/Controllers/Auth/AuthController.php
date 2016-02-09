@@ -4,6 +4,7 @@ namespace Matchappen\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Matchappen\Http\Requests\StoreWorkplaceRequest;
+use Matchappen\Occupation;
 use Matchappen\User;
 use Matchappen\Workplace;
 use Validator;
@@ -88,7 +89,8 @@ class AuthController extends Controller
         $user->workplace()->associate($workplace);
         $user->save();
 
-        //TODO: catch occupations, add new ones, and sync them with the workplace
+        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($data['workplace']['occupations'], $user);
+        $workplace->occupations()->sync($occupations);
 
         //TODO: email admin after new workplace registration
 

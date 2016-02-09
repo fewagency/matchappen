@@ -20,6 +20,11 @@
   </div>
 
   <div>
+    Yrken på arbetsplatsen
+    <textarea name="workplace[occupations]" data-occupationsurl="{{ action('OccupationController@index') }}">{{ old('workplace.occupations') }}</textarea>
+  </div>
+
+  <div>
     Företagets adress
     <textarea name="workplace[address]">{{ old('workplace.address') }}</textarea>
   </div>

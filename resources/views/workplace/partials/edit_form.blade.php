@@ -24,8 +24,8 @@
   @endif
 
   <div>
-    Yrken
-    <textarea name="occupations" data-optionsurl="{{ action('OccupationController@index') }}">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
+    Yrken på arbetsplatsen
+    <textarea name="occupations" data-occupationsurl="{{ action('OccupationController@index') }}">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
   </div>
 
   <div>

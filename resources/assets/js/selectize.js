@@ -1,5 +1,6 @@
 $(function () {
-  $('textarea[name="occupations"]').selectize({
+  var occupationInputs = $('textarea[data-occupationsurl]');
+  occupationInputs.selectize({
     valueField: 'name',
     labelField: 'name',
     searchField: 'name',
@@ -9,7 +10,7 @@ $(function () {
     load: function (query, callback) {
       if (!query.length) return callback();
       $.ajax({
-        url: $('textarea[name="occupations"]').data('optionsurl'),
+        url: occupationInputs.data('occupationsurl'),
         type: 'GET',
         data: {
           q: query,
