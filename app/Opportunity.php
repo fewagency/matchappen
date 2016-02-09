@@ -57,6 +57,14 @@ class Opportunity extends Model
     ];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'name', 'href', 'headline', 'text'];
+
+
+    /**
      * Scope a query to only include opportunities from published workplaces.
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -116,7 +124,7 @@ class Opportunity extends Model
     public function scopeWithPlacesLeft($query)
     {
         //TODO: add check for max_visitors > sum(bookings.visitors where reserved_until isnull) to scope
-        dd($this->bookings()->getBaseQuery());
+        //dd($this->bookings()->getBaseQuery());
 
         return $query;
     }
@@ -129,6 +137,16 @@ class Opportunity extends Model
     public function scopeBookable($query)
     {
         return $query->viewable()->withPlacesLeft();
+    }
+
+    /**
+     * Scope a query to only include opportunites to promote.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePromoted($query)
+    {
+        return $query->bookable()->orderBy('registration_end');
     }
 
     /**
@@ -217,6 +235,26 @@ class Opportunity extends Model
                 'workplace' => $this->workplace->name,
                 'time' => $this->start->format('j/n G:i'),
             ]);
+    }
+
+    public function getHrefAttribute()
+    {
+        return action('OpportunityController@show', $this);
+    }
+
+    public function getHeadlineAttribute()
+    {
+        return $this->name;
+    }
+
+    public function getTextAttribute()
+    {
+        $parts = [];
+        if ($this->occupations->count()) {
+            $parts[] = $this->occupations->implode('name', ', ');
+        }
+
+        return implode(' - ', $parts);
     }
 
     public function numberOfBookedVisitors()

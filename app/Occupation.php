@@ -29,7 +29,7 @@ class Occupation extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $visible = ['id', 'name', 'slug'];
+    protected $visible = ['id', 'name', 'slug', 'href', 'headline', 'text'];
 
     /**
      * Relationship to workplaces where this occupation is represented
@@ -68,6 +68,43 @@ class Occupation extends Model implements SluggableInterface
         return $query->whereHas('workplaces', function ($query) {
             $query->published();
         });
+    }
+
+    /**
+     * Scope a query to only include occupations to promote.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePromoted($query)
+    {
+        return $query->whereHas('opportunities', function ($query) {
+            $query->bookable();
+        });
+    }
+
+    public function getHrefAttribute()
+    {
+        return action('OccupationController@show', $this);
+    }
+
+    public function getHeadlineAttribute()
+    {
+        return $this->name;
+    }
+
+    public function getTextAttribute()
+    {
+        $offers = [];
+        $workplace_count = $this->workplaces()->published()->count();
+        $opportunity_count = $this->opportunities()->viewable()->count();
+        if ($workplace_count) {
+            $offers[] = $workplace_count . ' ' . trans_choice('workplace.workplace', $workplace_count);
+        }
+        if ($opportunity_count) {
+            $offers[] = $opportunity_count . ' ' . trans_choice('opportunity.opportunity', $opportunity_count);
+        }
+
+        return implode(', ', $offers);
     }
 
     public function getRouteKeyName()

@@ -49,6 +49,13 @@ class Workplace extends Model implements SluggableInterface
     ];
 
     /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['id', 'name', 'slug', 'href', 'headline', 'text'];
+
+    /**
      * Publish this workplace - to be used by admins
      */
     public function publish()
@@ -127,6 +134,18 @@ class Workplace extends Model implements SluggableInterface
         return $query->where('is_published', null);
     }
 
+    /**
+     * Scope a query to only include workplaces to promote.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePromoted($query)
+    {
+        return $query->whereHas('opportunities', function ($query) {
+            $query->bookable();
+        });
+    }
+
     public function getDisplayContactNameAttribute()
     {
         return $this->contact_name ?: $this->fallback_contact_name;
@@ -155,6 +174,29 @@ class Workplace extends Model implements SluggableInterface
     public function getFallbackPhoneAttribute()
     {
         return $this->users->first()->phone;
+    }
+
+    public function getHrefAttribute()
+    {
+        return action('WorkplaceController@show', $this);
+    }
+
+    public function getHeadlineAttribute()
+    {
+        return $this->name;
+    }
+
+    public function getTextAttribute()
+    {
+        $parts = [];
+        if ($this->occupations->count()) {
+            $parts[] = $this->occupations->implode('name', ', ');
+        }
+        if ($opportunity_count = $this->opportunities()->count()) {
+            $parts[] = $opportunity_count . ' ' . trans_choice('opportunity.opportunity', $opportunity_count);
+        }
+
+        return implode(' - ', $parts);
     }
 
     /**

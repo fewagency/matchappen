@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <h1>{{ trans_choice('general.occupation', $occupations->count()) }}</h1>
+  <h1>{{ trans_choice('occupation.occupation', $occupations->count()) }}</h1>
 
   @include('occupation.partials.list')
 

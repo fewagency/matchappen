@@ -1,7 +1,12 @@
 <?php
 
 Route::get('/', function () {
-    return view('index');
+    $limit = 5;
+    $opportunities = \Matchappen\Opportunity::promoted()->limit($limit)->get();
+    $workplaces = \Matchappen\Workplace::promoted()->limit($limit)->get();
+    $occupations = \Matchappen\Occupation::promoted()->limit($limit)->get();
+
+    return view('index', compact('opportunities', 'workplaces', 'occupations'));
 });
 
 Route::group(['prefix' => 'yrken'], function () {
