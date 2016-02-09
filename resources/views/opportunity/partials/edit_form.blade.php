@@ -38,6 +38,11 @@
   </div>
 
   <div>
+    Yrken
+    <textarea name="occupations" data-occupationsurl="{{ action('OccupationController@index') }}">{{ old('occupations', $opportunity->occupations->implode('name', ',')) }}</textarea>
+  </div>
+
+  <div>
     Beskrivning
     <textarea name="description">{{ old('description', $opportunity->description) }}</textarea>
   </div>

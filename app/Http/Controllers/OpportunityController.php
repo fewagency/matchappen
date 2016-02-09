@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreOpportunityRequest;
+use Matchappen\Occupation;
 use Matchappen\Opportunity;
 
 class OpportunityController extends Controller
@@ -38,7 +39,9 @@ class OpportunityController extends Controller
     {
         $workplace = $request->user()->workplace;
 
-        $opportunity = value(new Opportunity())->workplace()->associate($workplace);
+        $opportunity = new Opportunity();
+        $opportunity->workplace()->associate($workplace);
+        $opportunity->occupations = $workplace->occupations;
 
         return view('opportunity.create')->with(compact('opportunity', 'workplace'));
     }
@@ -48,6 +51,9 @@ class OpportunityController extends Controller
         $opportunity = new Opportunity($request->input());
         $opportunity->workplace()->associate($request->user()->workplace);
         $opportunity->save();
+
+        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity created
 
@@ -64,6 +70,9 @@ class OpportunityController extends Controller
     public function update(Opportunity $opportunity, StoreOpportunityRequest $request)
     {
         $opportunity->update($request->input());
+
+        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity update
 

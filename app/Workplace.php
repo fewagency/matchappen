@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string fallback_phone
  * @property string homepage
  * @property bool|null is_published
+ * @property Collection occupations
  */
 class Workplace extends Model implements SluggableInterface
 {
