@@ -50,7 +50,7 @@
     ])
 
   @include('partials.mega-nav-item', [
-    'main_href' => '#', //action('OccupationController@index'),
+    'main_href' => action('OccupationController@index'),
     'item_modifier' => 'occupations',
     'cta_icon' => base_path() . '/public/images/handshake-1-noun_153518.svg',
     'headline' => 'Spännande yrken',
@@ -84,7 +84,7 @@
     ],
     'extra_sub_items' => [
       [
-        'href' => '#', //action('OccupationController@index'),
+        'href' => action('OccupationController@index'),
         'text' => 'Se fler spännande yrken'
       ]
     ]

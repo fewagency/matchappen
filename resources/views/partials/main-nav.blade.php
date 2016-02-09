@@ -1,3 +1,4 @@
+@inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 <div class="main-nav-wrapper">
   <div class="container">
     <div class="row">
@@ -12,7 +13,7 @@
                 <span>{{ ucfirst(trans_choice('workplace.workplace', 2)) }}</span></a>
             </li>
             <li class="main-nav__item">
-              <a href="#"
+              <a href="{{ action('OccupationController@index') }}"
                  class="main-nav__item-link"><?php include(base_path() . '/public/images/handshake-1-noun_153518.svg'); ?>
                 <span>{{ ucfirst(trans_choice('general.occupation', 2)) }}</span></a>
             </li>

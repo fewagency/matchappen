@@ -12,7 +12,11 @@ class OccupationController extends Controller
 {
     public function index(Request $request)
     {
-        $occupations = Occupation::where('name', 'like', $request->get('q') . '%')->orderBy('name')->get();
+        $query = Occupation::query();
+        if($request->has('q')) {
+            $query->where('name', 'like', $request->get('q') . '%');
+        }
+        $occupations = $query->orderBy('name')->get();
         if ($request->ajax()) {
             return $occupations;
         }

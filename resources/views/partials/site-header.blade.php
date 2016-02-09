@@ -1,5 +1,3 @@
-@inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
-
 <div class="site-top-bar">
   <div></div><div></div><div></div>
 </div>
