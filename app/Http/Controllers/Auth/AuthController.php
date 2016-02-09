@@ -62,11 +62,11 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         $validator = Validator::make($data, []);
-        foreach (User::rulesForCreate() as $attribute => $rules) {
-            $validator->mergeRules('user.' . $attribute, $rules);
-        }
         foreach (StoreWorkplaceRequest::rulesForCreate() as $attribute => $rules) {
             $validator->mergeRules('workplace.' . $attribute, $rules);
+        }
+        foreach (User::rulesForCreate() as $attribute => $rules) {
+            $validator->mergeRules('user.' . $attribute, $rules);
         }
 
         return $validator;
