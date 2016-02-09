@@ -94,7 +94,7 @@
       'main_href' => action('OpportunityController@index'),
       'item_modifier' => 'opportunities',
       'cta_icon' => base_path() . '/public/images/speech-bubbles-1-noun_70008.svg',
-      'headline' => 'Mötestider',
+      'headline' => trans_choice('opportunity.opportunity',2),
       'intro_text' => 'Läs om lorem ipsum dolor sit amet',
       'sub_items' => [
         [
