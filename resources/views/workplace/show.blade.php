@@ -23,6 +23,8 @@
     <p>Hemsida: <a href="{{ $workplace->homepage }}">{{ $workplace->homepage }}</a></p>
   @endif
 
+  @include('occupation.partials.list', ['occupations' => $workplace->occupations ])
+
   <p>Anställda: {{ $workplace->employees }}</p>
   <p>Kontaktperson: {{ $workplace->display_contact_name }}</p>
   <p>Epost: <a href="mailto:{{ $workplace->display_email }}">{{ $workplace->display_email }}</a></p>

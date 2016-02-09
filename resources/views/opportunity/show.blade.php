@@ -13,6 +13,9 @@
   @endif
 
   <p>Längd: {{ $opportunity->minutes }} minuter</p>
+
+  @include('occupation.partials.list', ['occupations' => $opportunity->occupations ])
+
   <address>{!! nl2br(e($opportunity->display_address)) !!}</address>
   <p>Kontaktperson: {{ $opportunity->display_contact_name }}</p>
   <p>Telefon: {{ $opportunity->display_contact_phone }}</p>
