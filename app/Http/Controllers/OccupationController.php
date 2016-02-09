@@ -13,15 +13,20 @@ class OccupationController extends Controller
     public function index(Request $request)
     {
         $query = Occupation::query();
-        if($request->has('q')) {
+
+        if ($request->has('q')) {
             $query->where('name', 'like', $request->get('q') . '%');
         }
-        $occupations = $query->orderBy('name')->get();
+
         if ($request->ajax()) {
-            return $occupations;
+            $query->orderBy('name');
+
+            return $query->get();
         }
 
-        return view('occupation.index')->with(compact('occupations'));
+        $query->published();
+
+        return view('occupation.index')->with(['occupations' => $query->get()]);
     }
 
     public function show(Occupation $occupation)

@@ -29,7 +29,7 @@ class Occupation extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $visible = ['id', 'name'];
+    protected $visible = ['id', 'name', 'slug'];
 
     /**
      * Relationship to workplaces where this occupation is represented
@@ -56,6 +56,18 @@ class Occupation extends Model implements SluggableInterface
     public function createdBy()
     {
         return $this->belongsTo('Matchappen\User', 'created_by');
+    }
+
+    /**
+     * Scope a query to only include occupations from published workplaces.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished($query)
+    {
+        return $query->whereHas('workplaces', function ($query) {
+            $query->published();
+        });
     }
 
     public function getRouteKeyName()
