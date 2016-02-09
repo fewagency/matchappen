@@ -25,7 +25,7 @@
   </div>
 
   <div>
-    Företagets adress
+    Arbetsplatsens adress
     <textarea name="workplace[address]">{{ old('workplace.address') }}</textarea>
   </div>
 

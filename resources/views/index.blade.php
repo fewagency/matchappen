@@ -12,7 +12,7 @@
     'main_href' => action('WorkplaceController@index'),
     'item_modifier' => 'companies',
     'cta_icon' => base_path() . '/public/images/portfolio.svg',
-    'headline' => 'Spännande företag',
+    'headline' => 'Spännande arbetsplatser',
     'intro_text' => 'Läs om lorem ipsum dolor sit amet',
     'sub_items' => [
         [
@@ -44,7 +44,7 @@
       'extra_sub_items' => [
       [
         'href' => action('WorkplaceController@index'),
-        'text' => 'Se fler spännande företag'
+        'text' => 'Se fler spännande arbetsplatser'
       ]
     ]
     ])
