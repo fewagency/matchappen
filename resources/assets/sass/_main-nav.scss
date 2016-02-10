@@ -1,5 +1,7 @@
 .main-nav-wrapper {
   background: #000;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .main-nav {
@@ -61,18 +63,25 @@
   }
 
   svg {
-    width: auto;
-    height: 40px;
+
+    width: 60%;
+    height: auto;
     fill: #fff;
 
     @media (min-width: $screen-sm-min) {
-
+      width: auto;
+      height: 40px;
     }
 
   }
 
   span {
-    display: block;
+    display: none;
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
+    }
+
   }
 
 }
