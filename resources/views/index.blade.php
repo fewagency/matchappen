@@ -10,9 +10,12 @@
 
   @include('partials.mega-nav-item', [
     'main_href' => action('WorkplaceController@index'),
-    'item_modifier' => 'companies',
+    'item_modifiers' => ['companies'],
+    'item_id' => 'companies',
+    'use_fold_effect' => true,
     'cta_icon' => base_path() . '/public/images/portfolio.svg',
     'headline' => 'Spännande arbetsplatser',
+    'headline_level' => 2,
     'intro_text' => 'Läs om lorem ipsum dolor sit amet',
     'sub_items' => $workplaces,
     'extra_sub_items' => [
@@ -25,9 +28,12 @@
 
   @include('partials.mega-nav-item', [
     'main_href' => action('OccupationController@index'),
-    'item_modifier' => 'occupations',
+    'item_modifiers' => ['occupations'],
+    'item_id' => 'occupations',
+    'use_fold_effect' => true,
     'cta_icon' => base_path() . '/public/images/handshake-1-noun_153518.svg',
     'headline' => 'Spännande yrken',
+    'headline_level' => 2,
     'intro_text' => 'Läs om lorem ipsum dolor sit amet',
     'sub_items' => $occupations,
     'extra_sub_items' => [
@@ -40,9 +46,12 @@
 
   @include('partials.mega-nav-item', [
       'main_href' => action('OpportunityController@index'),
-      'item_modifier' => 'opportunities',
+      'item_modifiers' => ['opportunities'],
+      'item_id' => 'opportunities',
+      'use_fold_effect' => true,
       'cta_icon' => base_path() . '/public/images/speech-bubbles-1-noun_70008.svg',
       'headline' => trans_choice('opportunity.opportunity',2),
+      'headline_level' => 2,
       'intro_text' => 'Läs om lorem ipsum dolor sit amet',
       'sub_items' => $opportunities,
       'extra_sub_items' => [

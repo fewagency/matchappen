@@ -8,7 +8,15 @@
 
   @include('workplace.partials.card')
 
-  @include('opportunity.partials.list', ['opportunities' => $workplace->upcomingOpportunities])
+  {{-- @include('opportunity.partials.list', ['opportunities' => $workplace->upcomingOpportunities]) --}}
+
+  @foreach($workplace->upcomingOpportunities as $upcoming_opportunity)
+
+    @include('partials.mega-nav-item-sub-item', [
+      'sub_item' => $upcoming_opportunity
+    ])
+
+  @endforeach
 
   <a href="{{ action('WorkplaceController@show', $workplace) }}">
     Hur ser din {{ trans_choice('workplace.workplace', 1) }} ut för andra besökare?

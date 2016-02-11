@@ -20,6 +20,6 @@
 
   </div>
 
-</div>
+  @include('partials.main-nav')
 
-@include('partials.main-nav')
+</div>
