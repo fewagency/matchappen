@@ -11,7 +11,7 @@
 
 @import "_loading-indicator";
 @import "_few-paperfold";
-@import "_mega-nav";
+@import "_mega-nav-item";
 
 @import "_site-top-bar";
 @import "_site-header";
@@ -23,11 +23,10 @@
 
   body.loading {
 
-    background: #fff;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    background: #fff no-repeat center center;
+    background: #000 no-repeat center center;
 
     > * {
       visibility: hidden;

@@ -24,7 +24,16 @@ FewPaperfold = {
 
       var paperfold = $targetElm.paperfold({
         duration: 300,
-        folds: ($('.few-paperfold-item', $targetElm).length / 2)
+        folds: ($('.few-paperfold-item', $targetElm).length / 2),
+        onProgress: function(progress) {
+
+          if(progress == 1) {
+
+            console.log($(this));
+
+          }
+
+        }
       });
 
       $(this).on('click', function(event) {
