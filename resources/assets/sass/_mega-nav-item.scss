@@ -21,7 +21,7 @@ $mega-nav-item-height: 258px;
     fill: $color-blue-2;
   }
 
-  .mega-nav-item__sub-item-wrapper-1 {
+  .mega-nav-item__sub-item-text-wrapper {
     border-color: $color-blue-1;
   }
 
@@ -56,7 +56,7 @@ $mega-nav-item-height: 258px;
     fill: $color-orange-2;
   }
 
-  .mega-nav-item__sub-item-wrapper-1 {
+  .mega-nav-item__sub-item-text-wrapper {
     border-color: $color-orange-1;
   }
 
@@ -91,7 +91,7 @@ $mega-nav-item-height: 258px;
     fill: $color-green-2;
   }
 
-  .mega-nav-item__sub-item-wrapper-1 {
+  .mega-nav-item__sub-item-text-wrapper {
     border-color: $color-green-1;
   }
 
@@ -237,16 +237,30 @@ $mega-nav-item-height: 258px;
   @extend .container;
   position: relative;
 
-  @media (min-width: $screen-sm-min) {
-    border-left: solid 2px;
-  }
+}
+
+.mega-nav-item__sub-item-wrapper-2 {
+
+  @extend .row;
+
+}
+
+.mega-nav-item__sub-item-wrapper-3 {
+
+  @include make-xs-column(12);
+
 }
 
 .mega-nav-item__sub-item-text-wrapper {
-  padding: 0;
+  padding: 0 0 0 16px;
   margin: 0;
   line-height: 1.3em;
   display: block;
+
+  @media (min-width: $screen-sm-min) {
+    border-left: solid 2px;
+  }
+
 }
 
 .mega-nav-item__sub-item-text {
