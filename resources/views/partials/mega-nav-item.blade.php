@@ -39,7 +39,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-offset-1 col-lg-10">
+      <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 
         <a href="{{ $main_href }}" class="mega-nav-item__intro-wrapper"{!! ($use_fold_effect ? ' data-fewaccordiontarget="' . $mega_nav_item_id . '"' : '') !!}>
           <div class="mega-nav-item__intro">
