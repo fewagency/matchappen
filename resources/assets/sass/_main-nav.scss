@@ -48,6 +48,43 @@
   display: block;
   float: left;
   text-align: center;
+
+  &--workplaces.main-nav__item--active {
+
+    a {
+      color: $color-blue-1;
+    }
+
+    svg {
+      fill: $color-blue-1;
+    }
+
+  }
+
+  &--occupations.main-nav__item--active {
+
+    a {
+      color: $color-orange-1;
+    }
+
+    svg {
+      fill: $color-orange-1;
+    }
+
+  }
+
+  &--opportunities.main-nav__item--active {
+
+    a {
+      color: $color-green-1;
+    }
+
+    svg {
+      fill: $color-green-1;
+    }
+
+  }
+
 }
 
 .main-nav__item-link {
