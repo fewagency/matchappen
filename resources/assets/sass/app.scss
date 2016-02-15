@@ -18,28 +18,4 @@
 @import "_main-nav";
 
 @import "_text-block-1";
-
-.js {
-
-  body.loading {
-
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background: #000 no-repeat center center;
-
-    > * {
-      visibility: hidden;
-    }
-
-    #loading-indicator {
-      display: block;
-      visibility: visible;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -71px 0 0 -71px;
-    }
-
-  }
-}
+@import "page-intro";
