@@ -336,12 +336,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fewagency/fluent-form.git",
-                "reference": "e205e9787cc6ead7b7555df0281ba91f9c3f0860"
+                "reference": "9126caab84c8326f95ae1bf165d3c59c85479593"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fewagency/fluent-form/zipball/e205e9787cc6ead7b7555df0281ba91f9c3f0860",
-                "reference": "e205e9787cc6ead7b7555df0281ba91f9c3f0860",
+                "url": "https://api.github.com/repos/fewagency/fluent-form/zipball/9126caab84c8326f95ae1bf165d3c59c85479593",
+                "reference": "9126caab84c8326f95ae1bf165d3c59c85479593",
                 "shasum": ""
             },
             "require": {
@@ -376,7 +376,7 @@
                 "generator",
                 "html"
             ],
-            "time": "2016-02-26 14:09:08"
+            "time": "2016-02-26 14:42:14"
         },
         {
             "name": "fewagency/fluent-html",

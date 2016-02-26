@@ -1,60 +1,36 @@
 @if($opportunity->isBookable())
-  @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
+@inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
+{!!
+  FluentForm::withAction(action('BookingController@store', $opportunity))
+  ->withValues(['email'=>$token_guard->email()])
+  ->withValues(old())
+  ->withErrors($errors)
+  ->withToken(csrf_token())
+  ->containingInputBlock('name')
+  ->required()
+  ->followedByInputBlock('visitors','number')
+  ->onlyDisplayedIf($token_guard->checkSupervisor())
+  ->withInputAttribute('max',$opportunity->placesLeft())
+  ->required()
+  ->followedByInputBlock('email', 'email')
+  ->withLabel($token_guard->checkSupervisor() ? 'Elevens epost' : trans('auth.labels.your_email'))
+  ->required(!$token_guard->checkSupervisor())
+  ->withDescription($token_guard->checkSupervisor() ? '(om du bokar till 1 elev)' : null)
+  ->followedByInputBlock('supervisor_email','email')
+  ->readonly($token_guard->checkSupervisor())
+  ->required()
+  ->withLabel($token_guard->checkSupervisor() ? trans('auth.labels.your_email') : 'Din lärares epostadress')
+  ->withDescription($token_guard->checkSupervisor() ? '' : '(mentor eller SYV går också bra)')
+  ->followedByInputBlock('phone','tel')
+  ->withLabel('Ditt mobilnummer')
+  ->withDescription('(frivilligt)')
+  ->followedByButtonBlock('Boka')
+!!}
+<!-- TODO: lägg till årskurs i bokningsformuläret -->
+<!-- TODO: lägg till skola i bokningsformuläret om vi inte kan läsa ut det från elevens epostadress -->
 
-  <form method="POST" action="{{ action('BookingController@store', $opportunity) }}">
-    {!! csrf_field() !!}
+@if(!$token_guard->checkSupervisor())
+  <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som {{ trans('general.edu-staff') }}?</a>
+@endif
 
-    @if (count($errors) > 0)
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    @endif
-
-    <div>
-      Ditt namn
-      <input type="text" name="name" value="{{ old('name') }}">
-    </div>
-
-    @if($token_guard->checkSupervisor())
-      <div>
-        Antal deltagare
-        <input type="number" name="visitors" value="{{ old('visitors', 1) }}" max="{{ $opportunity->placesLeft() }}">
-      </div>
-    @endif
-    <div>
-      @if($token_guard->checkSupervisor())
-        Elevens epost (om du bokar till en elev)
-      @else
-        Din epost
-      @endif
-      <input type="email" name="email" value="{{ old('email') }}">
-    </div>
-    <div>
-      @if($token_guard->checkSupervisor())
-        Din epost
-      @else
-        Din lärares epost (mentor eller SYV går också bra)
-      @endif
-      <input type="email" name="supervisor_email" value="{{ old('supervisor_email', $token_guard->email()) }}" @if($token_guard->checkSupervisor()) readonly @endif >
-    </div>
-
-    <div>
-      Ditt mobilnummer (frivilligt)
-      <input type="tel" name="phone" value="{{ old('phone') }}">
-    </div>
-
-    <!-- TODO: lägg till årskurs i bokningsformuläret -->
-    <!-- TODO: lägg till skola i bokningsformuläret om vi inte kan läsa ut det från elevens epostadress -->
-
-    <div>
-      <button type="submit">Boka</button>
-    </div>
-
-    @if(!$token_guard->checkSupervisor())
-      <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som {{ trans('general.edu-staff') }}?</a>
-    @endif
-
-  </form>
 @endif
