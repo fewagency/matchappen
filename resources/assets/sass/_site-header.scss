@@ -10,7 +10,7 @@
   @extend %myriad-pro-bold;
   font-size: 40px;
   display: inline-block;
-  margin-top: 3px;
+  margin-top: 13px;
   width: 113px;
   height: 35px;
 
@@ -34,12 +34,12 @@
   height: 0;
   overflow: hidden;
   padding-top: 35px;
-  background: url(../../images/pejl.png);
+  background: url(../../images/pejl.svg);
 
   @media	only screen and (-webkit-min-device-pixel-ratio: 1.3),
   only screen and (-o-min-device-pixel-ratio: 13/10),
   only screen and (min-resolution: 120dpi) {
-    background-image: url(../../images/pejl@2x.png);
+    background-image: url(../../images/pejl.svg);
     background-size: 113px 35px;
   }
 

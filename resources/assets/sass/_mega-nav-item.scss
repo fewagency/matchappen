@@ -56,6 +56,16 @@ $mega-nav-item-height: 258px;
     color: $color-blue-1;
   }
 
+  svg {
+
+    .st0{fill:#E1EFF6;}
+    .st1{fill:#CFE6F0;}
+    .st2{fill:#FFFFFF;}
+    .st3{fill:#252C3C;}
+    .st4{fill:#3B4350;}
+
+  }
+
 }
 
 /** Occupations **/
@@ -91,6 +101,18 @@ $mega-nav-item-height: 258px;
     color: $color-orange-1;
   }
 
+  svg {
+
+    .st0{fill:#F6E1A9;}
+    .st1{fill:#FFFFFF;}
+    .st2{fill:#D8D9DA;}
+    .st3{fill:#2B3A49;}
+    .st4{fill:#252C3C;}
+    .st5{fill:#ACAEB4;}
+    .st6{fill:#F1D27F;}
+
+  }
+
 }
 
 /** Opportunitites **/
@@ -124,6 +146,18 @@ $mega-nav-item-height: 258px;
 
   .mega-nav-item__extra-sub-item {
     color: $color-purple-1;
+  }
+
+  svg {
+
+    .st0{fill:#E3CADD;}
+    .st1{fill:#FFFFFF;}
+    .st2{fill:#252C3C;}
+    .st3{fill:#6FB6BF;}
+    .st4{fill:#ACAEB4;}
+    .st5{fill:#D799C0;}
+    .st6{fill:#D5B1CE;}
+
   }
 
 }
