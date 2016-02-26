@@ -19,17 +19,6 @@
       visibility: hidden;
     }
 
-    /*
-    .js body.loading > #loading-indicator {
-      display: block;
-      visibility: visible;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -71px 0 0 -71px;
-    }
-    */
-
   </style>
 
   <meta content='width=device-width, initial-scale=1.0' name='viewport'/>

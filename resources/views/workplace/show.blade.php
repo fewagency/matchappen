@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="content workplace-info">
+  <div class="content item-info workplace-info">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">

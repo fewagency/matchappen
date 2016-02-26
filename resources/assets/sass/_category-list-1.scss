@@ -27,7 +27,9 @@
   color: $color-orange-1;
   border-color: $color-orange-1;
 
-  &:hover {
+  &:hover,
+  &:active,
+  &:focus {
     background: $color-orange-1;
     color: #fff;
   }

@@ -3,7 +3,7 @@
 @section('content')
 
   @include('workplace.partials.list', [
-    //'intro_text' => 'Lorem ipsum dolor sit amet'
+    'hide_intro' => true
   ])
 
 @endsection

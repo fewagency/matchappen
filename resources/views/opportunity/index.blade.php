@@ -2,6 +2,8 @@
 
 @section('content')
 
-  @include('opportunity.partials.list');
+  @include('opportunity.partials.list', [
+    'hide_intro' => true
+  ])
 
 @endsection

@@ -2,6 +2,8 @@
 
 @section('content')
 
-  @include('occupation.partials.list')
+  @include('occupation.partials.list', [
+    'hide_intro' => true
+  ])
 
 @endsection

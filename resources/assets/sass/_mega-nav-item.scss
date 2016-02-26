@@ -8,6 +8,7 @@ $mega-nav-item-height: 258px;
 
 .mega-nav-item--simple-intro {
   background: #fff;
+  margin-bottom: 32px;
 }
 
 .mega-nav-item--simple-intro .mega-nav-item__simple-intro {
@@ -265,13 +266,14 @@ $mega-nav-item-height: 258px;
 }
 
 .mega-nav-item__sub-item-text-wrapper {
-  padding: 0 0 0 16px;
+  padding: 0;
   margin: 0;
   line-height: 1.3em;
   display: block;
 
   @media (min-width: $screen-sm-min) {
     border-left: solid 2px;
+    padding-left: 16px;
   }
 
 }

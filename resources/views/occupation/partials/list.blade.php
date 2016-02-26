@@ -7,6 +7,7 @@
 ?>
 
 @include('partials.mega-nav-item', [
+    'hide_intro' => (isset($hide_intro) && $hide_intro === true),
     'main_href' => action('OccupationController@index'),
     'item_modifiers' => ['occupations'],
     'cta_icon' => trans('assets.occupations-icon'),

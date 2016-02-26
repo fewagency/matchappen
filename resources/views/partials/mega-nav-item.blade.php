@@ -53,7 +53,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
       </div>
     </div>
 
-  @else
+  @elseif(!isset($hide_intro) || $hide_intro === false)
 
   <div class="container">
     <div class="row">
