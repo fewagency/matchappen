@@ -2,11 +2,19 @@
 
 @section('content')
 
-  <h1>{{ $occupation->name }}</h1>
+  <div class="page-intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
 
-  <h2>{{ trans_choice('opportunity.opportunity', 2) }}</h2>
+          <h1>{{ $occupation->name }}</h1>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
   @include('opportunity.partials.list', ['opportunities' => $occupation->opportunities()->viewable()->get() ])
 
-  <h2>{{ trans_choice('workplace.workplace', 2) }}</h2>
   @include('workplace.partials.list', ['workplaces' => $occupation->workplaces()->published()->get() ])
 @endsection

@@ -6,10 +6,28 @@ $mega-nav-item-height: 258px;
 
   text-align: center;
 
+  /*
   .js {
     min-height: $mega-nav-item-height;
   }
+  */
 
+}
+
+.mega-nav-item--simple-intro {
+  background: #fff;
+}
+
+.mega-nav-item--simple-intro .mega-nav-item__simple-intro {
+  text-align: left;
+}
+
+.mega-nav-item--simple-intro .mega-nav-item__intro-headline {
+  @extend %myriad-pro-regular;
+  color: $color-gray-1;
+  border-bottom: none;
+  box-shadow: none;
+  font-size: 18px;
 }
 
 /** Companies **/
@@ -88,31 +106,31 @@ $mega-nav-item-height: 258px;
   @extend .color-scheme-3;
 
   .mega-nav-item__intro-wrapper svg {
-    fill: $color-green-2;
+    fill: $color-purple-2;
   }
 
   .mega-nav-item__sub-item-text-wrapper {
-    border-color: $color-green-1;
+    border-color: $color-purple-1;
   }
 
   .mega-nav-item__intro-headline {
-    border-color: $color-green-2;
+    border-color: $color-purple-2;
   }
 
   .mega-nav-item__sub-item > div {
 
     &:hover {
-      background: $color-green-2;
+      background: $color-purple-2;
     }
 
   }
 
   .mega-nav-item__sub-item-cta svg {
-    fill: $color-green-1;
+    fill: $color-purple-1;
   }
 
   .mega-nav-item__extra-sub-item {
-    color: $color-green-1;
+    color: $color-purple-1;
   }
 
 }
@@ -158,6 +176,9 @@ $mega-nav-item-height: 258px;
 
   .js & {
     padding-top: 40px;
+  }
+
+  .js .start-page & {
     min-height: $mega-nav-item-height;
   }
 
@@ -322,4 +343,9 @@ $mega-nav-item-height: 258px;
   line-height: 70px;
   text-transform: uppercase;
   text-decoration: underline;
+
+  a:hover {
+    text-decoration: none;
+  }
+
 }

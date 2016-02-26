@@ -1,36 +1,87 @@
 @extends('layouts.master')
 
 @section('content')
-  @include('partials.status')
 
-  <h1>{{ $workplace->name }}</h1>
+  <div class="content workplace-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
 
-  @include('workplace.partials.approve')
+          @include('partials.status')
 
-  @include('workplace.partials.admin_edit_link')
+          <h1 class="headline_1">{{ $workplace->name }}</h1>
 
-  @if(!$workplace->isPublished() and Gate::allows('publish', $workplace))
+          @include('workplace.partials.approve')
 
-    <p>Publicerad: {{ $workplace->isPublished() ? 'Ja' : 'Nej' }}</p>
+          @include('workplace.partials.admin_edit_link')
 
-  @endif
+          @if($workplace->description)
+            <div class="row">
+              <div class="col-md-9 text-block-2">
+                {{ $workplace->description }}
+              </div>
+            </div>
+          @endif
 
-  @if($workplace->description)
-    <p>Beskrivning: {{ $workplace->description }}</p>
-  @endif
+          @if(!$workplace->isPublished() and Gate::allows('publish', $workplace))
 
-  @if($workplace->homepage)
-    <p>Hemsida: <a href="{{ $workplace->homepage }}">{{ $workplace->homepage }}</a></p>
-  @endif
+            @include('partials.info-1', [
+              'left_col_content' => 'Publicerad',
+              'right_col_content' => $workplace->isPublished() ? 'Ja' : 'Nej'
+            ])
 
-  @include('occupation.partials.list', ['occupations' => $workplace->occupations ])
+          @endif
 
-  <p>Anställda: {{ $workplace->employees }}</p>
-  <p>Kontaktperson: {{ $workplace->display_contact_name }}</p>
-  <p>Epost: <a href="mailto:{{ $workplace->display_email }}">{{ $workplace->display_email }}</a></p>
-  <p>Telefon: {{ $workplace->display_phone }}</p>
-  <address>{!! nl2br(e($workplace->address)) !!}</address>
+          @include('partials.category-list-1', [
+            'block_modifier' => 'occupations',
+            'headline' => 'Yrken',
+            'items' => $workplace->occupations
+          ])
 
-  @include('opportunity.partials.list', ['opportunities' => $workplace->opportunities])
+          @if($workplace->homepage)
+
+            @include('partials.info-1', [
+              'left_col_content' => 'Hemsida',
+              'right_col_content' => '<a href="' . $workplace->homepage . '">' . $workplace->homepage . '</a>'
+            ])
+
+          @endif
+
+          @include('partials.info-1', [
+            'left_col_content' => 'Anställda',
+            'right_col_content' => $workplace->employees
+          ])
+
+          @include('partials.info-1', [
+            'left_col_content' => 'Kontaktperson',
+            'right_col_content' => $workplace->display_contact_name
+          ])
+
+          @include('partials.info-1', [
+            'left_col_content' => 'Epost',
+            'right_col_content' => '<a href="mailto:' . $workplace->display_email . '">' . $workplace->display_email . '</a>'
+          ])
+
+          @include('partials.info-1', [
+            'left_col_content' => 'Telefon',
+            'right_col_content' => '<a href="tel:' . substr(str_replace(' ', '', $workplace->display_phone), 1) . '">' . $workplace->display_phone . '</a>'
+          ])
+
+          @include('partials.info-1', [
+            'left_col_content' => 'Adress',
+            'right_col_content' => nl2br(e($workplace->address))
+          ])
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @include('opportunity.partials.list',[
+    'simple_intro' => true,
+    'headline_level' => 2,
+    'headline' => 'Tillfällen',
+    'opportunities' => $workplace->opportunities
+  ])
 
 @endsection

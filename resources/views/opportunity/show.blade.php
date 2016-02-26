@@ -2,26 +2,34 @@
 
 @section('content')
 
-  <h1>{{ $opportunity->name }}</h1>
+  <section class="page-intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
 
-  @include('opportunity.partials.booking_link')
+          <h1>{{ $opportunity->name }}</h1>
 
-  @include('opportunity.partials.admin_edit_link')
+          @include('opportunity.partials.booking_link')
 
-  @if($opportunity->description)
-    <p>Beskrivning: {{ $opportunity->description }}</p>
-  @endif
+          @include('opportunity.partials.admin_edit_link')
 
-  <p>Längd: {{ $opportunity->minutes }} minuter</p>
+          @if($opportunity->description)
+            <p>Beskrivning: {{ $opportunity->description }}</p>
+          @endif
+
+          <p>Längd: {{ $opportunity->minutes }} minuter</p>
+
+          <address>{!! nl2br(e($opportunity->display_address)) !!}</address>
+          <p>Kontaktperson: {{ $opportunity->display_contact_name }}</p>
+          <p>Telefon: {{ $opportunity->display_contact_phone }}</p>
+          <p>Sista anmälan: {{ $opportunity->registration_end->format('j/n') }}</p>
+          <p>Platser kvar: {{ $opportunity->placesLeft() }}/{{ $opportunity->max_visitors }}</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
 
   @include('occupation.partials.list', ['occupations' => $opportunity->occupations ])
-
-  <address>{!! nl2br(e($opportunity->display_address)) !!}</address>
-  <p>Kontaktperson: {{ $opportunity->display_contact_name }}</p>
-  <p>Telefon: {{ $opportunity->display_contact_phone }}</p>
-  <p>Sista anmälan: {{ $opportunity->registration_end->format('j/n') }}</p>
-  <p>Platser kvar: {{ $opportunity->placesLeft() }}/{{ $opportunity->max_visitors }}</p>
-
-  @include('workplace.partials.card', ['workplace' => $opportunity->workplace])
 
 @endsection

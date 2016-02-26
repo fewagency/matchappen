@@ -5,6 +5,7 @@
 
 @import "../../../bower_components/selectize/dist/css/selectize.bootstrap3";
 
+@import "_main";
 @import "_colors";
 @import "_variables";
 @import "_typography";
@@ -17,5 +18,9 @@
 @import "_site-header";
 @import "_main-nav";
 
+@import "_content";
 @import "_text-block-1";
-@import "page-intro";
+@import "_text-block-2";
+@import "_page-intro";
+@import "_info-1";
+@import "_category-list-1";

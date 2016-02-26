@@ -1,3 +1,9 @@
+%myriad-pro-regular {
+  font-family: "myriad-pro", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
 %myriad-pro-bold {
   font-family: "myriad-pro", sans-serif;
   font-style: normal;
@@ -7,19 +13,23 @@
 %myriad-pro-semibold {
   font-family: "myriad-pro", sans-serif;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h1,
 h2,
 h3 {
   @extend %myriad-pro-bold;
+  color: #2d2d2d;
 }
 
-h1 {
-  font-size: 30px;
+.headline_1 {
+  @extend %myriad-pro-bold;
+  font-size: 35px;
+  padding: 0;
+  margin: 0;
 }
 
-h2 {
+.headline_2 {
   font-size: 26px;
 }

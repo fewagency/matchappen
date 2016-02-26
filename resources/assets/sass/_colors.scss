@@ -1,14 +1,16 @@
-$color-blue-1: #b3dfec;
-$color-blue-2: #eef7fa;
+$color-blue-1: #a1dee9;
+$color-blue-2: #eff8fa; //lighten($color-blue-1, 25%);
 
-$color-orange-1: #fac458;
-$color-orange-2: #fef0d5;
+$color-orange-1: #fbc34e;
+$color-orange-2: #fff0d7;
 
-$color-green-1: #dedc49;
+$color-green-1: #dedd3a;
 $color-green-2: #f5f6ce;
 
-$color-purple-1: #d699bf;
+$color-purple-1: #d798bf;
 $color-purple-2: #f4e6f0;
+
+$color-gray-1: #bbbbbb;
 
 .color-scheme-1 {
 
@@ -34,15 +36,16 @@ $color-purple-2: #f4e6f0;
 
 .color-scheme-3 {
 
-  background: $color-green-1;
-  color: $color-green-2;
+  background: $color-purple-1;
+  color: $color-purple-2;
 
   a {
-    color: $color-green-2;
+    color: $color-purple-2;
   }
 
 }
 
+/*
 .color-scheme-4 {
 
   background: $color-purple-1;
@@ -53,3 +56,4 @@ $color-purple-2: #f4e6f0;
   }
 
 }
+*/

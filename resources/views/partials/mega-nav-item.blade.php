@@ -33,9 +33,27 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
     }
 
+    if(isset($simple_intro) && $simple_intro === true) {
+
+      $item_modifier_classes .= ' mega-nav-item--simple-intro';
+
+    }
+
 ?>
 
 <section class="mega-nav-item{{ $item_modifier_classes }}">
+
+  @if(isset($simple_intro) && $simple_intro === true)
+
+    <div class="container mega-nav-item__simple-intro">
+      <div class="row">
+        <div class="col-xs-12">
+          <h{{ $headline_level }} class="mega-nav-item__intro-headline">{{ $headline }}</h{{ $headline_level }}>
+        </div>
+      </div>
+    </div>
+
+  @else
 
   <div class="container">
     <div class="row">
@@ -45,7 +63,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
           <div class="mega-nav-item__intro">
             <?php require($cta_icon); ?>
             <h{{ $headline_level }} class="mega-nav-item__intro-headline">{{ $headline }}</h{{ $headline_level }}>
-            <div class="mega-nav-item__intro-text">{{ $intro_text }}</div>
+            <div class="mega-nav-item__intro-text">{{ ucfirst($intro_text) }}</div>
           </div>
 
           @if($use_fold_effect)
@@ -58,6 +76,8 @@ and that $item_id has a value that is unique across all mega nav items on the pa
       </div>
     </div>
   </div>
+
+  @endif
 
   <div class="mega-nav-item__sub-items-wrapper few-paperfold-wrapper"{!! ($mega_nav_item_id !== false ? 'id="' . $mega_nav_item_id .'"' : '') !!}'>
     <ul class="mega-nav-item__sub-items">
