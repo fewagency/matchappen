@@ -1,3 +1,6 @@
 @if($opportunity->isBookable())
-<a href="{{ action('OpportunityController@booking', $opportunity) }}">Boka!</a>
+  @include('partials.btn-xxl', [
+            'href' => action('OpportunityController@booking', $opportunity),
+            'text' => 'Boka besök'
+          ])
 @endif
