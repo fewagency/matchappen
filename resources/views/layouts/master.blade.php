@@ -40,6 +40,8 @@
 
 @yield('content')
 
+@include('partials.site-footer')
+
 
 {{-- @include('partials.loading-indicator') --}}
 
