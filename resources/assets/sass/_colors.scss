@@ -10,6 +10,8 @@ $color-green-2: #f5f6ce;
 $color-purple-1: #d798bf;
 $color-purple-2: #f4e6f0;
 
+$color-black-1: #2d2d2d;
+
 $color-gray-1: #bbbbbb;
 
 .color-scheme-1 {
@@ -17,7 +19,10 @@ $color-gray-1: #bbbbbb;
   background: $color-blue-1;
   color: $color-blue-2;
 
-  a {
+  a,
+  h1,
+  h2,
+  h3 { //
     color: $color-blue-2;
   }
 
@@ -28,7 +33,10 @@ $color-gray-1: #bbbbbb;
   background: $color-orange-1;
   color: $color-orange-2;
 
-  a {
+  a,
+  h1,
+  h2,
+  h3 {
     color: $color-orange-2;
   }
 
@@ -39,7 +47,10 @@ $color-gray-1: #bbbbbb;
   background: $color-purple-1;
   color: $color-purple-2;
 
-  a {
+  a,
+  h1,
+  h2,
+  h3 {
     color: $color-purple-2;
   }
 
