@@ -49,39 +49,80 @@
   float: left;
   text-align: center;
 
-  &--workplaces.main-nav__item--active {
-
-    a {
-      color: $color-blue-1;
-    }
+  &--workplaces {
 
     svg {
-      fill: $color-blue-1;
+      .st0{fill:#C2C3C7;}
+      .st1{fill:#FFFFFF;}
+    }
+
+    &.main-nav__item--active {
+
+      a {
+        color: $color-blue-1;
+      }
+
     }
 
   }
 
-  &--occupations.main-nav__item--active {
-
-    a {
-      color: $color-orange-1;
-    }
+  &--occupations {
 
     svg {
-      fill: $color-orange-1;
+      .st0{fill:#FFFFFF;}
+      .st1{fill:#C2C3C7;}
+    }
+
+    &.main-nav__item--active {
+
+      a {
+        color: $color-orange-1;
+      }
+
     }
 
   }
 
-  &--opportunities.main-nav__item--active {
-
-    a {
-      color: $color-purple-1;
-    }
+  &--opportunities {
 
     svg {
-      fill: $color-purple-1;
+      .st0{fill:#FFFFFF;}
+      .st1{fill:#252C3C;}
+      .st2{fill:#6FB6BF;}
+      .st3{fill:#C2C3C7;}
     }
+
+    &.main-nav__item--active {
+
+      a {
+        color: $color-purple-1;
+      }
+
+    }
+
+  }
+
+  &--my-account {
+
+    svg {
+      .st0{fill:#FFFFFF;}
+    }
+
+  }
+
+  &--log-in {
+
+    .st0{fill:none;}
+    .st1{fill:#FFFFFF;}
+    .st2{fill:#C2C3C7;}
+
+  }
+
+  &--log-out {
+
+    .st0{fill:none;}
+    .st1{fill:#FFFFFF;}
+    .st2{fill:#C2C3C7;}
 
   }
 

@@ -2,17 +2,20 @@
 
 return [
 
-    'workplaces-icon' => base_path() . '/public/images/portfolio.svg',
+    'workplaces-icon' => base_path() . '/public/images/workplace-full.svg',
+    'workplaces-icon-stripped' => base_path() . '/public/images/workplace-stripped.svg',
 
-    'occupations-icon' => base_path() . '/public/images/handshake-1-noun_153518.svg',
+    'occupations-icon' => base_path() . '/public/images/occupation-full.svg',
+    'occupations-icon-stripped' => base_path() . '/public/images/occupation-stripped.svg',
 
-    'opportunities-icon' => base_path() . '/public/images/speech-bubbles-1-noun_70008.svg',
+    'opportunities-icon' => base_path() . '/public/images/opportunity-full.svg',
+    'opportunities-icon-stripped' => base_path() . '/public/images/opportunity-stripped.svg',
 
-    'account-icon' => base_path() . '/public/images/account-1-noun_275225.svg',
+    'account-icon' => base_path() . '/public/images/account.svg',
 
-    'log-out-icon' => base_path() . '/public/images/log-out-1-noun_7237.svg',
+    'log-out-icon' => base_path() . '/public/images/log-out.svg',
 
-    'log-in-icon' => base_path() . '/public/images/log-in-1-noun-1_7717.svg'
+    'log-in-icon' => base_path() . '/public/images/log-out.svg'
 
 ];
 

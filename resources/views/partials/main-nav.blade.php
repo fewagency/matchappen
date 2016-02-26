@@ -15,19 +15,19 @@
           <ul class="main-nav__items">
             <li class="main-nav__item main-nav__item--workplaces">
               <a href="{{ action('WorkplaceController@index') }}"
-                 class="main-nav__item-link"><?php include(trans('assets.workplaces-icon')) ?>
+                 class="main-nav__item-link"><?php include(trans('assets.workplaces-icon-stripped')) ?>
                 <span>{{ ucfirst(trans_choice('workplace.workplace', 2)) }}</span>
               </a>
             </li>
             <li class="main-nav__item main-nav__item--occupations">
               <a href="{{ action('OccupationController@index') }}"
-                 class="main-nav__item-link"><?php include(trans('assets.occupations-icon')) ?>
+                 class="main-nav__item-link"><?php include(trans('assets.occupations-icon-stripped')) ?>
                 <span>{{ ucfirst(trans_choice('occupation.occupation', 2)) }}</span>
               </a>
             </li>
             <li class="main-nav__item main-nav__item--opportunities">
               <a href="{{ action('OpportunityController@index') }}"
-                 class="main-nav__item-link"><?php include(trans('assets.opportunities-icon')) ?>
+                 class="main-nav__item-link"><?php include(trans('assets.opportunities-icon-stripped')) ?>
                 <span>{{ ucfirst(trans_choice('opportunity.opportunity', 2)) }}</span>
               </a>
             </li>
