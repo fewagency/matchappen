@@ -5,8 +5,9 @@ Route::get('/', function () {
     $opportunities = \Matchappen\Opportunity::promoted()->limit($limit)->get();
     $workplaces = \Matchappen\Workplace::promoted()->limit($limit)->get();
     $occupations = \Matchappen\Occupation::promoted()->limit($limit)->get();
+    $body_class = 'start-page';
 
-    return view('index', compact('opportunities', 'workplaces', 'occupations'));
+    return view('index', compact('opportunities', 'workplaces', 'occupations', 'body_class'));
 });
 
 Route::group(['prefix' => 'yrken'], function () {

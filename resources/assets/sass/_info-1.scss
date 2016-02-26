@@ -1,0 +1,24 @@
+.info-1 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.info-1--category-list-1-wrapper {
+
+  padding-top: 18px;
+
+}
+
+.info-1__headline {
+  text-transform: uppercase;
+  color: $color-gray-1;
+}
+
+.info-1 a {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+}

@@ -5,6 +5,7 @@
 
 @import "../../../bower_components/selectize/dist/css/selectize.bootstrap3";
 
+@import "_main";
 @import "_colors";
 @import "_variables";
 @import "_typography";
@@ -17,29 +18,10 @@
 @import "_site-header";
 @import "_main-nav";
 
+@import "_content";
+@import "_item-info";
 @import "_text-block-1";
-
-.js {
-
-  body.loading {
-
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background: #000 no-repeat center center;
-
-    > * {
-      visibility: hidden;
-    }
-
-    #loading-indicator {
-      display: block;
-      visibility: visible;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      margin: -71px 0 0 -71px;
-    }
-
-  }
-}
+@import "_text-block-2";
+@import "_page-intro";
+@import "_info-1";
+@import "_category-list-1";

@@ -10,7 +10,7 @@
 
       <div class="col-xs-12">
 
-        <a href="/" class="site-header__app-name">{{ trans('general.appname') }}</a>
+        <a href="/" class="site-header__app-name"><span>{{ trans('general.appname') }}</span></a>
 
         <a href="http://malmo.se" target="_blank" class="site-header__client-link"><div>Malmö stad</div></a>
 
@@ -20,6 +20,8 @@
 
   </div>
 
-  @include('partials.main-nav')
+  @if(!Request::is('/'))
+    @include('partials.main-nav')
+  @endif
 
 </div>
