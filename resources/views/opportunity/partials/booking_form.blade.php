@@ -10,10 +10,12 @@
   ->withToken(csrf_token())
 
   ->containingInputBlock('name')
+  ->withLabel('Ditt namn')
   ->required()
 
   ->followedByInputBlock('visitors','number')
   ->onlyDisplayedIf($token_guard->checkSupervisor())
+  ->withLabel('Antal besökare')
   ->withInputAttribute('max',$opportunity->placesLeft())
   ->required()
 
