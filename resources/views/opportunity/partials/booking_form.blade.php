@@ -2,7 +2,9 @@
 @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 {!!
   FluentForm::withAction(action('BookingController@store', $opportunity))
-  ->withValues(['email'=>$token_guard->email()])
+  ->withValues([
+    $token_guard->checkSupervisor() ? 'supervisor_email' : 'email' => $token_guard->email(),
+  ])
   ->withValues(old())
   ->withErrors($errors)
   ->withToken(csrf_token())
