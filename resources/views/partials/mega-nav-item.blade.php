@@ -45,7 +45,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
   @if(isset($simple_intro) && $simple_intro === true)
 
-    <div class="container mega-nav-item__simple-intro">
+    <div class="container mega-nav-item__simple-intro container--master">
       <div class="row">
         <div class="col-xs-12">
           <h{{ $headline_level }} class="mega-nav-item__intro-headline">{{ $headline }}</h{{ $headline_level }}>
@@ -55,7 +55,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
   @elseif(!isset($hide_intro) || $hide_intro === false)
 
-  <div class="container">
+  <div class="container container--master">
     <div class="row">
       <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
 

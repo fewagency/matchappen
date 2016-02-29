@@ -2,17 +2,15 @@
 
 @section('content')
   <div class="content item-info opportunity-info">
-    <div class="container">
+    <div class="container container--master">
       <div class="row">
         <div class="col-xs-12">
 
           <h1 class="headline_1">{{ $opportunity->name }}</h1>
 
           @if($opportunity->description)
-            <div class="row">
-              <div class="col-md-9 text-block-2">
-                {{ $opportunity->description }}
-              </div>
+            <div class="text-block-2">
+              {{ $opportunity->description }}
             </div>
           @endif
 

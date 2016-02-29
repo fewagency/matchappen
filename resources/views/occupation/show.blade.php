@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="content item-info occupation-info">
-    <div class="container">
+    <div class="container container--master">
       <div class="row">
         <div class="col-xs-12">
 
@@ -12,10 +12,8 @@
           <h1 class="headline_1">{{ $occupation->name }}</h1>
 
           @if($occupation->description)
-            <div class="row">
-              <div class="col-md-9 text-block-2">
-                {{ $occupation->description }}
-              </div>
+            <div class="text-block-2">
+              {{ $occupation->description }}
             </div>
           @endif
 

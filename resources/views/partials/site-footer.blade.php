@@ -1,8 +1,8 @@
 @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 <footer class="site-footer">
-  <div class="container">
+  <div class="container container--master">
     <div class="row">
-      <div class="col-md-offset-3 col-md-6">
+      <div class="col-xs-12 col-md-offset-3 col-md-6">
 
         <nav class="site-footer-nav">
 

@@ -36,12 +36,24 @@
 <body class="loading {{ $body_class or '' }}">
 
 @include('partials.site-header')
+
 @include('partials.warning')
+
+@if(isset($use_master_container) && $use_master_container === true)
+  <div class="container container--master">
+    <div class="row">
+      <div class="col-xs-12">
+@endif
 
 @yield('content')
 
-@include('partials.site-footer')
+@if(isset($use_master_container) && $use_master_container === true)
+      </div>
+    </div>
+  </div>
+@endif
 
+@include('partials.site-footer')
 
 {{-- @include('partials.loading-indicator') --}}
 
