@@ -1,3 +1,31 @@
 .form-block {
   @extend .form-group;
 }
+
+.form-block__label {
+  @extend .control-label;
+}
+
+.form-block__control {
+  @extend .form-control;
+}
+
+.form-block--has-error {
+  @extend .has-error;
+}
+
+.form-block--required {
+
+}
+
+.form-block__description {
+  @extend .small;
+}
+
+ul.form-block__messages {
+  @extend .list-unstyled;
+}
+
+.form-block__messages--errors {
+  @extend .text-danger;
+}
