@@ -1,22 +1,6 @@
-<form method="POST" action="{{ action('Auth\PasswordController@postEmail') }}">
-  {!! csrf_field() !!}
-
-  @if (count($errors) > 0)
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  @endif
-
-  <div>
-    Email
-    <input type="email" name="email" value="{{ old('email') }}">
-  </div>
-
-  <div>
-    <button type="submit">
-      Send Password Reset Link
-    </button>
-  </div>
-</form>
+{!!
+FluentForm::withAction(action('Auth\PasswordController@postEmail'))->withValues(old())->withErrors($errors)
+->withToken(csrf_token())
+->containingInputBlock('email','email')->withLabel(trans('auth.labels.your_email'))
+->followedByButtonBlock('Send Password Reset Link')
+!!}
