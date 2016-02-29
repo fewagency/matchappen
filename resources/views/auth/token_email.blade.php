@@ -1,9 +1,9 @@
-@extends('layouts.master')
+@extends('layouts.master', ['use_master_container' => true])
 
 @section('content')
   @include('partials.status')
   @if(session('status'))
-    <div class="error">
+    <div class="bg-danger">
       <!-- TODO: remove this token link from template! This is just for testing! -->
       <a href="{{ \Matchappen\AccessToken::orderBy('created_at', 'desc')->first()->getTokenUrl() }}">
         Test the emailed token link

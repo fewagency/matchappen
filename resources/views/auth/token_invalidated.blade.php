@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master', ['use_master_container' => true])
 
 @section('content')
   <p>{{ trans('auth.token_invalidated') }}</p>
