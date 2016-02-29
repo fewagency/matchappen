@@ -4,7 +4,7 @@
 
 <div class="site-header">
 
-  <div class="container">
+  <div class="container container--master">
 
     <div class="row">
 

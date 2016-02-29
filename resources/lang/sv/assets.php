@@ -15,7 +15,9 @@ return [
 
     'log-out-icon' => base_path() . '/public/images/log-out.svg',
 
-    'log-in-icon' => base_path() . '/public/images/log-out.svg'
+    'log-in-icon' => base_path() . '/public/images/log-out.svg',
+
+    'master-col-classes' => 'col-md-offset-2 col-md-8'
 
 ];
 

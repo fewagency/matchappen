@@ -3,7 +3,7 @@
 @section('content')
 
   <div class="content item-info workplace-info">
-    <div class="container">
+    <div class="container container--master">
       <div class="row">
         <div class="col-xs-12">
 
@@ -16,10 +16,8 @@
           @include('workplace.partials.admin_edit_link')
 
           @if($workplace->description)
-            <div class="row">
-              <div class="col-md-9 text-block-2">
-                {{ $workplace->description }}
-              </div>
+            <div class="text-block-2">
+              {{ $workplace->description }}
             </div>
           @endif
 

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master'. ['use_master_container' => true])
 @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 
 @section('content')
