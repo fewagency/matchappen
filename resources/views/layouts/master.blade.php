@@ -35,25 +35,29 @@
 </head>
 <body class="loading {{ $body_class or '' }}">
 
-@include('partials.site-header')
+<div class="master-wrapper">
+  @include('partials.site-header')
 
-@include('partials.warning')
+  @include('partials.warning')
 
-@if(isset($use_master_container) && $use_master_container === true)
-  <div class="container container--master">
-    <div class="row">
-      <div class="col-xs-12">
-@endif
+  @if(isset($use_master_container) && $use_master_container === true)
+    <div class="container container--master">
+      <div class="row">
+        <div class="col-xs-12">
+  @endif
 
-@yield('content')
+          <div class="master-content-wrapper">
+            @yield('content')
+          </div>
 
-@if(isset($use_master_container) && $use_master_container === true)
+  @if(isset($use_master_container) && $use_master_container === true)
+        </div>
       </div>
     </div>
-  </div>
-@endif
+  @endif
 
-@include('partials.site-footer')
+  @include('partials.site-footer')
+</div>
 
 {{-- @include('partials.loading-indicator') --}}
 

@@ -1,7 +1,21 @@
+html,
+body {
+  height:100%;
+}
+
 body {
   padding-bottom: 0;
 }
 
 .container--master {
   max-width: 970px;
+}
+
+.master-wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+.master-content-wrapper {
+  padding-bottom: $footer-height;
 }
