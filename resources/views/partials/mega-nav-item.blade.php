@@ -33,9 +33,20 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
     }
 
-    if(isset($simple_intro) && $simple_intro === true) {
+    if(!isset($intro_type)) {
+      $intro_type = false;
+    }
 
-      $item_modifier_classes .= ' mega-nav-item--simple-intro';
+    switch($intro_type) {
+
+      case 1 :
+        $item_modifier_classes .= ' mega-nav-item--simple-intro';
+        break;
+
+      case 2 :
+        $item_modifier_classes .= ' mega-nav-item--intro-type-2';
+        break;
+
 
     }
 
@@ -43,7 +54,7 @@ and that $item_id has a value that is unique across all mega nav items on the pa
 
 <section class="mega-nav-item{{ $item_modifier_classes }}">
 
-  @if(isset($simple_intro) && $simple_intro === true)
+  @if($intro_type === 1)
 
     <div class="container mega-nav-item__simple-intro container--master">
       <div class="row">
@@ -53,7 +64,17 @@ and that $item_id has a value that is unique across all mega nav items on the pa
       </div>
     </div>
 
-  @elseif(!isset($hide_intro) || $hide_intro === false)
+  @elseif($intro_type === 2)
+
+    <div class="container mega-nav-item__intro-type-2 container--master">
+      <div class="row">
+        <div class="col-xs-12">
+          <h{{ $headline_level }} class="mega-nav-item__intro-headline">{{ $headline }}</h{{ $headline_level }}>
+        </div>
+      </div>
+    </div>
+
+  @else
 
   <div class="container container--master">
     <div class="row">

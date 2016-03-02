@@ -3,7 +3,7 @@
 @section('content')
 
   @include('occupation.partials.list', [
-    'hide_intro' => true
+    'intro_type' => 2
   ])
 
 @endsection

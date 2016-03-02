@@ -3,7 +3,7 @@
 @section('content')
 
   @include('workplace.partials.list', [
-    'hide_intro' => true
+    'intro_type' => 2
   ])
 
 @endsection

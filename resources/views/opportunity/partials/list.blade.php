@@ -7,7 +7,7 @@
 ?>
 
 @include('partials.mega-nav-item', [
-    'hide_intro' => (isset($hide_intro) && $hide_intro === true),
+    'intro_type' => (isset($intro_type) ? $intro_type : false),
     'main_href' => action('OpportunityController@index'),
     'item_modifiers' => ['opportunities'],
     'cta_icon' => trans('assets.opportunities-icon'),

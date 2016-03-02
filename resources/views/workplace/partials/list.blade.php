@@ -7,7 +7,7 @@
 ?>
 
 @include('partials.mega-nav-item', [
-    'hide_intro' => (isset($hide_intro) && $hide_intro === true),
+    'intro_type' => (isset($intro_type) ? $intro_type : false),
     'main_href' => action('WorkplaceController@index'),
     'item_modifiers' => ['companies'],
     'cta_icon' => trans('assets.workplaces-icon'),
