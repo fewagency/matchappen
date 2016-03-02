@@ -10,7 +10,7 @@
   @extend .form-control;
 }
 
-.form-block--has-error {
+.form-block--error {
   @extend .has-error;
 }
 
@@ -26,6 +26,6 @@ ul.form-block__messages {
   @extend .list-unstyled;
 }
 
-.form-block__messages--errors {
+.form-block__messages--error {
   @extend .text-danger;
 }
