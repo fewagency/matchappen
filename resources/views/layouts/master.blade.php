@@ -61,6 +61,8 @@
 
 {{-- @include('partials.loading-indicator') --}}
 
+@include('partials.cookie-alert')
+
 <script src='{{ elixir('js/all.js') }}'></script>
 </body>
 </html>

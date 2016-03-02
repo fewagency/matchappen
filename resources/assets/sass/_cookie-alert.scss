@@ -1,0 +1,23 @@
+#cookie-alert {
+
+  border-top: solid 1px #000;
+  background: #fff;
+  position: fixed;
+  z-index: 9999;
+  bottom: 0;
+  width: 100%;
+  padding-top: 18px;
+  padding-bottom: 18px;
+
+}
+
+#cookie-alert .btn {
+  border: none;
+
+  &,
+  &:focus {
+    color: #fff;
+    background: #000;
+  }
+
+}
