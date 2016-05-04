@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Expression;
 
 /**
  * @property int workplace_id
@@ -119,12 +120,18 @@ class Opportunity extends Model
     /**
      * Scope a query to only include opportunities that have places left to book
      *
+     * @param $query \Illuminate\Database\Eloquent\Builder
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeWithPlacesLeft($query)
     {
-        //TODO: add check for max_visitors > sum(bookings.visitors where reserved_until isnull) to scope
-        //dd($this->bookings()->getBaseQuery());
+        //check for max_visitors > select sum(bookings.visitors) from bookings...)
+        //TODO: do we need to handle reserved_until (confirmed) in bookings?
+        $sub_query = $this->bookings()->getRelated()->newQuery()->select(new Expression('sum(visitors)'))->where($this->getQualifiedKeyName(),
+            '=', new Expression($this->bookings()->getForeignKey()));
+        $query->where('max_visitors', '>', new Expression('('.$sub_query->toSql().')'));
+
+        //dd($query->toSql());
 
         return $query;
     }
