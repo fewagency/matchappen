@@ -125,11 +125,11 @@ class Opportunity extends Model
      */
     public function scopeWithPlacesLeft($query)
     {
-        //check for max_visitors > select sum(bookings.visitors) from bookings...)
+        //check for max_visitors > (select sum(bookings.visitors) from bookings where...)
         //TODO: do we need to handle reserved_until (confirmed) in bookings?
-        $sub_query = $this->bookings()->getRelated()->newQuery()->select(new Expression('sum(visitors)'))->where($this->getQualifiedKeyName(),
-            '=', new Expression($this->bookings()->getForeignKey()));
-        $query->where('max_visitors', '>', new Expression('('.$sub_query->toSql().')'));
+        $sub_query = $this->bookings()->getRelated()->newQuery()->select(new Expression('sum(visitors)'))
+            ->where($this->getQualifiedKeyName(), '=', new Expression($this->bookings()->getForeignKey()));
+        $query->where('max_visitors', '>', new Expression('(' . $sub_query->toSql() . ')'));
 
         //dd($query->toSql());
 
