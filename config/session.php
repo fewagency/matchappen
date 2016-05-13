@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'cookie' => 'matchapp_session', //TODO: set cookie name to match the final app name
+    'cookie' => 'todo_besok_session',
 
     /*
     |--------------------------------------------------------------------------
