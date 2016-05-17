@@ -13,7 +13,7 @@ class AddCreatorToOccupation extends Migration
     public function up()
     {
         Schema::table('occupations', function (Blueprint $table) {
-            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('created_by')->nullable();
         });
     }
 

@@ -13,7 +13,7 @@ class AddSlugToOccupationsTable extends Migration
     public function up()
     {
         Schema::table('occupations', function (Blueprint $table) {
-            $table->string('slug')->index()->after('name');
+            $table->string('slug')->nullable()->index()->after('name');
         });
     }
 
