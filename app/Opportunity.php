@@ -132,7 +132,6 @@ class Opportunity extends Model
             $related_model->applyGlobalScopes($related_model->newEloquentBuilder($query));
             $query->select(new Expression('sum(visitors)'))
                 ->where($this->getQualifiedKeyName(), new Expression($this->bookings()->getForeignKey()));
-            //TODO: do we need to handle reserved_until (confirmed) in bookings?
         });
 
         return $query;
