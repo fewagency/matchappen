@@ -1,3 +1,4 @@
+<!-- TODO: replace registration with FluentForm -->
 <form method="POST" action="{{ action('Auth\AuthController@postRegister') }}">
   {!! csrf_field() !!}
 
