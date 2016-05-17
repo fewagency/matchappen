@@ -28,4 +28,20 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
     public function __construct()
     {
     }
+
+    /**
+     * @Then I should be logged in
+     */
+    public function iShouldBeLoggedIn()
+    {
+        PHPUnit::assertTrue(Auth::check());
+    }
+
+    /**
+     * @Then I should be logged out
+     */
+    public function iShouldBeLoggedOut()
+    {
+        PHPUnit::assertFalse(Auth::check());
+    }
 }
