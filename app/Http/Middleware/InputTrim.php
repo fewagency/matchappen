@@ -28,6 +28,7 @@ class InputTrim
      */
     public function handle($request, Closure $next, $field_to_trim)
     {
+        //We don't use ArrayAccess on the request object because that doesn't set values properly using dot-notation
         $input = $request->input();
         foreach (array_slice(func_get_args(), 2) as $field_to_trim) {
             if (array_has($input, $field_to_trim)) {

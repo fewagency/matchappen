@@ -27,4 +27,4 @@ Feature: Workplace registration
     Given I go to "registrering"
     And I fill in "workplace[name]" with " Test workplace "
     And I press "Register"
-    And the "workplace[name]" field should contain "Test workplace"
+    Then the "workplace[name]" field should contain "Test workplace"
