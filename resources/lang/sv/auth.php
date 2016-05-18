@@ -9,5 +9,6 @@ return [
     'actions' => [
         'login' => 'Logga in',
         'register_workplace' => 'Registrera arbetsplats',
+        'send_password_reset_link' => 'Skicka länk för lösenordsåterställning',
     ],
 ];
