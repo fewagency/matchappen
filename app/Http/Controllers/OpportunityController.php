@@ -17,6 +17,7 @@ class OpportunityController extends Controller
     {
         $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
         $this->middleware('input.trim:' . implode(',', $fields_to_trim), ['only' => ['update', 'store']]);
+        $this->middleware('input.carbonize:start,registration_end');
     }
 
     public function index()

@@ -2,6 +2,7 @@
 
 namespace Matchappen\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Matchappen\Http\Requests\Request;
 use Matchappen\Opportunity;
@@ -50,14 +51,13 @@ class StoreOpportunityRequest extends Request
 
     public static function rulesForUpdate()
     {
-        //TODO: validating dates may need to be done in controller, unless we parse dates in middleware first
         return [
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,
             'description' => 'string|max:1000',
-            'start' => 'string', //TODO: add rule: opportunity must start between now and +6 months
+            'start' => 'before:' . Carbon::parse('+6 months')->toDateString(),
             'minutes' => 'integer|required_with:start|in:' .
                 implode(',', array_keys(trans('opportunity.minutes_options'))),
-            'registration_end' => 'string|required_with:start', //TODO: add rule: opportunity must have registration_end between now and start
+            'registration_end' => 'required_with:start|before:start|after:' . Carbon::now(),
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
