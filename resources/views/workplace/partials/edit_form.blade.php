@@ -1,3 +1,4 @@
+<!-- TODO: make edit workplace form fluent -->
 <form method="POST" action="{{ action('WorkplaceController@update', $workplace->getKey()) }}">
   {!! csrf_field() !!}
 

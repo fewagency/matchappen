@@ -1,4 +1,5 @@
 @inject('carbon', '\Carbon\Carbon')
+<!-- TODO: make edit opportunity form fluent -->
 <form method="POST"
       action="{{ $opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store') }}"
 >
