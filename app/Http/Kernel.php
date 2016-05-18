@@ -30,6 +30,6 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Matchappen\Http\Middleware\RedirectIfAuthenticated::class,
         'input.trim' => \Matchappen\Http\Middleware\InputTrim::class,
-        'input.carbonize' => \Matchappen\Http\Middleware\CarbonizeInput::class,
+        'input.parse_datetime' => \Matchappen\Http\Middleware\ParseDatetimeInput::class,
     ];
 }

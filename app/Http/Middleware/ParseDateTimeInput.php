@@ -10,14 +10,14 @@ use Closure;
  * Define fields with : and comma-separated list of fieldnames (dot-notated).
  *
  * Example for route definition:
- * 'middleware' => 'input.carbonize:birthday,date.start,date.end'
+ * 'middleware' => 'input.parse_datetime:birthday,date.start,date.end'
  *
  * Example for controller:
- * $this->middleware('input.carbonize:birthday,date.start,date.end');
+ * $this->middleware('input.parse_datetime:birthday,date.start,date.end');
  *
  */
 
-class CarbonizeInput
+class ParseDatetimeInput
 {
     /**
      * Handle an incoming request.
