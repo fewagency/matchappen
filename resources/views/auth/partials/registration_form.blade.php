@@ -1,9 +1,9 @@
 {{
 FluentForm::create()->withAction(action('Auth\AuthController@postRegister'))
-->withToken(csrf_token())
 ->withValues(old())
 ->withErrors($errors)
 ->withLabels(trans('validation.attributes'))
+->withToken(csrf_token())
 ->containingInputBlock('workplace.name')->required()
 ->followedByInputBlock('workplace.employees','number')->withInputAttribute(['min'=>1, 'max'=>65535])->required()
 ->followedByInputBlock('workplace.occupations','textarea')->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
