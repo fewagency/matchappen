@@ -32,8 +32,12 @@ class ParseDatetimeInput
         $input = $request->input();
         foreach (array_slice(func_get_args(), 2) as $date_field) {
             if (array_has($input, $date_field)) {
-                $carbon = Carbon::parse(array_get($input, $date_field));
-                array_set($input, $date_field, $carbon->toDateTimeString());
+                try {
+                    $carbon = Carbon::parse(array_get($input, $date_field));
+                    array_set($input, $date_field, $carbon->toDateTimeString());
+                } catch(\Exception $e) {
+                    // If parse fails, do nothing to the input
+                }
             }
         }
         $request->replace($input);
