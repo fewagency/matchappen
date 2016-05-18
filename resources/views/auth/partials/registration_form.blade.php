@@ -1,5 +1,5 @@
 {{
-FluentForm::create()->withAction(action('Auth\AuthController@postRegister'))
+FluentForm::withAction(action('Auth\AuthController@postRegister'))
 ->withValues(old())
 ->withErrors($errors)
 ->withLabels(trans('validation.attributes'))
