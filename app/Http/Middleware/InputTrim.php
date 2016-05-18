@@ -28,7 +28,7 @@ class InputTrim
      */
     public function handle($request, Closure $next, $field_to_trim)
     {
-        $input = $request->all();
+        $input = $request->input();
         foreach (array_slice(func_get_args(), 2) as $field_to_trim) {
             if (array_has($input, $field_to_trim)) {
                 array_set($input, $field_to_trim, trim(array_get($input, $field_to_trim)));
