@@ -16,7 +16,7 @@ use Closure;
  *
  */
 
-class InputTrim
+class TrimInput
 {
     /**
      * Handle an incoming request.

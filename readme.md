@@ -53,7 +53,7 @@ and can be checked throughout controllers, blade-views, etc using the
 
 ### Middleware
 There's a custom created middleware for trimming excess whitespace from user input defined in
-(app/Http/Middleware/InputTrim.php)[app/Http/Middleware/InputTrim.php].
+(app/Http/Middleware/TrimInput.php)[app/Http/Middleware/TrimInput.php].
 A good example of trim-middleware use is in the constructor of the
 [BookingController](app/Http/Controllers/BookingController.php).
 
