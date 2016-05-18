@@ -47,6 +47,18 @@ return [
         'name' => 'namn',
         'supervisor_email' => 'ansvarig skolpersonals epostadress',
         'phone' => 'telefon',
+        'workplace' => [
+            'name' => 'arbetsplats',
+            'employees' => 'antal anställda på arbetsplatsen',
+            'occupations' => 'yrken på arbetsplatsen',
+            'address' => 'arbetsplatsens adress',
+        ],
+        'user' => [
+            'name' => 'ditt namn',
+            'email' => 'din epostadress',
+            'phone' => 'ditt telefonnummer',
+            'password' => 'lösenord',
+        ]
     ],
 
 ];

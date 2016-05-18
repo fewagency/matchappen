@@ -13,7 +13,7 @@ Feature: Workplace registration
     And I fill in "user[phone]" with "040-123456"
     And I fill in "user[password]" with "passWord"
     And I fill in "user[password_confirmation]" with "passWord"
-    And I press "Register"
+    And I press "Registrera arbetsplats"
     Then I should be logged in
     Given I go to "logout"
     Then I should be logged out
@@ -26,5 +26,5 @@ Feature: Workplace registration
   Scenario: Person registers with excess whitespace in fields and gets them trimmed
     Given I go to "registrering"
     And I fill in "workplace[name]" with " Test workplace "
-    And I press "Register"
+    And I press "Registrera arbetsplats"
     Then the "workplace[name]" field should contain "Test workplace"
