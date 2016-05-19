@@ -7,17 +7,17 @@
         <nav class="site-footer-nav">
 
           <ul class="site-footer-nav__items">
-            <li class="site-footer-nav__item">
+            <li class="site-footer-nav__item site-footer-nav__item--workplaces">
               <a href="{{ action('WorkplaceController@index') }}" class="site-footer-nav__item-link">
                 <span>{{ ucfirst(trans_choice('workplace.workplace', 2)) }}</span>
               </a>
             </li>
-            <li class="site-footer-nav__item">
+            <li class="site-footer-nav__item site-footer-nav__item--occupations">
               <a href="{{ action('OccupationController@index') }}" class="site-footer-nav__item-link">
                 <span>{{ ucfirst(trans_choice('occupation.occupation', 2)) }}</span>
               </a>
             </li>
-            <li class="site-footer-nav__item">
+            <li class="site-footer-nav__item site-footer-nav__item--opportunities">
               <a href="{{ action('OpportunityController@index') }}" class="site-footer-nav__item-link">
                 <span>{{ ucfirst(trans_choice('opportunity.opportunity', 2)) }}</span>
               </a>
@@ -49,6 +49,13 @@
                       </a>
               </li>
             @endif
+
+            <li class="site-footer-nav__item">
+              <a href="{{ route('dashboard') }}" class="site-footer-nav__item-link">
+                <span><a href="mailto:todo@malmo.se">todo@malmo.se</a></span>
+              </a>
+            </li>
+
           </ul>
 
         </nav>

@@ -24,9 +24,9 @@
   <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
   <title>{{ $title or trans('general.appname') }} – Malmö stad</title>
   <!--[if IE]><meta content='IE=edge' http-equiv='X-UA-Compatible'/><![endif]-->
+  <link type="text/css" rel="stylesheet" href="//fast.fonts.net/cssapi/c8d4739f-47f8-40c5-ab92-66d3f33d9d70.css"/>
   <link rel="stylesheet" href="{{ elixir('css/app.css') }}">
   <script src="{{ asset('/build/js/modernizr.js') }}"></script> {{-- Lets put modernizr here since some CSS relies heavily on it --}}
-  <script src="https://use.typekit.net/kjy7xgd.js"></script>
   <script>
     try{Typekit.load({ async: true });}catch(e){};
     document.getElementsByTagName('HTML')[0].classList.add('js');

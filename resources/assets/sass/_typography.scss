@@ -1,3 +1,28 @@
+/*
+font-family:'ITC Avant Garde Gothic W01 XLt';
+font-family:'ITC Avant GardeGothicW01XLtObl';
+font-family:'ITC Avant Garde Gothic W01 Bk';
+font-family:'ITC Avant Garde GothicW01BkObl';
+font-family:'ITC Avant Garde Gothic W01 Md';
+font-family:'ITC Avant Garde GothicW01MdObl';
+font-family:'ITC Avant Garde Gothic W01 Dm';
+font-family:'ITC Avant Garde GothicW01DmObl';
+font-family:'ITC Avant Garde Gothic W01 Bd';
+font-family:'ITC Avant Garde GothicW01BdObl';
+font-family:'ITC Avant Garde GothicW01XLtCn';
+font-family:'ITCAvantGardeGothicW01XLtCnObl';
+font-family:'ITC Avant Garde Gothic W01BkCn';
+font-family:'ITC AvantGardeGothicW01BkCnObl';
+font-family:'ITC Avant Garde Gothic W01MdCn';
+font-family:'ITC AvantGardeGothicW01MdCnObl';
+font-family:'ITC Avant Garde Gothic W01DmCn';
+font-family:'ITC AvantGardeGothicW01DmCnObl';
+font-family:'ITC Avant Garde Gothic W01BdCn';
+font-family:'ITC AvantGardeGothicW01BdCnObl';
+
+*/
+
+/*
 %myriad-pro-regular {
   font-family: "myriad-pro", sans-serif;
   font-style: normal;
@@ -15,16 +40,38 @@
   font-style: normal;
   font-weight: 600;
 }
+*/
+
+@mixin base-font() {
+  font-family: 'ITC Avant Garde Gothic W01 Bk', arial, helvetica, sans-serif;
+}
+
+@mixin medium-font() {
+  font-family: 'ITC Avant Garde Gothic W01 Md', arial, helvetica, sans-serif;
+}
+
+@mixin demi-bold-font() {
+  font-family: 'ITC Avant Garde Gothic W01 Dm', arial, helvetica, sans-serif;
+}
+
+/*
+@mixin bold-font() {
+  font-family: 'ITC Avant Garde Gothic W01 Bd', arial, helvetica, sans-serif;
+}
+*/
 
 h1,
 h2,
 h3 {
-  @extend %myriad-pro-bold;
+  @include medium-font();
+  font-weight: normal;
   color: #2d2d2d;
+  letter-spacing: 0.03em;
 }
 
 .headline_1 {
-  @extend %myriad-pro-bold;
+  @include demi-bold-font();
+  font-weight: normal;
   font-size: 35px;
   padding: 0;
   margin: 0;
@@ -32,4 +79,13 @@ h3 {
 
 .headline_2 {
   font-size: 26px;
+}
+
+.fontface {
+
+  b {
+    @include demi-bold-font();
+    font-weight: normal;
+  }
+
 }
