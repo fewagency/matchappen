@@ -1,5 +1,5 @@
 <div class="site-top-bar">
-  <div></div><div></div><div></div>
+  <span></span><span></span><span></span><span></span><span></span>
 </div>
 
 <div class="site-header">

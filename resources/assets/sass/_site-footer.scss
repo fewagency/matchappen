@@ -4,7 +4,7 @@
   width:100%;
   height: $footer-height;
   background: $color-gray-2;
-  padding-top: 12px;
+  padding-top: 22px;
   padding-bottom: 12px;
   margin-top: 34px;
 }
@@ -42,6 +42,10 @@
 
 }
 
+.site-footer-nav__items {
+  padding-left: 0;
+}
+
 .site-footer-nav__item {
   display: block;
   float: left;
@@ -52,4 +56,22 @@
 .site-footer-nav__item-link {
   display: block;
   //padding: 12px;
+}
+
+.site-footer-nav__item--workplaces {
+  background: $color-blue-1;
+}
+
+.site-footer-nav__item--opportunities {
+  background: $color-orange-1;
+}
+
+.site-footer-nav__item--occupations {
+  background: $color-purple-1;
+}
+
+.site-footer-nav__item--workplaces a,
+.site-footer-nav__item--opportunities a,
+.site-footer-nav__item--occupations a {
+  color: #fff;
 }
