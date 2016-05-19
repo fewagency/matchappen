@@ -34,7 +34,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->followedByInputBlock('description', 'textarea')
 
 ->followedByInputBlock('address', 'textarea')
-//TODO: this replace of newlines may not be needed
+//TODO: this replace of newlines may not be needed if handled in FluentHtml
 ->withInputAttribute('placeholder', str_replace("\n", " ", $opportunity->fallback_address))
 
 ->followedByInputBlock('contact_name')
