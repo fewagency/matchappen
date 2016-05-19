@@ -1,16 +1,14 @@
 @inject('carbon', '\Carbon\Carbon')
 {{
 FluentForm::withAction($opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store'))
-->withValues(
-  ['max_visitors' => 5],
-  $opportunity,
-  [
-    'start' => $carbon->parse($opportunity->start ?: $carbon->parse('+30 weekdays 15:00'))->toW3cString(),
-    'registration_end' => $carbon->parse($opportunity->registration_end ?: $carbon->parse('+20 weekdays'))->toW3cString(),
-    'occupations' => $opportunity->occupations->implode('name', ',')
-  ],
-  old()
- )
+->withValues(['max_visitors' => 5])
+->withValues($opportunity)
+->withValues([
+  'start' => $carbon->parse($opportunity->start ?: $carbon->parse('+30 weekdays 15:00'))->toW3cString(),
+  'registration_end' => $carbon->parse($opportunity->registration_end ?: $carbon->parse('+20 weekdays'))->toW3cString(),
+  'occupations' => $opportunity->occupations->implode('name', ',')
+])
+->withValues(old())
 ->withErrors($errors)
 ->withLabels(trans('validation.attributes'))
 ->withToken(csrf_token())
