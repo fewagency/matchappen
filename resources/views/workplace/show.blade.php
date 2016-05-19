@@ -79,7 +79,7 @@
     'intro_type' => 1,
     'headline_level' => 2,
     'headline' => 'Tillfällen',
-    'opportunities' => $workplace->opportunities
+    'opportunities' => $workplace->upcomingOpportunities
   ])
 
 @endsection
