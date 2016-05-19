@@ -53,7 +53,7 @@ class Workplace extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $visible = ['id', 'name', 'slug', 'href', 'headline', 'text'];
+    protected $visible = ['id', 'name', 'slug', 'href', 'headline', 'text', 'employees', 'contact_name', 'email', 'phone', 'address', 'description', 'homepage'];
 
     /**
      * Publish this workplace - to be used by admins
