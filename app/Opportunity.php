@@ -63,7 +63,8 @@ class Opportunity extends Model
      * @var array
      */
     protected $visible = ['id', 'name', 'href', 'headline', 'text'];
-
+    //TODO: do we need to open up more fields for the edit opportunity form or is that to be handled in FluentForm?
+    // Test at http://matchappen.local/tillfälle/1/edit
 
     /**
      * Scope a query to only include opportunities from published workplaces.

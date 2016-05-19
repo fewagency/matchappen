@@ -53,6 +53,12 @@ return [
         'description' => 'beskrivning',
         'is_published' => 'publicerad',
         'homepage' => 'hemsida',
+        'max_visitors' => 'antal platser',
+        'start' => 'start',
+        'minutes' => 'längd',
+        'registration_end' => 'anmälan fram till',
+        'occupations' => 'yrken',
+        'contact_phone' => 'telefon',
         'workplace' => [
             'name' => 'arbetsplats',
             'employees' => 'antal anställda på arbetsplatsen',
