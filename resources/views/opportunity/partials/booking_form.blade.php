@@ -1,6 +1,6 @@
 @if($opportunity->isBookable())
 @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
-{!!
+{{
   FluentForm::withAction(action('BookingController@store', $opportunity))
   ->withValues([
     $token_guard->checkSupervisor() ? 'supervisor_email' : 'email' => $token_guard->email(),
@@ -35,7 +35,7 @@
   ->withDescription('(frivilligt)')
 
   ->followedByButtonBlock('Boka')
-!!}
+}}
 <!-- TODO: lägg till årskurs i bokningsformuläret -->
 <!-- TODO: lägg till skola i bokningsformuläret om vi inte kan läsa ut det från elevens epostadress -->
 
