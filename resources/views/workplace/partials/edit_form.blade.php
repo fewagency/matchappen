@@ -1,73 +1,41 @@
-<!-- TODO: make edit workplace form fluent -->
-<form method="POST" action="{{ action('WorkplaceController@update', $workplace->getKey()) }}">
-  {!! csrf_field() !!}
+{{
+FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()))
+->withValues($workplace, ['occupations' => $workplace->occupations->implode('name', ',')], old())
+->withErrors($errors)
+->withLabels(trans('validation.attributes'))
+->withToken(csrf_token())
 
-  @if (count($errors) > 0)
-    <ul>
-      @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-  @endif
+->containingInputBlock('name')
+->required()
 
-  <div>
-    Namn
-    <input type="text" name="name" value="{{ old('name', $workplace->name) }}">
-  </div>
+->followedByCheckboxBlock('is_published')
+->onlyDisplayedIf(!$workplace->isPublishRequested() and Gate::allows('publish', $workplace))
+->checked($workplace->isPublished())
+->withPrependedContent(new \FewAgency\FluentForm\HiddenInputElement('is_published', 0))
 
+->followedByInputBlock('occupations','textarea')
+->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
+->withLabel(trans('validation.attributes.workplace.occupations'))
 
-  @if(!$workplace->isPublishRequested() and Gate::allows('publish', $workplace))
-    <div>
-      Publicerat:
-      <input type="hidden" name="is_published" value="0"/>
-      <input type="checkbox" name="is_published" value="1" @if($workplace->isPublished()) checked="checked" @endif />
-    </div>
-  @endif
+->followedByInputBlock('employees', 'number')
+->withInputAttribute(['min'=>1, 'max'=>65535])
+->required()
 
-  <div>
-    Yrken på arbetsplatsen
-    <textarea name="occupations" data-occupationsurl="{{ action('OccupationController@index') }}">{{ old('occupations', $workplace->occupations->implode('name', ',')) }}</textarea>
-  </div>
+->followedByInputBlock('contact_name')
+->withInputAttribute('placeholder', $workplace->fallback_contact_name)
 
-  <div>
-    Antal anställda
-    <input type="number" name="employees" min="1" max="65535" value="{{ old('employees', $workplace->employees) }}">
-  </div>
+->followedByInputBlock('email', 'email')
+->withInputAttribute('placeholder', $workplace->fallback_email)
 
-  <div>
-    Kontaktperson
-    <input type="text" name="contact_name" value="{{ old('contact_name', $workplace->contact_name) }}"
-           placeholder="{{ $workplace->fallback_contact_name }}">
-  </div>
+->followedByInputBlock('phone', 'tel')
+->withInputAttribute('placeholder', $workplace->fallback_phone)
 
-  <div>
-    Email
-    <input type="email" name="email" value="{{ old('email', $workplace->email) }}"
-           placeholder="{{ $workplace->fallback_email }}">
-  </div>
+->followedByInputBlock('address', 'textarea')
+->required()
 
-  <div>
-    Telefon
-    <input type="tel" name="phone" value="{{ old('phone', $workplace->phone) }}"
-           placeholder="{{ $workplace->fallback_phone }}">
-  </div>
+->followedByInputBlock('description', 'textarea')
 
-  <div>
-    Adress
-    <textarea name="address">{{ old('address', $workplace->address) }}</textarea>
-  </div>
+->followedByInputBlock('homepage')
 
-  <div>
-    Beskrivning
-    <textarea name="description">{{ old('description', $workplace->description) }}</textarea>
-  </div>
-
-  <div>
-    Hemsida
-    <input type="text" name="homepage" value="{{ old('homepage', $workplace->homepage) }}">
-  </div>
-
-  <div>
-    <button type="submit">Spara</button>
-  </div>
-</form>
+->followedByButtonBlock(trans('actions.save'))
+}}
