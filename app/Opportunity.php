@@ -147,7 +147,7 @@ class Opportunity extends Model
             $related_model = $this->bookings()->getRelated();
             $query->from($related_model->getTable());
             $related_model->applyGlobalScopes($related_model->newEloquentBuilder($query));
-            $query->select(new Expression('sum(visitors)'))
+            $query->select(new Expression('coalesce(sum(visitors), 0)'))
                 ->where($this->getQualifiedKeyName(), new Expression($this->bookings()->getForeignKey()));
         });
 
