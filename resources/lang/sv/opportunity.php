@@ -6,7 +6,7 @@ return [
     'labels' => [
         'student_email' => 'Elevens epostadress',
         'supervisor_email' => 'Din lärares epostadress',
-        'phone' => 'Ditt mobilnummer',
+        'your_mobile_phone' => 'Ditt mobilnummer',
     ],
     'actions' => [
         'book' => 'boka',
