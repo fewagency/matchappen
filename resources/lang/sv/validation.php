@@ -59,8 +59,9 @@ return [
         'registration_end' => 'anmälan fram till',
         'occupations' => 'yrken',
         'contact_phone' => 'telefon',
+        'visitors' => 'antal besökare',
         'workplace' => [
-            'name' => 'arbetsplats',
+            'name' => 'arbetsplatsens namn',
             'employees' => 'antal anställda på arbetsplatsen',
             'occupations' => 'yrken på arbetsplatsen',
             'address' => 'arbetsplatsens adress',
