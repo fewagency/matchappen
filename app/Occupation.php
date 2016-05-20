@@ -50,6 +50,15 @@ class Occupation extends Model implements SluggableInterface
     }
 
     /**
+     * The future opportunities of this occupation
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function upcomingOpportunities()
+    {
+        return $this->opportunities()->upcoming();
+    }
+
+    /**
      * Relationship to the user that created this occupation
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

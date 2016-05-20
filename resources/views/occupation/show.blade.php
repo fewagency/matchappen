@@ -25,14 +25,14 @@
   @include('opportunity.partials.list',[
     'intro_type' => 1,
     'headline_level' => 2,
-    'headline' => 'Tillfällen',
-    'opportunities' => $occupation->opportunities
+    'headline' => trans_choice('opportunity.opportunity', 2),
+    'opportunities' => $occupation->upcomingOpportunities
   ])
 
   @include('workplace.partials.list',[
     'intro_type' => 1,
     'headline_level' => 2,
-    'headline' => 'Arbetsplatser',
+    'headline' => trans_choice('workplace.workplace', 2),
     'workplaces' => $occupation->workplaces
   ])
 
