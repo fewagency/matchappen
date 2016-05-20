@@ -29,12 +29,12 @@
   height: 0;
   overflow: hidden;
   padding-top: 35px;
-  background: url(../../images/pejl.svg) no-repeat;
+  background: url(../../images/todo.svg) no-repeat;
 
   @media	only screen and (-webkit-min-device-pixel-ratio: 1.3),
   only screen and (-o-min-device-pixel-ratio: 13/10),
   only screen and (min-resolution: 120dpi) {
-    background-image: url(../../images/pejl.svg);
+    background-image: url(../../images/todo.svg);
     background-size: 113px 35px;
   }
 
@@ -52,13 +52,12 @@
   height: 0;
   padding-top: 56px;
   overflow: hidden;
-  background: url(../../images/malmo-stad.png) no-repeat;
+  background: url(../../images/malmo-stad.svg) no-repeat;
 
   @media	only screen and (-webkit-min-device-pixel-ratio: 1.3),
   only screen and (-o-min-device-pixel-ratio: 13/10),
   only screen and (min-resolution: 120dpi) {
 
-    background-image: url(../../images/malmo-stad@2x.png);
     background-size: 42px 56px;
 
   }

@@ -4,7 +4,7 @@
  */
 
 return [
-    'appname' => 'Pejl',
+    'appname' => 'TO·DO',
     'edu-staff' => 'skolpersonal',
     'student' => 'student|studenter',
 

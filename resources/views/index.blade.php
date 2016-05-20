@@ -14,14 +14,14 @@
     'item_id' => 'companies',
     'use_fold_effect' => true,
     'cta_icon' => trans('assets.workplaces-icon'),
-    'headline' => 'Spännande arbetsplatser',
+    'headline' => 'Arbetsplatser',
     'headline_level' => 2,
     'intro_text' => 'Läs om lorem ipsum dolor sit amet',
     'sub_items' => $workplaces,
     'extra_sub_items' => [
       [
         'href' => action('WorkplaceController@index'),
-        'text' => 'Se fler spännande '.trans_choice('workplace.workplace', 2)
+        'text' => 'Se fler '.trans_choice('workplace.workplace', 2)
       ]
     ]
     ])
@@ -32,14 +32,14 @@
     'item_id' => 'occupations',
     'use_fold_effect' => true,
     'cta_icon' => trans('assets.occupations-icon'),
-    'headline' => 'Spännande yrken',
+    'headline' => 'Yrken',
     'headline_level' => 2,
     'intro_text' => 'Läs om lorem ipsum dolor sit amet',
     'sub_items' => $occupations,
     'extra_sub_items' => [
       [
         'href' => action('OccupationController@index'),
-        'text' => 'Se fler spännande '.trans_choice('occupation.occupation', 2)
+        'text' => 'Se fler '.trans_choice('occupation.occupation', 2)
       ]
     ]
   ])
@@ -57,7 +57,7 @@
       'extra_sub_items' => [
         [
           'href' => action('OpportunityController@index'),
-          'text' => 'Se fler spännande '.trans_choice('opportunity.opportunity', 2)
+          'text' => 'Se fler '.trans_choice('opportunity.opportunity', 2)
         ]
       ]
     ])

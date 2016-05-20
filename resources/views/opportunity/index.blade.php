@@ -1,4 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.master', [
+  'body_class' => 'list-view'
+])
 
 @section('content')
 

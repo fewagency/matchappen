@@ -192,7 +192,7 @@ class Workplace extends Model implements SluggableInterface
         if ($this->occupations->count()) {
             $parts[] = $this->occupations->implode('name', ', ');
         }
-        if ($opportunity_count = $this->opportunities()->count()) {
+        if ($opportunity_count = $this->upcomingOpportunities()->count()) {
             $parts[] = $opportunity_count . ' ' . trans_choice('opportunity.opportunity', $opportunity_count);
         }
 
