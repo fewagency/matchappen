@@ -38,7 +38,7 @@
     ->followedByButtonBlock(trans('opportunity.actions.book'))
   }}
   <!-- TODO: lägg till årskurs i bokningsformuläret -->
-  <!-- TODO: lägg till skola i bokningsformuläret om vi inte kan läsa ut det från elevens epostadress -->
+  <!-- TODO: lägg till skola i bokningsformuläret -->
 
   @if(!$token_guard->checkSupervisor())
     <a href="{{ action('Auth\EmailTokenController@getEmail') }}">Vill du boka som {{ trans('general.edu-staff') }}?</a>
