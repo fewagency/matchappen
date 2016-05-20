@@ -4,6 +4,10 @@
 
 .form-block__label {
   @extend .control-label;
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .form-block__control {
@@ -15,7 +19,10 @@
 }
 
 .form-block--required {
-  //TODO: style required form-block
+  label.form-block__label:after {
+    content: "*";
+    font-weight: lighter;
+  }
 }
 
 .form-block__description {
