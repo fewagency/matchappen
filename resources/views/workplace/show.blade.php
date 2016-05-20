@@ -32,37 +32,37 @@
 
           @include('partials.category-list-1', [
             'block_modifier' => 'occupations',
-            'headline' => 'Yrken',
+            'headline' => trans_choice('occupation.occupation', 2),
             'items' => $workplace->occupations
           ])
 
           @if($workplace->homepage)
 
             @include('partials.info-1', [
-              'left_col_content' => 'Hemsida',
-              'right_col_content' => '<a href="' . $workplace->homepage . '">' . $workplace->homepage . '</a>'
+              'left_col_content' => trans('validation.attributes.homepage'),
+              'right_col_content' => '<a href="' . e($workplace->homepage) . '">' . e($workplace->homepage) . '</a>'
             ])
 
           @endif
 
           @include('partials.info-1', [
-            'left_col_content' => 'Anställda',
+            'left_col_content' => trans('validation.attributes.employees'),
             'right_col_content' => $workplace->employees
           ])
 
           @include('partials.info-1', [
-            'left_col_content' => 'Kontaktperson',
-            'right_col_content' => $workplace->display_contact_name
+            'left_col_content' => trans('validation.attributes.contact_name'),
+            'right_col_content' => e($workplace->display_contact_name)
           ])
 
           @include('partials.info-1', [
-            'left_col_content' => 'Epost',
-            'right_col_content' => '<a href="mailto:' . $workplace->display_email . '">' . $workplace->display_email . '</a>'
+            'left_col_content' => trans('validation.attributes.email'),
+            'right_col_content' => '<a href="mailto:' . e($workplace->display_email) . '">' . e($workplace->display_email) . '</a>'
           ])
 
           @include('partials.info-1', [
-            'left_col_content' => 'Telefon',
-            'right_col_content' => '<a href="tel:' . substr(str_replace(' ', '', $workplace->display_phone), 1) . '">' . $workplace->display_phone . '</a>'
+            'left_col_content' => trans('validation.attributes.phone'),
+            'right_col_content' => '<a href="tel:' . e(substr(str_replace(' ', '', $workplace->display_phone), 1)) . '">' . e($workplace->display_phone) . '</a>'
           ])
 
           @include('partials.info-1', [
