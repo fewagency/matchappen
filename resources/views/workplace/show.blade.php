@@ -75,11 +75,13 @@
     </div>
   </div>
 
-  @include('opportunity.partials.list',[
-    'intro_type' => 1,
-    'headline_level' => 2,
-    'headline' => trans_choice('opportunity.opportunity', count($workplace->upcomingOpportunities)),
-    'opportunities' => $workplace->upcomingOpportunities
-  ])
+  @if(count($workplace->upcomingOpportunities))
+    @include('opportunity.partials.list',[
+      'intro_type' => 1,
+      'headline_level' => 2,
+      'headline' => trans_choice('opportunity.opportunity', count($workplace->upcomingOpportunities)),
+      'opportunities' => $workplace->upcomingOpportunities
+    ])
+  @endif
 
 @endsection

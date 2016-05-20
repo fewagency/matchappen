@@ -22,18 +22,22 @@
     </div>
   </div>
 
-  @include('opportunity.partials.list',[
-    'intro_type' => 1,
-    'headline_level' => 2,
-    'headline' => trans_choice('opportunity.opportunity', 2),
-    'opportunities' => $occupation->upcomingOpportunities
-  ])
+  @if(count($occupation->upcomingOpportunities))
+    @include('opportunity.partials.list',[
+      'intro_type' => 1,
+      'headline_level' => 2,
+      'headline' => trans_choice('opportunity.opportunity', count($occupation->upcomingOpportunities)),
+      'opportunities' => $occupation->upcomingOpportunities
+    ])
+  @endif
 
-  @include('workplace.partials.list',[
-    'intro_type' => 1,
-    'headline_level' => 2,
-    'headline' => trans_choice('workplace.workplace', 2),
-    'workplaces' => $occupation->workplaces
-  ])
+  @if(count($occupation->workplaces))
+    @include('workplace.partials.list',[
+      'intro_type' => 1,
+      'headline_level' => 2,
+      'headline' => trans_choice('workplace.workplace', count($occupation->workplaces)),
+      'workplaces' => $occupation->workplaces
+    ])
+  @endif
 
 @endsection
