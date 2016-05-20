@@ -23,7 +23,7 @@
 
         @include('partials.category-list-1', [
           'block_modifier' => 'occupations',
-          'headline' => trans_choice('occupation.occupation',2),
+          'headline' => trans_choice('occupation.occupation', count($opportunity->occupations)),
           'items' => $opportunity->occupations
         ])
 

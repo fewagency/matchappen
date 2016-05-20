@@ -32,7 +32,7 @@
 
           @include('partials.category-list-1', [
             'block_modifier' => 'occupations',
-            'headline' => trans_choice('occupation.occupation', 2),
+            'headline' => trans_choice('occupation.occupation', count($workplace->occupations)),
             'items' => $workplace->occupations
           ])
 
@@ -66,7 +66,7 @@
           ])
 
           @include('partials.info-1', [
-            'left_col_content' => 'Adress',
+            'left_col_content' => trans('validation.attributes.address'),
             'right_col_content' => nl2br(e($workplace->address))
           ])
 
@@ -78,7 +78,7 @@
   @include('opportunity.partials.list',[
     'intro_type' => 1,
     'headline_level' => 2,
-    'headline' => 'Tillfällen',
+    'headline' => trans_choice('opportunity.opportunity', count($workplace->upcomingOpportunities)),
     'opportunities' => $workplace->upcomingOpportunities
   ])
 
