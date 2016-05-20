@@ -32,7 +32,7 @@
     ->withDescription($token_guard->checkSupervisor() ? '' : '(mentor eller SYV går också bra)')
 
     ->followedByInputBlock('phone','tel')
-    ->withLabel(trans('opportunity.labels.phone'))
+    ->withLabel(trans('opportunity.labels.your_mobile_phone'))
     ->withDescription('(frivilligt)')
 
     ->followedByButtonBlock(trans('opportunity.actions.book'))
