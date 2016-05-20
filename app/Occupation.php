@@ -89,6 +89,7 @@ class Occupation extends Model implements SluggableInterface
         return $query->whereHas('opportunities', function ($query) {
             $query->bookable();
         });
+        //promoted occupations could be ordered by number of bookable opportunities
     }
 
     public function getHrefAttribute()
