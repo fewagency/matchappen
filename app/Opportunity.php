@@ -161,7 +161,7 @@ class Opportunity extends Model
      */
     public function scopeBookable($query)
     {
-        return $query->viewable()->withPlacesLeft();
+        return $query->where('registration_end', '>', Carbon::now())->withPlacesLeft()->viewable();
     }
 
     /**
