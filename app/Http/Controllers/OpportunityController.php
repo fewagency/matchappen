@@ -23,8 +23,9 @@ class OpportunityController extends Controller
     public function index()
     {
         $opportunities = Opportunity::viewable()->get();
+        $number_of_bookable_opportunities = Opportunity::bookable()->count();
 
-        return view('opportunity.index')->with(compact('opportunities'));
+        return view('opportunity.index')->with(compact('opportunities', 'number_of_bookable_opportunities'));
     }
 
     public function show(Opportunity $opportunity)
