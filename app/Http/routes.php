@@ -2,9 +2,31 @@
 
 Route::get('/', function () {
     $limit = 5;
+
     $opportunities = \Matchappen\Opportunity::promoted()->limit($limit)->get();
+    if (empty($opportunities)) {
+        $opportunities = \Matchappen\Opportunity::viewable()->get();
+        if (count($opportunities) > $limit) {
+            $opportunities = $opportunities->random($limit);
+        }
+    }
+
     $workplaces = \Matchappen\Workplace::promoted()->limit($limit)->get();
+    if (empty($workplaces)) {
+        $workplaces = \Matchappen\Workplace::published()->get();
+        if (count($workplaces) > $limit) {
+            $workplaces = $workplaces->random($limit);
+        }
+    }
+
     $occupations = \Matchappen\Occupation::promoted()->limit($limit)->get();
+    if (empty($occupations)) {
+        $occupations = \Matchappen\Occupation::published()->get();
+        if (count($occupations) > $limit) {
+            $occupations = $occupations->random($limit);
+        }
+    }
+
     $body_class = 'start-page';
 
     return view('index', compact('opportunities', 'workplaces', 'occupations', 'body_class'));
