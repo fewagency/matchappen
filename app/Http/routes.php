@@ -4,7 +4,7 @@ Route::get('/', function () {
     $limit = 5;
 
     $opportunities = \Matchappen\Opportunity::promoted()->limit($limit)->get();
-    if (empty($opportunities)) {
+    if (!count($opportunities)) {
         $opportunities = \Matchappen\Opportunity::viewable()->get();
         if (count($opportunities) > $limit) {
             $opportunities = $opportunities->random($limit);
@@ -12,7 +12,7 @@ Route::get('/', function () {
     }
 
     $workplaces = \Matchappen\Workplace::promoted()->limit($limit)->get();
-    if (empty($workplaces)) {
+    if (!count($workplaces)) {
         $workplaces = \Matchappen\Workplace::published()->get();
         if (count($workplaces) > $limit) {
             $workplaces = $workplaces->random($limit);
@@ -20,7 +20,7 @@ Route::get('/', function () {
     }
 
     $occupations = \Matchappen\Occupation::promoted()->limit($limit)->get();
-    if (empty($occupations)) {
+    if (!count($occupations)) {
         $occupations = \Matchappen\Occupation::published()->get();
         if (count($occupations) > $limit) {
             $occupations = $occupations->random($limit);
