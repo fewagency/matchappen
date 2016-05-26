@@ -1,4 +1,7 @@
 User-agent: *
-Disallow: /
-
-# TODO: exclude auth and password pages from robots
+Disallow: /login
+Disallow: /logout
+Disallow: /password/
+Disallow: /token/
+Disallow: /bokning/
+Disallow: /registrering
