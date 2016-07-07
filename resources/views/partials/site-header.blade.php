@@ -20,10 +20,4 @@
 
   </div>
 
-  {{--
-  @if(!Request::is('/'))
-    @include('partials.main-nav')
-  @endif
-  --}}
-
 </div>
