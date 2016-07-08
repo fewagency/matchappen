@@ -342,7 +342,7 @@ class Opportunity extends Model
      */
     public static function getEarliestStartTime()
     {
-        return Carbon::parse('+1 hour')->minute(0);
+        return Carbon::parse('+1 hour')->minute(0)->second(0);
     }
 
     /**
