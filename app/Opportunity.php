@@ -336,4 +336,21 @@ class Opportunity extends Model
         return $this->registration_end->isPast();
     }
 
+    /**
+     * Get the earliest possible start time relative now
+     * @return Carbon
+     */
+    public static function getEarliestStartTime()
+    {
+        return Carbon::parse('+1 hour')->minute(0);
+    }
+
+    /**
+     * Get the latest possible start time relative now
+     * @return Carbon
+     */
+    public static function getLatestStartTime()
+    {
+        return Carbon::parse('+6 months 00:00');
+    }
 }

@@ -4,8 +4,9 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
 ->withValues([
-  'start' => $carbon->parse($opportunity->start ?: $carbon->parse('+30 weekdays 15:00'))->toW3cString(),
-  'registration_end' => $carbon->parse($opportunity->registration_end ?: $carbon->parse('+20 weekdays'))->toW3cString(),
+  //TODO: could this datetime parsing be done in the actual input block instead?
+  'start' => $carbon->parse($opportunity->start ?: $carbon->parse('+30 weekdays 15:00'))->format(trans('opportunity.datetime_format')),
+  'registration_end' => $carbon->parse($opportunity->registration_end ?: $carbon->parse('+20 weekdays'))->format(trans('opportunity.datetime_format')),
   'occupations' => $opportunity->occupations->implode('name', ',')
 ])
 ->withValues(old())
@@ -18,12 +19,14 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->required()
 
 ->followedByInputBlock('start','datetime-local')
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->toW3cString(), 'max'=>$opportunity->getLatestStartTime()->toW3cString()])
 ->required()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
 
 ->followedByInputBlock('registration_end','datetime-local')
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->toW3cString(), 'max'=>$opportunity->getLatestStartTime()->toW3cString()])
 ->required()
 
 ->followedByInputBlock('occupations', 'textarea')
