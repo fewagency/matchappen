@@ -19,7 +19,7 @@ elixir(function (mix) {
     .sass('app.scss')
     .scripts([
       //'vendor/modernizr.js',
-      '../../../bower_components/jquery/dist/jquery.min.js',
+      //'../../../bower_components/jquery/dist/jquery.min.js',
       '../../../bower_components/jQuery.dotdotdot/src/js/jquery.dotdotdot.js',
       'vendor/paperfold.js',
       '../../../bower_components/selectize/dist/js/standalone/selectize.min.js',

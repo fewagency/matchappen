@@ -27,11 +27,6 @@ FewPaperfold = {
         folds: ($('.few-paperfold-item', $targetElm).length / 2),
         onProgress: function(progress) {
 
-          if(progress == 1) {
-
-            console.log($(this));
-
-          }
 
         }
       });
@@ -57,8 +52,6 @@ FewPaperfold = {
           paperfold.close();
 
         }
-
-
 
       });
 
