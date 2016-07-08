@@ -1,13 +1,13 @@
 @inject('carbon', '\Carbon\Carbon')
+<?php $datetime_local_format = 'Y-m-d\TH:i:s'; ?>
 {{
 FluentForm::withAction($opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store'))
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
 ->withValues([
-  //TODO: could this datetime parsing be done in the actual input block instead?
-  'start' => $carbon->parse($opportunity->start ?: $carbon->parse('+30 weekdays 15:00'))->format(trans('opportunity.datetime_format')),
-  'registration_end' => $carbon->parse($opportunity->registration_end ?: $carbon->parse('+20 weekdays'))->format(trans('opportunity.datetime_format')),
-  'occupations' => $opportunity->occupations->implode('name', ',')
+  'start' => $opportunity->start ?: $carbon->parse('+30 weekdays 15:00'),
+  'registration_end' => $opportunity->registration_end ?: $carbon->parse('+20 weekdays'),
+  'occupations' => $opportunity->occupations->implode('name', ','),
 ])
 ->withValues(old())
 ->withErrors($errors)
@@ -19,14 +19,30 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->required()
 
 ->followedByInputBlock('start','datetime-local')
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->toW3cString(), 'max'=>$opportunity->getLatestStartTime()->toW3cString()])
+->withInputAttribute('value', function($input) {
+  $value = $input->getValue();
+  try {
+    $value = \Carbon\Carbon::parse($value)->format(trans('opportunity.datetime_format'));
+  } catch(Exception $e) {
+  }
+  return $value;
+})
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTime()->format($datetime_local_format)])
 ->required()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
 
 ->followedByInputBlock('registration_end','datetime-local')
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->toW3cString(), 'max'=>$opportunity->getLatestStartTime()->toW3cString()])
+->withInputAttribute('value', function($input) {
+  $value = $input->getValue();
+  try {
+    $value = \Carbon\Carbon::parse($value)->format(trans('opportunity.datetime_format'));
+  } catch(Exception $e) {
+  }
+  return $value;
+})
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTime()->format($datetime_local_format)])
 ->required()
 
 ->followedByInputBlock('occupations', 'textarea')
