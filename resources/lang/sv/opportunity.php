@@ -12,4 +12,5 @@ return [
     'actions' => [
         'book' => 'boka',
     ],
+    'datetime_format' => 'Y-m-d H:i',
 ];

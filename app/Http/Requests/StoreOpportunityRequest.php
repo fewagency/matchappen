@@ -51,13 +51,14 @@ class StoreOpportunityRequest extends Request
 
     public static function rulesForUpdate()
     {
+        $datetime_format = trans('opportunity.datetime_format');
         return [
             'max_visitors' => 'integer|min:1|max:' . Opportunity::MAX_VISITORS,
             'description' => 'string|max:1000',
-            'start' => 'before:' . Carbon::parse('+6 months')->toDateString(),
+            'start' => 'after:' . Carbon::now()->format($datetime_format) . '|before:' . Carbon::parse('+6 months')->toDateString(),
             'minutes' => 'integer|required_with:start|in:' .
                 implode(',', array_keys(trans('opportunity.minutes_options'))),
-            'registration_end' => 'required_with:start|before:start|after:' . Carbon::now(),
+            'registration_end' => 'required_with:start|before:start|after:' . Carbon::now()->format($datetime_format),
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
