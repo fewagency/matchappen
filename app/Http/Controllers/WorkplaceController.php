@@ -17,7 +17,7 @@ class WorkplaceController extends Controller
     public function __construct(Request $request)
     {
         $fields_to_trim = array_keys(StoreWorkplaceRequest::rulesForUpdate());
-        $this->middleware('input.trim:' . implode(',', $fields_to_trim), ['only' => 'update']);
+        $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => 'update']);
     }
 
     public function index()

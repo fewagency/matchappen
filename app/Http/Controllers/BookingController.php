@@ -17,7 +17,7 @@ class BookingController extends Controller
 {
     public function __construct(Request $request)
     {
-        $this->middleware('input.trim:name,email,supervisor_email,phone', ['only' => ['update', 'store']]);
+        $this->middleware('reformulator.trim:name,email,supervisor_email,phone', ['only' => ['update', 'store']]);
     }
 
     public function store(Opportunity $opportunity, StoreBookingRequest $request, EmailTokenGuard $guard)

@@ -42,7 +42,7 @@ class AuthController extends Controller
                 return 'workplace.' . $value;
             }, array_keys(StoreWorkplaceRequest::rulesForCreate()))
         );
-        $this->middleware('input.trim:' . implode(',', $fields_to_trim), ['only' => 'postRegister']);
+        $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => 'postRegister']);
     }
 
     //TODO: make postRegister() redirect to getLogin() withInput if the email exists

@@ -29,7 +29,7 @@ class EmailTokenController extends Controller
 
     public function __construct(EmailTokenGuard $guard)
     {
-        $this->middleware('input.trim:email,token');
+        $this->middleware('reformulator.trim:email,token');
         $this->guard = $guard;
     }
 
