@@ -12,6 +12,7 @@ use Illuminate\Database\Query\Expression;
  * @property int workplace_id
  * @property int max_visitors
  * @property Carbon start
+ * @property Carbon start_local
  * @property Carbon end
  * @property Workplace workplace
  * @property string address
@@ -27,6 +28,7 @@ use Illuminate\Database\Query\Expression;
  * @property Carbon registration_end
  * @property string name
  * @property Collection occupations
+ * @property string timezone
  */
 class Opportunity extends Model
 {
@@ -49,7 +51,7 @@ class Opportunity extends Model
     protected $fillable = [
         'max_visitors',
         'description',
-        'start',
+        'start_local',
         'minutes',
         'registration_end',
         'address',
@@ -201,9 +203,33 @@ class Opportunity extends Model
         return $this->hasMany('Matchappen\Booking');
     }
 
-    public function setStartAttribute($datetime)
+    public static function getTimezoneAttribute()
     {
-        $this->attributes['start'] = Carbon::parse($datetime);
+        return 'Europe/Stockholm';
+    }
+
+    public function getStartLocalAttribute()
+    {
+        return $this->start->copy()->tz($this->timezone);
+    }
+
+    public function setStartLocalAttribute($datetime)
+    {
+        if ($datetime instanceof \DateTime) {
+            $datetime = Carbon::instance($datetime);
+        } elseif (strlen($datetime)) {
+            try {
+                $datetime = Carbon::parse($datetime, $this->timezone);
+            } catch(\Exception $e) {
+                //Ignore errors
+            }
+        }
+        if ($datetime instanceof Carbon) {
+            $datetime->tz(null); //Always move to the app's timezone
+        } else {
+            $datetime = null;
+        }
+        $this->start = $datetime;
     }
 
     public function getMinutesAttribute()
@@ -258,7 +284,7 @@ class Opportunity extends Model
         return trans('opportunity.opportunity_at_workplace',
             [
                 'workplace' => $this->workplace->name,
-                'time' => $this->start->format('j/n G:i'),
+                'time' => $this->start_local->format('j/n G:i'),
             ]);
     }
 
@@ -340,17 +366,17 @@ class Opportunity extends Model
      * Get the earliest possible start time relative now
      * @return Carbon
      */
-    public static function getEarliestStartTime()
+    public static function getEarliestStartTimeLocal()
     {
-        return Carbon::parse('+1 hour')->minute(0)->second(0);
+        return Carbon::parse('+2 hours', self::getTimezoneAttribute())->minute(0)->second(0);
     }
 
     /**
      * Get the latest possible start time relative now
      * @return Carbon
      */
-    public static function getLatestStartTime()
+    public static function getLatestStartTimeLocal()
     {
-        return Carbon::parse('+6 months 00:00');
+        return Carbon::parse('+6 months 00:00', self::getTimezoneAttribute());
     }
 }

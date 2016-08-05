@@ -5,8 +5,8 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
 ->withValues([
-  'start' => $opportunity->start ?: $carbon->parse('+30 weekdays 15:00'),
-  'registration_end' => $opportunity->registration_end ?: $carbon->parse('+20 weekdays'),
+  'start_local' => $opportunity->start ?: $carbon->parse('+30 weekdays 15:00', \Matchappen\Opportunity::getTimezoneAttribute()),
+  'registration_end' => $opportunity->registration_end ?: $carbon->parse('+20 weekdays', \Matchappen\Opportunity::getTimezoneAttribute()),
   'occupations' => $opportunity->occupations->implode('name', ','),
 ])
 ->withValues(old())
@@ -18,16 +18,23 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withInputAttribute(['min'=>1, 'max'=>\Matchappen\Opportunity::MAX_VISITORS])
 ->required()
 
-->followedByInputBlock('start','datetime-local')
-->withInputAttribute('value', function($input) {
+->followedByInputBlock('start_local','datetime-local')
+->withInputAttribute('value', function($input) use ($datetime_local_format) {
   $value = $input->getValue();
-  try {
-    $value = \Carbon\Carbon::parse($value)->format(trans('opportunity.datetime_format'));
-  } catch(Exception $e) {
+  if($value instanceof \DateTime) {
+    $value = \Carbon\Carbon::instance($value);
+  } elseif(strlen($value)) {
+    try {
+      $value = \Carbon\Carbon::parse($value, \Matchappen\Opportunity::getTimezoneAttribute());
+    } catch(Exception $e) {
+    }
+  }
+  if($value instanceof \Carbon\Carbon) {
+    $value = $value->tz(\Matchappen\Opportunity::getTimezoneAttribute())->format($datetime_local_format);
   }
   return $value;
 })
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTime()->format($datetime_local_format)])
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTimeLocal()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTimeLocal()->format($datetime_local_format)])
 ->required()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
@@ -42,7 +49,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
   }
   return $value;
 })
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTime()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTime()->format($datetime_local_format)])
+->withInputAttribute(['min'=>$opportunity->getEarliestStartTimeLocal()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTimeLocal()->format($datetime_local_format)])
 ->required()
 
 ->followedByInputBlock('occupations', 'textarea')
