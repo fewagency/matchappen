@@ -19,7 +19,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 
 ->followedByInputBlock('start_local', 'datetime-local')
 ->withInputAttribute('value', function($input) use ($carbonator) {
-  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute());
+  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute(), \Matchappen\Opportunity::getTimezoneAttribute()) ?: $input->getValue();
 })
 ->withInputAttribute([
 'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
@@ -32,7 +32,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 
 ->followedByInputBlock('registration_end_local', 'datetime-local')
 ->withInputAttribute('value', function($input) use ($carbonator) {
-  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute());
+  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute(), \Matchappen\Opportunity::getTimezoneAttribute()) ?: $input->getValue();
 })
 ->withInputAttribute([
 'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),

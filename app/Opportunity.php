@@ -209,6 +209,18 @@ class Opportunity extends Model
         return 'Europe/Stockholm';
     }
 
+    public function setStartAttribute($value)
+    {
+        $this->attributes['start'] = $this->fromDateTime($value);
+
+        if(empty($this->end) or $this->start->gte($this->end)) {
+            $this->end = $this->start->addHour();
+        }
+        if(empty($this->registration_end) or $this->start->lte($this->registration_end)) {
+            $this->registration_end = $this->start->subHour();
+        }
+    }
+
     public function getStartLocalAttribute()
     {
         return Carbonator::parseToTz($this->start, $this->timezone);
@@ -228,12 +240,12 @@ class Opportunity extends Model
 
     public function setMinutesAttribute($minutes)
     {
-        $this->end = $this->start->copy()->addMinutes($minutes);
+        $this->end = $this->start->addMinutes($minutes);
     }
 
     public function getRegistrationEndLocalAttribute()
     {
-        return Carbonator::parseToTz($this->end, $this->timezone);
+        return Carbonator::parseToTz($this->registration_end, $this->timezone);
     }
 
     public function setRegistrationEndLocalAttribute($datetime)
