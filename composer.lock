@@ -331,6 +331,52 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+            "name": "fewagency/carbonator",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fewagency/carbonator.git",
+                "reference": "235d08943c1dc290633187ee2aac3b67b38228a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fewagency/carbonator/zipball/235d08943c1dc290633187ee2aac3b67b38228a2",
+                "reference": "235d08943c1dc290633187ee2aac3b67b38228a2",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^1.21",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FewAgency\\Carbonator\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bjorn Nilsved",
+                    "email": "bjorn.nilsved@fewagency.se"
+                }
+            ],
+            "description": "Datetime helpers built on Carbon",
+            "keywords": [
+                "carbon",
+                "datetime",
+                "datetime-local",
+                "helper"
+            ],
+            "time": "2016-08-08 08:49:34"
+        },
+        {
             "name": "fewagency/fluent-form",
             "version": "dev-master",
             "source": {
@@ -432,15 +478,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fewagency/laravel-reformulator.git",
-                "reference": "0be09060a846a4ffc71026995a4c3097429a7cd5"
+                "reference": "f8e3e11c3e9c4c726dc5bf5cb6beb5211cafb16b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fewagency/laravel-reformulator/zipball/0be09060a846a4ffc71026995a4c3097429a7cd5",
-                "reference": "0be09060a846a4ffc71026995a4c3097429a7cd5",
+                "url": "https://api.github.com/repos/fewagency/laravel-reformulator/zipball/f8e3e11c3e9c4c726dc5bf5cb6beb5211cafb16b",
+                "reference": "f8e3e11c3e9c4c726dc5bf5cb6beb5211cafb16b",
                 "shasum": ""
             },
             "require": {
+                "fewagency/carbonator": "^1.0",
                 "illuminate/http": "^5.1",
                 "php": ">=5.5.9"
             },
@@ -479,7 +526,7 @@
                 "transform",
                 "trim"
             ],
-            "time": "2016-08-04 14:47:42"
+            "time": "2016-08-08 08:55:22"
         },
         {
             "name": "jakub-onderka/php-console-color",

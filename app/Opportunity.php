@@ -3,6 +3,7 @@
 namespace Matchappen;
 
 use Carbon\Carbon;
+use FewAgency\Carbonator\Carbonator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,7 @@ use Illuminate\Database\Query\Expression;
  * @property string fallback_contact_phone
  * @property Collection bookings
  * @property Carbon registration_end
+ * @property Carbon registration_end_local
  * @property string name
  * @property Collection occupations
  * @property string timezone
@@ -53,7 +55,7 @@ class Opportunity extends Model
         'description',
         'start_local',
         'minutes',
-        'registration_end',
+        'registration_end_local',
         'address',
         'contact_name',
         'contact_phone',
@@ -71,10 +73,9 @@ class Opportunity extends Model
         'headline',
         'text',
         'max_visitors',
-        'start',
-        'end',
+        'start_local',
         'minutes',
-        'registration_end',
+        'registration_end_local',
         'description',
         'address',
         'display_address',
@@ -210,26 +211,12 @@ class Opportunity extends Model
 
     public function getStartLocalAttribute()
     {
-        return $this->start->copy()->tz($this->timezone);
+        return Carbonator::parseToTz($this->start, $this->timezone);
     }
 
     public function setStartLocalAttribute($datetime)
     {
-        if ($datetime instanceof \DateTime) {
-            $datetime = Carbon::instance($datetime);
-        } elseif (strlen($datetime)) {
-            try {
-                $datetime = Carbon::parse($datetime, $this->timezone);
-            } catch(\Exception $e) {
-                //Ignore errors
-            }
-        }
-        if ($datetime instanceof Carbon) {
-            $datetime->tz(null); //Always move to the app's timezone
-        } else {
-            $datetime = null;
-        }
-        $this->start = $datetime;
+        $this->start = Carbonator::parseToDefaultTz($datetime, $this->timezone);
     }
 
     public function getMinutesAttribute()
@@ -244,9 +231,14 @@ class Opportunity extends Model
         $this->end = $this->start->copy()->addMinutes($minutes);
     }
 
-    public function setRegistrationEndAttribute($datetime)
+    public function getRegistrationEndLocalAttribute()
     {
-        $this->attributes['registration_end'] = Carbon::parse($datetime);
+        return Carbonator::parseToTz($this->end, $this->timezone);
+    }
+
+    public function setRegistrationEndLocalAttribute($datetime)
+    {
+        $this->registration_end = Carbonator::parseToDefaultTz($datetime, $this->timezone);
     }
 
     public function getDisplayAddressAttribute()

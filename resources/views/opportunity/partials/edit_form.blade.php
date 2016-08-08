@@ -1,12 +1,11 @@
-@inject('carbon', '\Carbon\Carbon')
-<?php $datetime_local_format = 'Y-m-d\TH:i:s'; ?>
+@inject('carbonator', '\FewAgency\Carbonator\Carbonator')
 {{
 FluentForm::withAction($opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store'))
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
 ->withValues([
-  'start_local' => $opportunity->start ?: $carbon->parse('+30 weekdays 15:00', \Matchappen\Opportunity::getTimezoneAttribute()),
-  'registration_end' => $opportunity->registration_end ?: $carbon->parse('+20 weekdays', \Matchappen\Opportunity::getTimezoneAttribute()),
+  'start_local' => $opportunity->start_local ?: $carbonator->parse('+30 weekdays 15:00', \Matchappen\Opportunity::getTimezoneAttribute()),
+  'registration_end_local' => $opportunity->registration_end_local ?: $carbonator->parse('+20 weekdays', \Matchappen\Opportunity::getTimezoneAttribute()),
   'occupations' => $opportunity->occupations->implode('name', ','),
 ])
 ->withValues(old())
@@ -18,38 +17,27 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withInputAttribute(['min'=>1, 'max'=>\Matchappen\Opportunity::MAX_VISITORS])
 ->required()
 
-->followedByInputBlock('start_local','datetime-local')
-->withInputAttribute('value', function($input) use ($datetime_local_format) {
-  $value = $input->getValue();
-  if($value instanceof \DateTime) {
-    $value = \Carbon\Carbon::instance($value);
-  } elseif(strlen($value)) {
-    try {
-      $value = \Carbon\Carbon::parse($value, \Matchappen\Opportunity::getTimezoneAttribute());
-    } catch(Exception $e) {
-    }
-  }
-  if($value instanceof \Carbon\Carbon) {
-    $value = $value->tz(\Matchappen\Opportunity::getTimezoneAttribute())->format($datetime_local_format);
-  }
-  return $value;
+->followedByInputBlock('start_local', 'datetime-local')
+->withInputAttribute('value', function($input) use ($carbonator) {
+  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute());
 })
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTimeLocal()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTimeLocal()->format($datetime_local_format)])
+->withInputAttribute([
+'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
+'max'=>$carbonator->parseToDatetimeLocal($opportunity->getLatestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
+])
 ->required()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
 
-->followedByInputBlock('registration_end','datetime-local')
-->withInputAttribute('value', function($input) {
-  $value = $input->getValue();
-  try {
-    $value = \Carbon\Carbon::parse($value)->format(trans('opportunity.datetime_format'));
-  } catch(Exception $e) {
-  }
-  return $value;
+->followedByInputBlock('registration_end_local', 'datetime-local')
+->withInputAttribute('value', function($input) use ($carbonator) {
+  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute());
 })
-->withInputAttribute(['min'=>$opportunity->getEarliestStartTimeLocal()->format($datetime_local_format), 'max'=>$opportunity->getLatestStartTimeLocal()->format($datetime_local_format)])
+->withInputAttribute([
+'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
+'max'=>$carbonator->parseToDatetimeLocal($opportunity->getLatestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
+])
 ->required()
 
 ->followedByInputBlock('occupations', 'textarea')
