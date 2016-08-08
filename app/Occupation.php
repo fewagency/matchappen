@@ -130,16 +130,13 @@ class Occupation extends Model implements SluggableInterface
     }
 
     /**
-     * @param string $names
+     * @param array $names
      * @param User|null $user
      * @return Collection
      */
-    public static function getOrCreateFromCommaSeparatedNames($names, User $user = null)
+    public static function getOrCreateFromNames($names, User $user)
     {
-        $names = collect(explode(',', $names))->map(function ($item) {
-            //strip any multiple non-word chars from occupation name
-            return trim(preg_replace('/(\W)\1+/', '$1', $item));
-        })->filter();
+        $names = collect($names);
         $instance = new static;
         $existing = $instance->newQuery()->whereIn('name', $names)->get();
         if ($user and $user->exists) {
@@ -154,7 +151,25 @@ class Occupation extends Model implements SluggableInterface
 
                 $existing->push($new);
             });
+
+            return $existing;
         }
+
+        return $existing;
+    }
+
+    /**
+     * @param string $names
+     * @param User|null $user
+     * @return Collection
+     */
+    public static function getOrCreateFromCommaSeparatedNames($names, User $user = null)
+    {
+        $names = collect(explode(',', $names))->map(function ($item) {
+            //strip any multiple non-word chars from occupation name
+            return trim(preg_replace('/(\W)\1+/', '$1', $item));
+        })->filter();
+        $existing = self::getOrCreateFromNames($names, $user);
 
         return $existing;
     }

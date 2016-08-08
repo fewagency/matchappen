@@ -42,6 +42,7 @@ class AuthController extends Controller
                 return 'workplace.' . $value;
             }, array_keys(StoreWorkplaceRequest::rulesForCreate()))
         );
+        $this->middleware('reformulator.explode:workplace.occupations', ['only' => 'postRegister']);
         $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => 'postRegister']);
     }
 
@@ -89,7 +90,7 @@ class AuthController extends Controller
         $user->workplace()->associate($workplace);
         $user->save();
 
-        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($data['workplace']['occupations'], $user);
+        $occupations = Occupation::getOrCreateFromNames($data['workplace']['occupations'], $user);
         $workplace->occupations()->sync($occupations);
 
         //TODO: email admin after new workplace registration

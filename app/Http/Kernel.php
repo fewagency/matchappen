@@ -30,6 +30,7 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Matchappen\Http\Middleware\RedirectIfAuthenticated::class,
         'reformulator.trim' => \FewAgency\Reformulator\Middleware\TrimInput::class,
+        'reformulator.explode' => \FewAgency\Reformulator\Middleware\ExplodeInput::class,
         'reformulator.datetime-local' => \FewAgency\Reformulator\Middleware\DatetimeLocalInput::class,
     ];
 }
