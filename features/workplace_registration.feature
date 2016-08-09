@@ -28,9 +28,3 @@ Feature: Workplace registration
     And I fill in "workplace[name]" with " Test workplace "
     And I press "Registrera arbetsplats"
     Then the "workplace[name]" field should contain "Test workplace"
-
-  Scenario: Workplace representative registers with excess whitespace in occupations and gets them trimmed
-    Given I go to "registrering"
-    And I fill in "workplace[occupations]" with " bagare, Art Director , copywriter "
-    And I press "Registrera arbetsplats"
-    Then the "workplace[occupations]" field should not contain " bagare, Art Director , copywriter "

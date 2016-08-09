@@ -44,6 +44,7 @@ class AuthController extends Controller
         );
         $this->middleware('reformulator.explode:workplace.occupations', ['only' => 'postRegister']);
         $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => 'postRegister']);
+        $this->middleware('reformulator.strip_repeats:workplace.occupations', ['only' => 'postRegister']);
     }
 
     //TODO: make postRegister() redirect to getLogin() withInput if the email exists

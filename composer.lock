@@ -478,12 +478,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fewagency/laravel-reformulator.git",
-                "reference": "d27cf4dfaf1c1eeb36e80718056bfd9a97c6f656"
+                "reference": "4cabee9b88b89356a324314c052f671714546e0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fewagency/laravel-reformulator/zipball/d27cf4dfaf1c1eeb36e80718056bfd9a97c6f656",
-                "reference": "d27cf4dfaf1c1eeb36e80718056bfd9a97c6f656",
+                "url": "https://api.github.com/repos/fewagency/laravel-reformulator/zipball/4cabee9b88b89356a324314c052f671714546e0e",
+                "reference": "4cabee9b88b89356a324314c052f671714546e0e",
                 "shasum": ""
             },
             "require": {
@@ -526,7 +526,7 @@
                 "transform",
                 "trim"
             ],
-            "time": "2016-08-08 12:32:19"
+            "time": "2016-08-08 15:16:34"
         },
         {
             "name": "jakub-onderka/php-console-color",
