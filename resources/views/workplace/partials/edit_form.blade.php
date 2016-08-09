@@ -13,7 +13,7 @@ FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()
 ->checked($workplace->isPublished())
 ->withPrependedContent(new \FewAgency\FluentForm\HiddenInputElement('is_published', 0))
 
-->followedByInputBlock('occupations', 'textarea')
+->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
 ->withLabel(trans('validation.attributes.workplace.occupations'))
 

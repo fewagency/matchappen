@@ -17,7 +17,9 @@ class WorkplaceController extends Controller
     public function __construct(Request $request)
     {
         $fields_to_trim = array_keys(StoreWorkplaceRequest::rulesForUpdate());
+        $this->middleware('reformulator.explode:occupations', ['only' => 'update']);
         $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => 'update']);
+        $this->middleware('reformulator.strip_repeats:occupations', ['only' => 'update']);
     }
 
     public function index()
@@ -48,7 +50,7 @@ class WorkplaceController extends Controller
     {
         $workplace->update($request->input());
 
-        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $workplace->occupations()->sync($occupations);
 
         //TODO: trigger email on workplace update
