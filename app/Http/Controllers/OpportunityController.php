@@ -16,9 +16,11 @@ class OpportunityController extends Controller
     public function __construct(Request $request)
     {
         $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
+        $this->middleware('reformulator.explode:occupations', ['only' => ['update', 'store']]);
         $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.datetime-local:start_local,start_local,'.Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,'.Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
+        $this->middleware('reformulator.strip_repeats:occupations', ['only' => ['update', 'store']]);
+        $this->middleware('reformulator.datetime-local:start_local,start_local,' . Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
+        $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,' . Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
     }
 
     public function index()
@@ -55,7 +57,7 @@ class OpportunityController extends Controller
         $opportunity->workplace()->associate($request->user()->workplace);
         $opportunity->save();
 
-        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity created
@@ -74,7 +76,7 @@ class OpportunityController extends Controller
     {
         $opportunity->update($request->input());
 
-        $occupations = Occupation::getOrCreateFromCommaSeparatedNames($request->input('occupations'), $request->user());
+        $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity update

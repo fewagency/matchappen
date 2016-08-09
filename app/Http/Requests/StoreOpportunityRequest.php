@@ -61,6 +61,7 @@ class StoreOpportunityRequest extends Request
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
+            'occupations' => 'array',
         ];
     }
 }

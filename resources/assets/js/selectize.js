@@ -1,5 +1,5 @@
 $(function () {
-  var occupationInputs = $('input[data-occupationsurl]');
+  var occupationInputs = $('input[data-occupationsurl], textarea[data-occupationsurl]');
   occupationInputs.selectize({
     valueField: 'name',
     labelField: 'name',

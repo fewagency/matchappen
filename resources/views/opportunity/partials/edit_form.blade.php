@@ -40,7 +40,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ])
 ->required()
 
-->followedByInputBlock('occupations', 'textarea')
+->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
 
 ->followedByInputBlock('description', 'textarea')
