@@ -60,6 +60,14 @@ font-family:'ITC AvantGardeGothicW01BdCnObl';
 }
 */
 
+a {
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 h1,
 h2,
 h3 {
