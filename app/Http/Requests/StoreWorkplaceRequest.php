@@ -39,7 +39,7 @@ class StoreWorkplaceRequest extends Request
         $rules = [
             'name' => ['required', 'min:3', 'max:255', 'unique:workplaces,name'],
             'employees' => ['required', 'integer', 'min:1', 'max:65535'],
-            'description' => ['string'],
+            'description' => ['required', 'string'],
             'homepage' => ['url', 'max:255'],
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'email' => ['email', 'max:50'],
