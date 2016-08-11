@@ -1,5 +1,5 @@
-/bower_components
 /vendor
+/bower_components
 /node_modules
 Homestead.yaml
 Homestead.json
@@ -10,7 +10,6 @@ _ide_helper.php
 /public/css/
 /public/js/
 .idea
-bower_components
 .DS_Store
 storage/debugbar
 public/images
