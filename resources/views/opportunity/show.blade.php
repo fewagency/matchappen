@@ -43,8 +43,8 @@
         ])
 
         @include('partials.info-1', [
-          'left_col_content' => trans('validation.attributes.registration_end'),
-          'right_col_content' => date('Y-m-d H:i', strtotime($opportunity->registration_end))
+          'left_col_content' => trans('validation.attributes.registration_end_local'),
+          'right_col_content' => $opportunity->registration_end_local->format(trans('opportunity.datetime_format'))
         ])
 
         @include('partials.info-1', [

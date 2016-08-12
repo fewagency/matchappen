@@ -76,6 +76,11 @@ class Opportunity extends Model
         'text',
         'max_visitors',
         'start_local',
+        'start_local_year',
+        'start_local_month',
+        'start_local_day',
+        'start_local_hour',
+        'start_local_minute',
         'minutes',
         'registration_end_local',
         'description',
@@ -90,11 +95,12 @@ class Opportunity extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        if(empty($this->start)) {
+        if (empty($this->start)) {
             $this->start = Carbonator::parseToDefaultTz('+30 weekdays 15:00', $this->timezone);
         }
-        if(empty($this->registration_end)) {
-            $this->registration_end = Carbonator::parseToDefaultTz($this->start_local->subWeekdays(7)->minute(0), $this->timezone);
+        if (empty($this->registration_end)) {
+            $this->registration_end = Carbonator::parseToDefaultTz($this->start_local->subWeekdays(7)->minute(0),
+                $this->timezone);
         }
     }
 
@@ -242,6 +248,31 @@ class Opportunity extends Model
     public function setStartLocalAttribute($datetime)
     {
         $this->start = Carbonator::parseToDefaultTz($datetime, $this->timezone);
+    }
+
+    public function getStartLocalYearAttribute()
+    {
+        return $this->start_local->format('Y');
+    }
+
+    public function getStartLocalMonthAttribute()
+    {
+        return $this->start_local->format('m');
+    }
+
+    public function getStartLocalDayAttribute()
+    {
+        return $this->start_local->format('d');
+    }
+
+    public function getStartLocalHourAttribute()
+    {
+        return $this->start_local->format('H');
+    }
+
+    public function getStartLocalMinuteAttribute()
+    {
+        return $this->start_local->format('i');
     }
 
     public function getMinutesAttribute()
@@ -397,6 +428,10 @@ class Opportunity extends Model
         return Carbon::parse('+6 months 00:00', self::getTimezoneAttribute());
     }
 
+    /**
+     * Get options for a start year dropdown
+     * @return array
+     */
     public static function getStartTimeYearOptions()
     {
         $year_range = range(self::getEarliestStartTimeLocal()->year, self::getLatestStartTimeLocal()->year);
@@ -404,6 +439,10 @@ class Opportunity extends Model
         return array_combine($year_range, $year_range);
     }
 
+    /**
+     * Get options for a start hour dropdown
+     * @return array
+     */
     public static function getStartTimeHourOptions()
     {
         $hours_range = range(self::EARLIEST_HOUR, self::LATEST_HOUR);
@@ -414,6 +453,10 @@ class Opportunity extends Model
         return array_combine($formatted_hours, $formatted_hours);
     }
 
+    /**
+     * Get options for a start minute dropdown
+     * @return array
+     */
     public static function getStartTimeMinuteOptions()
     {
         return ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];

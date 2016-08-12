@@ -3,9 +3,6 @@
 FluentForm::withAction($opportunity->exists ? action('OpportunityController@update', $opportunity) : action('OpportunityController@store'))
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
-->withValues([
-  'occupations' => $opportunity->occupations->implode('name', ','),
-])
 ->withValues(old())
 ->withErrors($errors)
 ->withLabels(trans('validation.attributes'))
