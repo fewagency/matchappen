@@ -213,10 +213,10 @@ class Opportunity extends Model
     {
         $this->attributes['start'] = $this->fromDateTime($value);
 
-        if(empty($this->end) or $this->start->gte($this->end)) {
+        if (empty($this->end) or $this->start->gte($this->end)) {
             $this->end = $this->start->addHour();
         }
-        if(empty($this->registration_end) or $this->start->lte($this->registration_end)) {
+        if (empty($this->registration_end) or $this->start->lte($this->registration_end)) {
             $this->registration_end = $this->start->subHour();
         }
     }
@@ -382,5 +382,12 @@ class Opportunity extends Model
     public static function getLatestStartTimeLocal()
     {
         return Carbon::parse('+6 months 00:00', self::getTimezoneAttribute());
+    }
+
+    public static function getStartTimeYearOptions()
+    {
+        $year_range = range(self::getEarliestStartTimeLocal()->year, self::getLatestStartTimeLocal()->year);
+
+        return array_combine($year_range, $year_range);
     }
 }

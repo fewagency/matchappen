@@ -21,10 +21,15 @@ class OpportunityController extends Controller
         $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), $middleware_options);
         $this->middleware('reformulator.strip_repeats:occupations', $middleware_options);
 
+        $this->middleware('reformulator.concatenate:start_local-date,-',
+            $middleware_options);
+        $this->middleware('reformulator.concatenate:start_local-time,:',
+            $middleware_options);
         $this->middleware('reformulator.concatenate:start_local, ,start_local_date,start_local_time',
             $middleware_options);
         $this->middleware('reformulator.datetime-local:start_local,start_local,' . Opportunity::getTimezoneAttribute(),
             $middleware_options);
+
         $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,' . Opportunity::getTimezoneAttribute(),
             $middleware_options);
     }
