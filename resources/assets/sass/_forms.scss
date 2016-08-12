@@ -25,6 +25,12 @@
   }
 }
 
+.form-block--hidden-label {
+  label.form-block__label {
+    @extend .sr-only;
+  }
+}
+
 .form-block__description {
   @extend .small;
 }
@@ -35,4 +41,53 @@ ul.form-block__messages {
 
 .form-block__messages--error {
   @extend .text-danger;
+}
+
+.form-block-container {
+  legend:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.form-block-container--inline {
+  margin-bottom: $form-group-margin-bottom;
+
+  .form-block {
+    // See node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss:478
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  .form-block__control {
+    // See node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss:485
+    display: inline-block;
+    width: auto; // Prevent labels from stacking above inputs in `.form-group`
+    vertical-align: middle;
+  }
+
+  .form-block__label {
+    // See node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss:512
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+
+  legend {
+    // Make legend look like a label
+    // Override some things from node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss:20
+    font-size: inherit;
+    border: none;
+    // See node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_forms.scss:32
+    display: inline-block;
+    max-width: 100%; // Force IE8 to wrap long content (see https://github.com/twbs/bootstrap/issues/13141)
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}
+
+.form-block-container--required {
+  legend:after {
+    content: "*";
+    font-weight: lighter;
+  }
 }
