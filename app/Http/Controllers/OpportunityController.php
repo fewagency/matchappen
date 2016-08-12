@@ -16,11 +16,17 @@ class OpportunityController extends Controller
     public function __construct(Request $request)
     {
         $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
-        $this->middleware('reformulator.explode:occupations', ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.strip_repeats:occupations', ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.datetime-local:start_local,start_local,' . Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
-        $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,' . Opportunity::getTimezoneAttribute(), ['only' => ['update', 'store']]);
+        $middleware_options = ['only' => ['update', 'store']];
+        $this->middleware('reformulator.explode:occupations', $middleware_options);
+        $this->middleware('reformulator.trim:' . implode(',', $fields_to_trim), $middleware_options);
+        $this->middleware('reformulator.strip_repeats:occupations', $middleware_options);
+
+        $this->middleware('reformulator.concatenate:start_local, ,start_local_date,start_local_time',
+            $middleware_options);
+        $this->middleware('reformulator.datetime-local:start_local,start_local,' . Opportunity::getTimezoneAttribute(),
+            $middleware_options);
+        $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,' . Opportunity::getTimezoneAttribute(),
+            $middleware_options);
     }
 
     public function index()

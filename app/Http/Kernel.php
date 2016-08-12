@@ -31,6 +31,7 @@ class Kernel extends HttpKernel
         'guest' => \Matchappen\Http\Middleware\RedirectIfAuthenticated::class,
         'reformulator.trim' => \FewAgency\Reformulator\Middleware\TrimInput::class,
         'reformulator.strip_repeats' => \FewAgency\Reformulator\Middleware\StripRepeatNonWordCharsFromInput::class,
+        'reformulator.concatenate' => \FewAgency\Reformulator\Middleware\ConcatenateInput::class,
         'reformulator.explode' => \FewAgency\Reformulator\Middleware\ExplodeInput::class,
         'reformulator.datetime-local' => \FewAgency\Reformulator\Middleware\DatetimeLocalInput::class,
     ];

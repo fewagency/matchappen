@@ -17,6 +17,13 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withInputAttribute(['min'=>1, 'max'=>\Matchappen\Opportunity::MAX_VISITORS])
 ->required()
 
+->followedByFieldset()->inline()->withClass('form-block-container--required')
+->withLegend(trans('validation.attributes.start_local'))
+->containingInputBlock('start_local_date', 'date')->withClass('form-block--hidden-label')
+->followedByInputBlock('start_local_time', 'time')->withClass('form-block--hidden-label')
+->getControlBlockContainer()
+
+/*
 ->followedByInputBlock('start_local', 'datetime-local')
 ->withInputAttribute('value', function($input) use ($carbonator) {
   return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute(), \Matchappen\Opportunity::getTimezoneAttribute()) ?: $input->getValue();
@@ -26,6 +33,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 'max'=>$carbonator->parseToDatetimeLocal($opportunity->getLatestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
 ])
 ->required()
+*/
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
