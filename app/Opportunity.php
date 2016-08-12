@@ -87,6 +87,17 @@ class Opportunity extends Model
         'display_contact_phone',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        if(empty($this->start)) {
+            $this->start = Carbonator::parseToDefaultTz('+30 weekdays 15:00', $this->timezone);
+        }
+        if(empty($this->registration_end)) {
+            $this->registration_end = Carbonator::parseToDefaultTz($this->start_local->subWeekdays(7)->minute(0), $this->timezone);
+        }
+    }
+
     /**
      * Scope a query to only include opportunities from published workplaces.
      *
@@ -403,7 +414,7 @@ class Opportunity extends Model
         return array_combine($formatted_hours, $formatted_hours);
     }
 
-    public static function getStartTimeMinutesOptions()
+    public static function getStartTimeMinuteOptions()
     {
         return ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
     }

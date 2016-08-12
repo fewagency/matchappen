@@ -59,7 +59,7 @@ return [
         'start_local_month' => 'månad',
         'start_local_year' => 'år',
         'start_local_hour' => 'klockslag',
-        'start_local_minutes' => 'minuter över hel timme',
+        'start_local_minute' => 'minuter över hel timme',
         'minutes' => 'längd',
         'registration_end_local' => 'anmälan fram till',
         'occupations' => 'yrken',

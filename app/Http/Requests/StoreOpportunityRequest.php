@@ -56,7 +56,7 @@ class StoreOpportunityRequest extends Request
             'description' => 'string|max:1000',
             'start_local' => 'after:' . Opportunity::getEarliestStartTimeLocal()->format($datetime_format) . '|before:' . Opportunity::getLatestStartTimeLocal()->toDateString(),
             'minutes' => 'integer|required_with:start_local|in:' .
-                implode(',', array_keys(trans('opportunity.minutes_options'))),
+                implode(',', array_keys(trans('opportunity.minute_options'))),
             'registration_end_local' => 'required_with:start_local|before:start_local|after:' . Opportunity::getEarliestStartTimeLocal()->format($datetime_format),
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],

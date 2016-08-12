@@ -4,8 +4,6 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->withValues(['max_visitors' => 5])
 ->withValues($opportunity)
 ->withValues([
-  'start_local' => $opportunity->start_local ?: $carbonator->parse('+30 weekdays 15:00', \Matchappen\Opportunity::getTimezoneAttribute()),
-  'registration_end_local' => $opportunity->registration_end_local ?: $carbonator->parse('+20 weekdays', \Matchappen\Opportunity::getTimezoneAttribute()),
   'occupations' => $opportunity->occupations->implode('name', ','),
 ])
 ->withValues(old())
@@ -24,7 +22,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->followedBySelectBlock('start_local_year', $opportunity->getStartTimeYearOptions())->withClass('form-block--hidden-label')
 ->withAppendedContent(trans('datetime.at_time'))
 ->followedBySelectBlock('start_local_hour', $opportunity->getStartTimeHourOptions())->withClass('form-block--hidden-label')
-->followedBySelectBlock('start_local_minutes', $opportunity->getStartTimeMinutesOptions())->withClass('form-block--hidden-label')
+->followedBySelectBlock('start_local_minute', $opportunity->getStartTimeMinuteOptions())->withClass('form-block--hidden-label')
 ->getControlBlockContainer()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))

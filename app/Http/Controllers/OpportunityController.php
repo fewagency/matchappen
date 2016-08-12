@@ -23,7 +23,7 @@ class OpportunityController extends Controller
 
         $this->middleware('reformulator.concatenate:start_local_date,-,start_local_year,start_local_month,start_local_day',
             $middleware_options);
-        $this->middleware('reformulator.concatenate:start_local_time,:,start_local_hour,start_local_minutes',
+        $this->middleware('reformulator.concatenate:start_local_time,:,start_local_hour,start_local_minute',
             $middleware_options);
         $this->middleware('reformulator.concatenate:start_local, ,start_local_date,start_local_time',
             $middleware_options);
