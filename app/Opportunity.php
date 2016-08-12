@@ -37,6 +37,8 @@ class Opportunity extends Model
     use SoftDeletes;
 
     const MAX_VISITORS = 30;
+    const EARLIEST_HOUR = 8;
+    const LATEST_HOUR = 20;
 
     /**
      * The attributes that should be mutated to dates.
@@ -389,5 +391,20 @@ class Opportunity extends Model
         $year_range = range(self::getEarliestStartTimeLocal()->year, self::getLatestStartTimeLocal()->year);
 
         return array_combine($year_range, $year_range);
+    }
+
+    public static function getStartTimeHourOptions()
+    {
+        $hours_range = range(self::EARLIEST_HOUR, self::LATEST_HOUR);
+        $formatted_hours = array_map(function ($day) {
+            return str_pad($day, 2, '0', STR_PAD_LEFT);
+        }, $hours_range);
+
+        return array_combine($formatted_hours, $formatted_hours);
+    }
+
+    public static function getStartTimeMinutesOptions()
+    {
+        return ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
     }
 }

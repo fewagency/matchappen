@@ -19,24 +19,13 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 
 ->followedByFieldset()->inline()->withClass('form-block-container--required')
 ->withLegend(trans('validation.attributes.start_local'))
-->containingSelectBlock('start_local_date.day', array_combine(array_map(function($day) { return str_pad($day,2,'0', STR_PAD_LEFT);},range(1,31)),range(1,31)))->withClass('form-block--hidden-label')
-->followedBySelectBlock('start_local_date.month', trans('datetime.month_options'))->withClass('form-block--hidden-label')
-->followedBySelectBlock('start_local_date.year', $opportunity->getStartTimeYearOptions())->withClass('form-block--hidden-label')
+->containingSelectBlock('start_local_day', array_combine(array_map(function($day) { return str_pad($day,2,'0', STR_PAD_LEFT);},range(1,31)),range(1,31)))->withClass('form-block--hidden-label')
+->followedBySelectBlock('start_local_month', trans('datetime.month_options'))->withClass('form-block--hidden-label')
+->followedBySelectBlock('start_local_year', $opportunity->getStartTimeYearOptions())->withClass('form-block--hidden-label')
 ->withAppendedContent(trans('datetime.at_time'))
-->followedByInputBlock('start_local_time', 'time')->withClass('form-block--hidden-label')
+->followedBySelectBlock('start_local_hour', $opportunity->getStartTimeHourOptions())->withClass('form-block--hidden-label')
+->followedBySelectBlock('start_local_minutes', $opportunity->getStartTimeMinutesOptions())->withClass('form-block--hidden-label')
 ->getControlBlockContainer()
-
-/*
-->followedByInputBlock('start_local', 'datetime-local')
-->withInputAttribute('value', function($input) use ($carbonator) {
-  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute(), \Matchappen\Opportunity::getTimezoneAttribute()) ?: $input->getValue();
-})
-->withInputAttribute([
-'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
-'max'=>$carbonator->parseToDatetimeLocal($opportunity->getLatestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
-])
-->required()
-*/
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
