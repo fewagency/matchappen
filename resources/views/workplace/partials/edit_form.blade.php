@@ -1,6 +1,6 @@
 {{
 FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()))
-->withValues($workplace, ['occupations' => $workplace->occupations->implode('name', ',')], old())
+->withValues($workplace, ['occupations' => $workplace->occupations->pluck('name')->toArray()], old())
 ->withErrors($errors)
 ->withLabels(trans('validation.attributes'))
 ->withToken(csrf_token())
