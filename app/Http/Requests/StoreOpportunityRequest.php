@@ -23,6 +23,24 @@ class StoreOpportunityRequest extends Request
         return Gate::allows('update', $opportunity);
     }
 
+    public function validator(\Illuminate\Contracts\Validation\Factory $factory)
+    {
+        // Factory use from \Illuminate\Foundation\Http\FormRequest::getValidatorInstance
+        $validator = $factory->make(
+            $this->all(), $this->container->call([$this, 'rules']), $this->messages(), $this->attributes()
+        );
+
+        // After validation code that copies error messages to relevant middleware-imploded fields
+        $validator->after(function (\Illuminate\Validation\Validator $validator) {
+            if ($validator->errors()->has('start_local')) {
+                $error_target = 'start_local_day';
+                $validator->errors()->add($error_target, $validator->errors()->first('start_local'));
+            }
+        });
+
+        return $validator;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
