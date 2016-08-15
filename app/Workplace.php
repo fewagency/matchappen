@@ -53,7 +53,30 @@ class Workplace extends Model implements SluggableInterface
      *
      * @var array
      */
-    protected $visible = ['id', 'name', 'slug', 'href', 'headline', 'text', 'employees', 'contact_name', 'email', 'phone', 'address', 'description', 'homepage'];
+    protected $visible = [
+        // These are actual attributes
+        'id',
+        'name',
+        'slug',
+        'employees',
+        'contact_name',
+        'email',
+        'phone',
+        'address',
+        'description',
+        'homepage',
+        // These are created by accessors
+        'href',
+        'headline',
+        'text',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['href', 'headline', 'text'];
 
     /**
      * Publish this workplace - to be used by admins
