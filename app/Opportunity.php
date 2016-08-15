@@ -329,7 +329,11 @@ class Opportunity extends Model
 
     public function getFallbackAddressAttribute()
     {
-        return $this->workplace->address;
+        if ($this->workplace) {
+            return $this->workplace->address;
+        }
+
+        return null;
     }
 
     public function getDisplayContactNameAttribute()
@@ -339,7 +343,11 @@ class Opportunity extends Model
 
     public function getFallbackContactNameAttribute()
     {
-        return $this->workplace->display_contact_name;
+        if ($this->workplace) {
+            return $this->workplace->display_contact_name;
+        }
+
+        return null;
     }
 
     public function getDisplayContactPhoneAttribute()
@@ -349,16 +357,24 @@ class Opportunity extends Model
 
     public function getFallbackContactPhoneAttribute()
     {
-        return $this->workplace->display_phone;
+        if ($this->workplace) {
+            return $this->workplace->display_phone;
+        }
+
+        return null;
     }
 
     public function getNameAttribute()
     {
-        return trans('opportunity.opportunity_at_workplace',
-            [
-                'workplace' => $this->workplace->name,
-                'time' => $this->start_local->format('j/n G:i'),
-            ]);
+        if ($this->workplace) {
+            return trans('opportunity.opportunity_at_workplace',
+                [
+                    'workplace' => $this->workplace->name,
+                    'time' => $this->start_local->format('j/n G:i'),
+                ]);
+        }
+
+        return null;
     }
 
     public function getHrefAttribute()
@@ -390,7 +406,7 @@ class Opportunity extends Model
 
     public function isPublished()
     {
-        return $this->workplace->isPublished();
+        return $this->workplace ? $this->workplace->isPublished() : false;
     }
 
     public function isUpcoming()
