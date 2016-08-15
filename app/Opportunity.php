@@ -69,12 +69,21 @@ class Opportunity extends Model
      * @var array
      */
     protected $visible = [
+        // These are actual attributes
         'id',
+        'max_visitors',
+        'description',
+        'address',
+        'contact_name',
+        'contact_phone',
+        // These are created by accessors
         'name',
         'href',
         'headline',
         'text',
-        'max_visitors',
+        'display_address',
+        'display_contact_name',
+        'display_contact_phone',
         'start_local',
         'start_local_year',
         'start_local_month',
@@ -83,13 +92,29 @@ class Opportunity extends Model
         'start_local_minute',
         'minutes',
         'registration_end_local',
-        'description',
-        'address',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'name',
+        'href',
+        'headline',
+        'text',
         'display_address',
-        'contact_name',
         'display_contact_name',
-        'contact_phone',
         'display_contact_phone',
+        'start_local',
+        'start_local_year',
+        'start_local_month',
+        'start_local_day',
+        'start_local_hour',
+        'start_local_minute',
+        'minutes',
+        'registration_end_local',
     ];
 
     public function __construct(array $attributes = [])
