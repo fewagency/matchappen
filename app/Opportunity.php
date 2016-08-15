@@ -128,8 +128,8 @@ class Opportunity extends Model
     public function __construct(array $attributes = [])
     {
         $default_start_local = Carbon::parse('+30 weekdays 15:00', $this->timezone);
-        $this->attributes['start'] = Carbonator::parseToDefaultTz($default_start_local)->toDateTimeString();
-        $this->attributes['end'] = Carbonator::parseToDefaultTz($default_start_local->copy()->addHour())->toDateTimeString();
+        $this->attributes['start'] = $this->asDateTime(Carbonator::parseToDefaultTz($default_start_local));
+        $this->attributes['end'] = $this->asDateTime(Carbonator::parseToDefaultTz($default_start_local->copy()->addHour()));
 
         parent::__construct($attributes);
 
