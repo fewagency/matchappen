@@ -15,6 +15,7 @@ use Illuminate\Database\Query\Expression;
  * @property Carbon start
  * @property Carbon start_local
  * @property Carbon end
+ * @property int minutes
  * @property Workplace workplace
  * @property string address
  * @property string display_address
@@ -39,6 +40,13 @@ class Opportunity extends Model
     const MAX_VISITORS = 30;
     const EARLIEST_HOUR = 8;
     const LATEST_HOUR = 20;
+
+    /**
+     * The model's attributes.
+     *
+     * @var array
+     */
+    protected $attributes = ['max_visitors' => 5];
 
     /**
      * The attributes that should be mutated to dates.
@@ -119,13 +127,15 @@ class Opportunity extends Model
 
     public function __construct(array $attributes = [])
     {
+        $default_start_local = Carbon::parse('+30 weekdays 15:00', $this->timezone);
+        $this->attributes['start'] = Carbonator::parseToDefaultTz($default_start_local)->toDateTimeString();
+        $this->attributes['end'] = Carbonator::parseToDefaultTz($default_start_local->copy()->addHour())->toDateTimeString();
+
         parent::__construct($attributes);
-        if (empty($this->start)) {
-            $this->start = Carbonator::parseToDefaultTz('+30 weekdays 15:00', $this->timezone);
-        }
+
         if (empty($this->registration_end)) {
-            $this->registration_end = Carbonator::parseToDefaultTz($this->start_local->subWeekdays(7)->minute(0),
-                $this->timezone);
+            $this->registration_end =
+                Carbonator::parseToDefaultTz($this->start_local->subWeekdays(5)->minute(0), $this->timezone);
         }
     }
 
@@ -255,11 +265,10 @@ class Opportunity extends Model
 
     public function setStartAttribute($value)
     {
+        $minutes = $this->minutes; // Save the current length in minutes to update end time too
         $this->attributes['start'] = $this->fromDateTime($value);
+        $this->minutes = $minutes;
 
-        if (empty($this->end) or $this->start->gte($this->end)) {
-            $this->end = $this->start->addHour();
-        }
         if (empty($this->registration_end) or $this->start->lte($this->registration_end)) {
             $this->registration_end = $this->start->subHour();
         }
@@ -302,9 +311,11 @@ class Opportunity extends Model
 
     public function getMinutesAttribute()
     {
-        if (!empty($this->start)) {
-            return $this->start->diffInMinutes($this->end);
+        if (empty($this->start) or empty($this->end)) {
+            return 60;
         }
+
+        return $this->start->diffInMinutes($this->end);
     }
 
     public function setMinutesAttribute($minutes)
