@@ -2,6 +2,7 @@
 
 namespace Matchappen\Http\Requests;
 
+use FewAgency\Carbonator\Carbonator;
 use Illuminate\Support\Facades\Gate;
 use Matchappen\Opportunity;
 
@@ -30,11 +31,40 @@ class StoreOpportunityRequest extends Request
             $this->all(), $this->container->call([$this, 'rules']), $this->messages(), $this->attributes()
         );
 
-        // After validation code that copies error messages to relevant middleware-imploded fields
+        // After validation code that copies some error messages to relevant middleware-concatenated fields
         $validator->after(function (\Illuminate\Validation\Validator $validator) {
+            // Get array of failed attributes, their rules and parameters
+            $failed_rules = $validator->failed();
+
+            // Errors on start_local should be copied to a start_local_xxx field
             if ($validator->errors()->has('start_local')) {
-                $error_target = 'start_local_day';
-                $validator->errors()->add($error_target, $validator->errors()->first('start_local'));
+                $target_attribute_name = 'start_local_day'; // Default field to copy error to
+                $start = Carbonator::parseToDefaultTz($validator->getData()['start_local'],
+                    Opportunity::getTimezoneAttribute());
+
+                $first_rule_message = $validator->errors()->first('start_local');
+                // Must be in this order:
+                $first_rule_parameters = reset($failed_rules['start_local']);
+                $first_rule_name = key($failed_rules['start_local']);
+
+                if ($first_rule_name == 'After' and $start) {
+                    $earliest_start = Carbonator::parseToDefaultTz($first_rule_parameters[0],
+                        Opportunity::getTimezoneAttribute());
+                    $target_attribute_name = 'start_local_minute';
+                    if ($start->hour < $earliest_start->hour) {
+                        $target_attribute_name = 'start_local_hour';
+                    }
+                    if ($start->day < $earliest_start->day) {
+                        $target_attribute_name = 'start_local_day';
+                    }
+                    if ($start->month < $earliest_start->month) {
+                        $target_attribute_name = 'start_local_month';
+                    }
+                    if ($start->year < $earliest_start->year) {
+                        $target_attribute_name = 'start_local_year';
+                    }
+                }
+                $validator->errors()->add($target_attribute_name, $first_rule_message);
             }
         });
 
