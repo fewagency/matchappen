@@ -15,6 +15,8 @@ class OpportunityController extends Controller
 
     public function __construct(Request $request)
     {
+        $this->middleware('auth', ['except' => ['index', 'show', 'booking']]);
+
         $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
         $middleware_options = ['only' => ['update', 'store']];
         $this->middleware('reformulator.explode:occupations', $middleware_options);
