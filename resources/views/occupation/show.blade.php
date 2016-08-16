@@ -9,7 +9,7 @@
 
           @include('partials.status')
 
-          <h1 class="headline_1">{{ $occupation->name }}</h1>
+          <h1 class="headline_1">{{ ucfirst(trans_choice('occupation.occupation',1)) }}: {{ $occupation->name }}</h1>
 
           @if($occupation->description)
             <div class="text-block-2">
