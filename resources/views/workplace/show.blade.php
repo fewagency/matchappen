@@ -13,8 +13,6 @@
 
           @include('workplace.partials.approve')
 
-          @include('workplace.partials.admin_edit_link')
-
           @if($workplace->description)
             <div class="text-block-2">
               {{ $workplace->description }}
@@ -69,6 +67,8 @@
             'left_col_content' => trans('validation.attributes.address'),
             'right_col_content' => nl2br(e($workplace->address))
           ])
+
+          @include('workplace.partials.admin_edit_link')
 
         </div>
       </div>

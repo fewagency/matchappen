@@ -1,7 +1,7 @@
 <?php
 return [
     'opportunity' => 'möte|möten',
-    'create_opportunity_headline' => 'Erbjud ett besök på din arbetsplats',
+    'create_opportunity_headline' => 'Erbjud ett besök på :workplace',
     'opportunity_at_workplace' => 'besök hos :workplace :time',
     'minutes_options' => [45 => '45 minuter', 60 => '1 timme', 90 => '1,5 timmar', 120 => '2 timmar'],
     'registration_end_weekdays_before_options' => [
