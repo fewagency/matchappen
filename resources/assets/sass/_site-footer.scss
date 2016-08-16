@@ -40,6 +40,12 @@
     width: 50%;
   }
 
+  li:nth-child(4):nth-last-child(3),
+  li:nth-child(5):nth-last-child(2),
+  li:nth-child(6):nth-last-child(1) {
+    width: 33%;
+  }
+
 }
 
 .site-footer-nav__items {
