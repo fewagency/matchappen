@@ -62,7 +62,7 @@ return [
         'start_local_minute' => 'starttid - minuter över hel timme',
         'minutes' => 'längd',
         'registration_end_local' => 'tid för sista anmälan',
-        'registration_end_weekdays_before' => 'sista anmälan - vardagar innan besök',
+        'registration_end_weekdays_before' => 'sista anmälan',
         'occupations' => 'yrken',
         'contact_phone' => 'telefon',
         'visitors' => 'antal besökare',

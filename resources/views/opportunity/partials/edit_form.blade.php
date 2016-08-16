@@ -10,9 +10,8 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 
 ->containingInputBlock('max_visitors','number')
 ->withInputAttribute(['min'=>1, 'max'=>\Matchappen\Opportunity::MAX_VISITORS])
-->required()
 
-->followedByFieldset()->inline()->withClass('form-block-container--required')
+->followedByFieldset()->inline()
 ->withLegend(trans('validation.attributes.start_local'))
 ->containingSelectBlock('start_local_day', array_combine(array_map(function($day) { return str_pad($day,2,'0', STR_PAD_LEFT);},range(1,31)),range(1,31)))->withClass('form-block--hidden-label')
 ->followedBySelectBlock('start_local_month', trans('datetime.month_options'))->withClass('form-block--hidden-label')
@@ -23,9 +22,8 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->getControlBlockContainer()
 
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
-->required()
 
-->followedByInputBlock('registration_end_weekdays_before','number')
+->followedBySelectBlock('registration_end_weekdays_before', trans('opportunity.registration_end_weekdays_before_options'))
 
 ->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
