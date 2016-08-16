@@ -4,6 +4,7 @@ namespace Matchappen\Http\Requests;
 
 use Illuminate\Support\Facades\Gate;
 use Matchappen\Http\Requests\Request;
+use Matchappen\Occupation;
 
 class StoreWorkplaceRequest extends Request
 {
@@ -20,6 +21,21 @@ class StoreWorkplaceRequest extends Request
         }
 
         return Gate::allows('update', $workplace);
+    }
+
+    public function validator(\Illuminate\Contracts\Validation\Factory $factory)
+    {
+        // Factory use from \Illuminate\Foundation\Http\FormRequest::getValidatorInstance
+        $validator = $factory->make(
+            $this->all(), $this->container->call([$this, 'rules']), $this->messages(), $this->attributes()
+        );
+
+        // Validates the occupations array contains only two words
+        $validator->after(function ($validator) {
+            Occupation::validateMax2Words($validator, 'occupations');
+        });
+
+        return $validator;
     }
 
     /**
@@ -45,7 +61,7 @@ class StoreWorkplaceRequest extends Request
             'email' => ['email', 'max:50'],
             'phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
             'address' => ['required', 'string', 'max:500'],
-            'occupations' => ['array'], // TODO: don't let any occupation name contain more than one whitespace
+            'occupations' => ['array'],
         ];
 
         return $rules;

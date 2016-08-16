@@ -4,6 +4,7 @@ namespace Matchappen\Http\Requests;
 
 use FewAgency\Carbonator\Carbonator;
 use Illuminate\Support\Facades\Gate;
+use Matchappen\Occupation;
 use Matchappen\Opportunity;
 
 class StoreOpportunityRequest extends Request
@@ -31,17 +32,9 @@ class StoreOpportunityRequest extends Request
             $this->all(), $this->container->call([$this, 'rules']), $this->messages(), $this->attributes()
         );
 
-        // After validation code that validates the occupations array separately
-        $validator->after(function (\Illuminate\Validation\Validator $validator) {
-            $data = $validator->getData();
-            if (!empty($data['occupations'])) {
-                foreach ((array)$data['occupations'] as $occupation_name) {
-                    if (preg_match_all('/\s\w/', $occupation_name) > 1) {
-                        $validator->errors()->add('occupations', trans('occupation.max2words'));
-                        break;
-                    }
-                }
-            }
+        // Validates the occupations array contains only two words
+        $validator->after(function ($validator) {
+            Occupation::validateMax2Words($validator, 'occupations');
         });
 
         // After validation code that copies some error messages to relevant middleware-concatenated fields
@@ -136,8 +129,6 @@ class StoreOpportunityRequest extends Request
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
             'occupations' => ['array'],
-            //'occupations.*' => ['regex:/^\S+(\s\w\S*)?(\s\W\S*)?$/'], // /^\S+(\s\w\S*)?(\s\W\S*)?$/ disallows repeated subpattern where a space is followed by a word character - but allows space followed by non-word chars
-            // TODO: don't let any occupation name contain more than one whitespace
         ];
     }
 }

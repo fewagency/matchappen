@@ -173,4 +173,23 @@ class Occupation extends Model implements SluggableInterface
 
         return $existing;
     }
+
+    /**
+     * This can be run as an after hook on a validator to validate that every occupation name contains only two words
+     * @param \Illuminate\Validation\Validator $validator
+     * @param $attribute
+     */
+    public static function validateMax2Words(\Illuminate\Validation\Validator $validator, $attribute = 'occupations')
+    {
+        $data = $validator->getData();
+        if (!empty($data[$attribute])) {
+            foreach ((array)$data[$attribute] as $occupation_name) {
+                // This lets spaces followed by non-word chars like parenthesis through
+                if (preg_match_all('/\s\w/', $occupation_name) > 1) {
+                    $validator->errors()->add($attribute, trans('occupation.max2words'));
+                    break;
+                }
+            }
+        }
+    }
 }
