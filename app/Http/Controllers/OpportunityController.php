@@ -31,9 +31,6 @@ class OpportunityController extends Controller
             $middleware_options);
         $this->middleware('reformulator.datetime-local:start_local,start_local,' . Opportunity::getTimezoneAttribute(),
             $middleware_options);
-
-        $this->middleware('reformulator.datetime-local:registration_end_local,registration_end_local,' . Opportunity::getTimezoneAttribute(),
-            $middleware_options);
     }
 
     public function index()

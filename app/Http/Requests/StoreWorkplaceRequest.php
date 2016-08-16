@@ -45,7 +45,7 @@ class StoreWorkplaceRequest extends Request
             'email' => ['email', 'max:50'],
             'phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
             'address' => ['required', 'string', 'max:500'],
-            'occupations' => ['array'],
+            'occupations' => ['array'], // TODO: don't let any occupation name contain more than one whitespace
         ];
 
         return $rules;

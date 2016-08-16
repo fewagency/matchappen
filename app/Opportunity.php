@@ -29,6 +29,7 @@ use Illuminate\Database\Query\Expression;
  * @property Collection bookings
  * @property Carbon registration_end
  * @property Carbon registration_end_local
+ * @property int registration_end_days_before
  * @property string name
  * @property Collection occupations
  * @property string timezone
@@ -65,7 +66,7 @@ class Opportunity extends Model
         'description',
         'start_local',
         'minutes',
-        'registration_end_local',
+        'registration_end_days_before',
         'address',
         'contact_name',
         'contact_phone',
@@ -100,6 +101,7 @@ class Opportunity extends Model
         'start_local_minute',
         'minutes',
         'registration_end_local',
+        'registration_end_days_before',
     ];
 
     /**
@@ -123,6 +125,7 @@ class Opportunity extends Model
         'start_local_minute',
         'minutes',
         'registration_end_local',
+        'registration_end_days_before',
     ];
 
     public function __construct(array $attributes = [])
@@ -265,13 +268,14 @@ class Opportunity extends Model
 
     public function setStartAttribute($value)
     {
-        $minutes = $this->minutes; // Save the current length in minutes to update end time too
-        $this->attributes['start'] = $this->fromDateTime($value);
-        $this->minutes = $minutes;
+        // Save data to move the end time and registration end time along with the start time
+        $minutes = $this->minutes;
+        $registration_end_days_before = $this->registration_end_days_before;
 
-        if (empty($this->registration_end) or $this->start->lte($this->registration_end)) {
-            $this->registration_end = $this->start->subHour();
-        }
+        $this->attributes['start'] = $this->fromDateTime($value);
+
+        $this->minutes = $minutes;
+        $this->registration_end_days_before = $registration_end_days_before;
     }
 
     public function getStartLocalAttribute()
@@ -331,6 +335,16 @@ class Opportunity extends Model
     public function setRegistrationEndLocalAttribute($datetime)
     {
         $this->registration_end = Carbonator::parseToDefaultTz($datetime, $this->timezone);
+    }
+
+    public function getRegistrationEndDaysBeforeAttribute()
+    {
+        return $this->registration_end_local->diffInDays($this->start_local);
+    }
+
+    public function setRegistrationEndDaysBeforeAttribute($days)
+    {
+        $this->registration_end_local = $this->start_local->subDays(abs($days))->minute(0);
     }
 
     public function getDisplayAddressAttribute()
