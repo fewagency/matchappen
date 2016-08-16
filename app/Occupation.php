@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 
 /**
  * @property string name
@@ -182,8 +183,8 @@ class Occupation extends Model implements SluggableInterface
     public static function validateMax2Words(\Illuminate\Validation\Validator $validator, $attribute = 'occupations')
     {
         $data = $validator->getData();
-        if (!empty($data[$attribute])) {
-            foreach ((array)$data[$attribute] as $occupation_name) {
+        if (Arr::has($data, $attribute)) {
+            foreach ((array)Arr::get($data, $attribute) as $occupation_name) {
                 // This lets spaces followed by non-word chars like parenthesis through
                 if (preg_match_all('/\s\w/', $occupation_name) > 1) {
                     $validator->errors()->add($attribute, trans('occupation.max2words'));

@@ -71,6 +71,11 @@ class AuthController extends Controller
             $validator->mergeRules('user.' . $attribute, $rules);
         }
 
+        // Validates the occupations array contains only two words
+        $validator->after(function ($validator) {
+            Occupation::validateMax2Words($validator, 'workplace.occupations');
+        });
+
         return $validator;
     }
 
