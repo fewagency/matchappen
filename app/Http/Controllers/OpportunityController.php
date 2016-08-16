@@ -72,7 +72,7 @@ class OpportunityController extends Controller
 
         //TODO: trigger emails on opportunity created
 
-        return redirect()->action('OpportunityController@edit', $opportunity->getKey());
+        return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
 
     public function edit(Opportunity $opportunity)
@@ -91,7 +91,7 @@ class OpportunityController extends Controller
 
         //TODO: trigger emails on opportunity update
 
-        return redirect()->action('OpportunityController@edit', $opportunity->getKey());
+        return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
 
     public function booking(Opportunity $opportunity)
