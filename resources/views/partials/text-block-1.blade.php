@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-12">
 
-        <{{ $headline_level  }} class="headline_1">{!! $headline !!}</{{ $headline_level }}>
+        <{{ $headline_level }} class="headline_1">{!! $headline !!}</{{ $headline_level }}>
 
         <div class="text-block-1__text-wrapper">
           {!! $text !!}
