@@ -29,7 +29,7 @@ use Illuminate\Database\Query\Expression;
  * @property Collection bookings
  * @property Carbon registration_end
  * @property Carbon registration_end_local
- * @property int registration_end_days_before
+ * @property int registration_end_weekdays_before
  * @property string name
  * @property Collection occupations
  * @property string timezone
@@ -66,7 +66,7 @@ class Opportunity extends Model
         'description',
         'start_local',
         'minutes',
-        'registration_end_days_before',
+        'registration_end_weekdays_before',
         'address',
         'contact_name',
         'contact_phone',
@@ -101,7 +101,7 @@ class Opportunity extends Model
         'start_local_minute',
         'minutes',
         'registration_end_local',
-        'registration_end_days_before',
+        'registration_end_weekdays_before',
     ];
 
     /**
@@ -125,7 +125,7 @@ class Opportunity extends Model
         'start_local_minute',
         'minutes',
         'registration_end_local',
-        'registration_end_days_before',
+        'registration_end_weekdays_before',
     ];
 
     public function __construct(array $attributes = [])
@@ -270,12 +270,12 @@ class Opportunity extends Model
     {
         // Save data to move the end time and registration end time along with the start time
         $minutes = $this->minutes;
-        $registration_end_days_before = $this->registration_end_days_before;
+        $registration_end_weekdays_before = $this->registration_end_weekdays_before;
 
         $this->attributes['start'] = $this->fromDateTime($value);
 
         $this->minutes = $minutes;
-        $this->registration_end_days_before = $registration_end_days_before;
+        $this->registration_end_weekdays_before = $registration_end_weekdays_before;
     }
 
     public function getStartLocalAttribute()
@@ -337,14 +337,24 @@ class Opportunity extends Model
         $this->registration_end = Carbonator::parseToDefaultTz($datetime, $this->timezone);
     }
 
-    public function getRegistrationEndDaysBeforeAttribute()
+    public function getRegistrationEndWeekdaysBeforeAttribute()
     {
-        return $this->registration_end_local->diffInDays($this->start_local);
+        return $this->registration_end_local->startOfDay()->diffInWeekdays($this->start_local->startOfDay());
     }
 
-    public function setRegistrationEndDaysBeforeAttribute($days)
+    public function setRegistrationEndWeekdaysBeforeAttribute($weekdays)
     {
-        $this->registration_end_local = $this->start_local->subDays(abs($days))->minute(0);
+        $weekdays = abs($weekdays);
+        $value = $this->start_local;
+        if ($weekdays) {
+            $value->subWeekdays($weekdays);
+        }
+        // Set to the nearest hour before start time of day
+        $value->hour($this->start_local->hour)->minute($this->start_local->minute);
+        $value->subMinute();
+        $value->minute(0);
+
+        $this->registration_end_local = $value;
     }
 
     public function getDisplayAddressAttribute()

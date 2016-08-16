@@ -25,17 +25,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 ->followedBySelectBlock('minutes', trans('opportunity.minutes_options'))
 ->required()
 
-->followedByInputBlock('registration_end_days_before','number')
-
-->followedByInputBlock('registration_end_local', 'datetime-local')
-->withInputAttribute('value', function($input) use ($carbonator) {
-  return $carbonator->parseToDatetimeLocal($input->getValue(), \Matchappen\Opportunity::getTimezoneAttribute(), \Matchappen\Opportunity::getTimezoneAttribute()) ?: $input->getValue();
-})
-->withInputAttribute([
-'min'=>$carbonator->parseToDatetimeLocal($opportunity->getEarliestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
-'max'=>$carbonator->parseToDatetimeLocal($opportunity->getLatestStartTimeLocal(), \Matchappen\Opportunity::getTimezoneAttribute()),
-])
-->required()
+->followedByInputBlock('registration_end_weekdays_before','number')
 
 ->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))

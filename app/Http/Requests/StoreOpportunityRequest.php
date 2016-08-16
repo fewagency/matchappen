@@ -118,7 +118,7 @@ class StoreOpportunityRequest extends Request
             'start_local' => 'after:' . Opportunity::getEarliestStartTimeLocal()->format($datetime_format) . '|before:' . Opportunity::getLatestStartTimeLocal()->toDateString(),
             'minutes' => 'in:' .
                 implode(',', array_keys(trans('opportunity.minutes_options'))),
-            'registration_end_days_before' => 'integer|between:0,10',
+            'registration_end_weekdays_before' => 'integer|between:0,10',
             'address' => 'string|max:400',
             'contact_name' => ['string', 'max:100', 'regex:' . trans('general.personal_name_regex')],
             'contact_phone' => ['string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
