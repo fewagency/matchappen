@@ -33,7 +33,7 @@ class UserController extends Controller
             return redirect()->action('Auth\AuthController@getLogin');
         }
 
-        if ($user->is_admin) {
+        if ($user->isAdmin()) {
             return view('user.dashboard_admin')->with([
                 'user' => $user,
                 'new_workplaces' => Workplace::publishRequested()->get(),

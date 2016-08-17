@@ -71,6 +71,7 @@ return [
             'employees' => 'antal anställda på arbetsplatsen',
             'occupations' => 'yrken på arbetsplatsen',
             'address' => 'arbetsplatsens adress',
+            'description' => 'beskrivning av arbetsplatsen',
         ],
         'user' => [
             'name' => 'ditt namn',

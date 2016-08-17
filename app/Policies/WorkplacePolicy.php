@@ -22,7 +22,7 @@ class WorkplacePolicy
 
     public function before($user, $ability)
     {
-        if ($user->is_admin) {
+        if ($user->isAdmin()) {
             return true;
         }
     }
@@ -34,6 +34,6 @@ class WorkplacePolicy
 
     public function publish(User $user, Workplace $workplace)
     {
-        return $user->is_admin;
+        return $user->isAdmin();
     }
 }

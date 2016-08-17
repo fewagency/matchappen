@@ -55,6 +55,25 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+     * Check if user has admin privileges
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return (bool)$this->is_admin;
+    }
+
+    /**
+     * Scope a query to only include admin users.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeAdmins($query)
+    {
+        return $query->where('is_admin', true);
+    }
+
+    /**
      * @return array of validator rules
      */
     public static function rulesForCreate()
@@ -65,5 +84,12 @@ class User extends Model implements AuthenticatableContract,
             'password' => 'required|string|confirmed|min:6',
             'phone' => ['required', 'string', 'max:20', 'regex:' . trans('general.local_phone_regex')],
         ];
+    }
+
+    /**
+     * @return array of email addresses to admin
+     */
+    public function getAdminEmails() {
+        return $this->admins()->lists('email')->toArray();
     }
 }

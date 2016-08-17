@@ -71,7 +71,7 @@ class AuthController extends Controller
             $validator->mergeRules('user.' . $attribute, $rules);
         }
 
-        // Validates the occupations array contains only two words
+        // Validates the occupations contains only two words
         $validator->after(function ($validator) {
             Occupation::validateMax2Words($validator, 'workplace.occupations');
         });
@@ -99,7 +99,12 @@ class AuthController extends Controller
         $occupations = Occupation::getOrCreateFromNames($data['workplace']['occupations'], $user);
         $workplace->occupations()->sync($occupations);
 
-        //TODO: email admin after new workplace registration
+        \Mail::queue('emails.workplace_registration_admin_notification', compact('workplace'),
+            function ($message) use ($workplace) {
+                $message->to(User::admins()->lists('email')->toArray());
+                $message->subject(trans('workplace.registration_admin_notification_mail_subject',
+                    ['workplace' => $workplace->name]));
+            });
 
         return $user;
     }
