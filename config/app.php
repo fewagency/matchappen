@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -194,7 +194,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'FluentForm'  => FewAgency\FluentForm\Facades\FluentForm::class,
+        'FluentForm' => FewAgency\FluentForm\Facades\FluentForm::class,
     ],
 
 ];

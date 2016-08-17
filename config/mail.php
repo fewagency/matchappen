@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'todo@malmo.se', 'name' => 'TODO Malmö stad'],
 
     /*
     |--------------------------------------------------------------------------

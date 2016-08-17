@@ -58,7 +58,10 @@ class EmailTokenController extends Controller
         $email = $request->get('email');
         $token = $guard->generateAccessToken($email);
 
-        //TODO: email token to user
+        \Mail::queue('emails.token', compact('token', 'email'), function ($message) use ($email) {
+            $message->to($email);
+            $message->subject(trans('auth.token_mail_subject'));
+        });
 
         return redirect()->back()->with('status', trans('auth.token_sent'));
     }
