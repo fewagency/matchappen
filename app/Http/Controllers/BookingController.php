@@ -31,10 +31,11 @@ class BookingController extends Controller
         if ($guard->checkSupervisor()) {
             $booking->save();
 
-            \Mail::queue('emails.supervisor_booking_notification', compact('booking'),
+            // Email confirmation to the supervisor that did the booking
+            \Mail::queue('emails.supervisor_booking_confirmed', compact('booking'),
                 function ($message) use ($booking) {
                     $message->to($booking->supervisor_email);
-                    $message->subject(trans('booking.supervisor_booking_notification_mail_subject',
+                    $message->subject(trans('booking.supervisor_booking_confirmed_mail_subject',
                         ['opportunity' => $booking->opportunity->name]));
                 });
 
@@ -44,10 +45,11 @@ class BookingController extends Controller
             $booking->save();
             $token = $booking->generateAccessToken($booking->email);
 
-            \Mail::queue('emails.pupil_booking_confirmation_token', compact('booking', 'token'),
+            // Email the confirmation token to the student that did the booking
+            \Mail::queue('emails.student_booking_confirmation_token', compact('booking', 'token'),
                 function ($message) use ($booking) {
                     $message->to($booking->email);
-                    $message->subject(trans('booking.pupil_booking_confirmation_token_mail_subject',
+                    $message->subject(trans('booking.student_booking_confirmation_token_mail_subject',
                         ['opportunity' => $booking->opportunity->name]));
                 });
 
@@ -73,8 +75,22 @@ class BookingController extends Controller
 
         if (!$booking->isConfirmed() and $booking->checkVisitorEmail($guard->email())) {
             $booking->confirm();
-            // TODO: email supervisor about student's confirmed booking
-            // TODO: email admin link to student
+
+            // Email notification to supervisor that a student has completed a booking
+            \Mail::queue('emails.supervisor_booking_notification', compact('booking'),
+                function ($message) use ($booking) {
+                    $message->to($booking->supervisor_email);
+                    $message->subject(trans('booking.supervisor_booking_notification_mail_subject',
+                        ['opportunity' => $booking->opportunity->name, 'student' => $booking->name]));
+                });
+
+            // Email confirmation to the student that completed the booking
+            \Mail::queue('emails.student_booking_confirmed', compact('booking'),
+                function ($message) use ($booking) {
+                    $message->to($booking->email);
+                    $message->subject(trans('booking.student_booking_confirmed_mail_subject',
+                        ['opportunity' => $booking->opportunity->name]));
+                });
         }
 
         $opportunity = $booking->opportunity;
