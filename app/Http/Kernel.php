@@ -28,6 +28,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \Matchappen\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'auth.token' => \Matchappen\Http\Middleware\AuthenticateToken::class,
         'guest' => \Matchappen\Http\Middleware\RedirectIfAuthenticated::class,
         'reformulator.trim' => \FewAgency\Reformulator\Middleware\TrimInput::class,
         'reformulator.strip_repeats' => \FewAgency\Reformulator\Middleware\StripRepeatNonWordCharsFromInput::class,

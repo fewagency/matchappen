@@ -17,6 +17,7 @@ class BookingController extends Controller
 {
     public function __construct(Request $request)
     {
+        $this->middleware('auth.token', ['only' => 'show']);
         $this->middleware('reformulator.trim:name,email,supervisor_email,phone', ['only' => ['update', 'store']]);
     }
 
@@ -62,8 +63,6 @@ class BookingController extends Controller
     public function show(Booking $booking, EmailTokenGuard $guard)
     {
         if (!$booking->checkEmail($guard->email())) {
-            // TODO: allow user to email new token to access this booking
-            // Set intended url and redirect to token login-page?
             abort(403, 'Access denied');
         }
 
