@@ -98,12 +98,20 @@ class BookingController extends Controller
         return view('booking.show')->with(compact('booking', 'opportunity'));
     }
 
-    public function postCancel(Booking $booking, CancelBookingRequest $request)
+    public function postCancel(Booking $booking, CancelBookingRequest $request, EmailTokenGuard $guard)
     {
         //Cancel booking (soft-delete)
         $booking->delete();
 
-        //TODO: notify supervisor about cancellation
+        if (!$guard->checkSupervisor()) {
+            // Email notification to supervisor that a student has cancelled a booking
+            \Mail::queue('emails.supervisor_booking_cancelled_notification', compact('booking'),
+                function ($message) use ($booking) {
+                    $message->to($booking->supervisor_email);
+                    $message->subject(trans('booking.supervisor_booking_cancelled_notification_mail_subject',
+                        ['opportunity' => $booking->opportunity->name, 'student' => $booking->name]));
+                });
+        }
 
         return redirect()->route('dashboard')->with('status',
             trans('booking.cancelled', ['booking' => $booking->opportunity->name])
