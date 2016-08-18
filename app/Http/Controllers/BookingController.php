@@ -30,7 +30,12 @@ class BookingController extends Controller
         if ($guard->checkSupervisor()) {
             $booking->save();
 
-            //TODO: email manage-booking link to supervisor
+            \Mail::queue('emails.supervisor_booking_notification', compact('booking'),
+                function ($message) use ($booking) {
+                    $message->to($booking->supervisor_email);
+                    $message->subject(trans('booking.supervisor_booking_notification_mail_subject',
+                        ['opportunity' => $booking->opportunity->name]));
+                });
 
             return redirect()->action('BookingController@show', $booking);
         } else {
@@ -57,7 +62,8 @@ class BookingController extends Controller
     public function show(Booking $booking, EmailTokenGuard $guard)
     {
         if (!$booking->checkEmail($guard->email())) {
-            // TODO: allow user to email new token to access this booking?
+            // TODO: allow user to email new token to access this booking
+            // Set intended url and redirect to token login-page?
             abort(403, 'Access denied');
         }
 

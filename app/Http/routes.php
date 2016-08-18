@@ -56,6 +56,7 @@ Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function 
     Route::get('{opportunity}', 'OpportunityController@show');
 });
 
+// Prefix for booking urls is hardcoded because it needs to be fixed for emailed links
 Route::group(['prefix' => 'bokning'], function () {
     Route::get('reserverad', 'BookingController@reserved');
     Route::get('klar', 'BookingController@completed');

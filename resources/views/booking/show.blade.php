@@ -1,4 +1,4 @@
-@extends('layouts.master'. ['use_master_container' => true])
+@extends('layouts.master', ['use_master_container' => true])
 @inject('token_guard', 'Matchappen\Services\EmailTokenGuard')
 
 @section('content')
@@ -6,7 +6,7 @@
     {{ $booking->checkVisitorEmail($token_guard->email()) ? 'Du' : $booking->name }}
     har bokat {{ $opportunity->name }}
   </h1>
-  <p>Längd: {{ $opportunity->minutes }} minuter</p>
+  <p>Längd: {{ trans('opportunity.minutes_options.'.$opportunity->minutes) }}</p>
 
   @if($token_guard->checkSupervisor())
     @if($booking->isGroup())
