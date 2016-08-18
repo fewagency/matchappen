@@ -51,11 +51,5 @@ Authorization policies for models are defined in [app/Policies](app/Policies), r
 and can be checked throughout controllers, blade-views, etc using the
 [standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
 
-### Middleware
-There's a custom created middleware for trimming excess whitespace from user input defined in
-(app/Http/Middleware/TrimInput.php)[app/Http/Middleware/TrimInput.php].
-A good example of trim-middleware use is in the constructor of the
-[BookingController](app/Http/Controllers/BookingController.php).
-
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
