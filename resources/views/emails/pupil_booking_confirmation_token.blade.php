@@ -1,0 +1,1 @@
+För att bekräfta din bokning, följ den här länken: {{ $token->getTokenUrl() }}

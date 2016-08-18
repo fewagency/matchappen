@@ -44,7 +44,12 @@ class BookingController extends Controller
             $booking->save();
             $token = $booking->generateAccessToken($booking->email);
 
-            //TODO: email booking confirmation token to pupil
+            \Mail::queue('emails.pupil_booking_confirmation_token', compact('booking', 'token'),
+                function ($message) use ($booking) {
+                    $message->to($booking->email);
+                    $message->subject(trans('booking.pupil_booking_confirmation_token_mail_subject',
+                        ['opportunity' => $booking->opportunity->name]));
+                });
 
             return redirect()->action('BookingController@reserved')->with('reserved_booking_id', $booking->getKey());
         }
