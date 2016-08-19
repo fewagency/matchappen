@@ -104,8 +104,27 @@ class OpportunityController extends Controller
                     ['opportunity' => $opportunity->name]));
             });
 
-        //TODO: trigger emails on opportunity update
-        // Email booked students and supervisors
+        foreach ($opportunity->bookings as $booking) {
+
+            // Email supervisor when opportunity was updated
+            \Mail::queue('emails.opportunity_update_supervisor_notification', compact('booking'),
+                function ($message) use ($booking) {
+                    $message->to($booking->supervisor_email);
+                    $message->subject(trans('opportunity.update_supervisor_notification_mail_subject',
+                        ['opportunity' => $booking->opportunity->name]));
+                });
+
+            // Email student when opportunity was updated
+            if ($booking->email) {
+                \Mail::queue('emails.opportunity_update_student_notification', compact('booking'),
+                    function ($message) use ($booking) {
+                        $message->to($booking->email);
+                        $message->subject(trans('opportunity.update_student_notification_mail_subject',
+                            ['opportunity' => $booking->opportunity->name]));
+                    });
+            }
+
+        }
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }

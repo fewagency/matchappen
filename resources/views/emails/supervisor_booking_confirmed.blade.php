@@ -7,4 +7,4 @@
 
 @include('emails.partials.opportunity', ['opportunity' => $booking->opportunity])
 
-{{  action('BookingController@show', $booking) }}
+{{ action('BookingController@show', $booking) }}

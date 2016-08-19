@@ -22,6 +22,8 @@ return [
     ],
     'datetime_format' => 'Y-m-d H:i',
 
-    'created_admin_notification_mail_subject' => 'Möte skapat: :opportunity',
+    'created_admin_notification_mail_subject' => 'Nytt möte: :opportunity',
     'update_admin_notification_mail_subject' => 'Ändrat möte: :opportunity',
+    'update_supervisor_notification_mail_subject' => 'Ändrat möte: :opportunity',
+    'update_student_notification_mail_subject' => 'Ändrat möte: :opportunity',
 ];
