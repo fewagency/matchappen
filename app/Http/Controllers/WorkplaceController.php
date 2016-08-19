@@ -9,6 +9,7 @@ use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreWorkplaceRequest;
 use Matchappen\Occupation;
+use Matchappen\User;
 use Matchappen\Workplace;
 
 class WorkplaceController extends Controller
@@ -55,7 +56,13 @@ class WorkplaceController extends Controller
         $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $workplace->occupations()->sync($occupations);
 
-        //TODO: trigger email on workplace update
+        // Email admin when workplace has been updated
+        \Mail::queue('emails.workplace_update_admin_notification', compact('workplace'),
+            function ($message) use ($workplace) {
+                $message->to(User::getAdminEmails());
+                $message->subject(trans('workplace.update_admin_notification_mail_subject',
+                    ['workplace' => $workplace->name]));
+            });
 
         return redirect()->action('WorkplaceController@edit', $workplace->getKey());
     }

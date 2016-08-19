@@ -89,7 +89,7 @@ class User extends Model implements AuthenticatableContract,
     /**
      * @return array of email addresses to admin
      */
-    public function getAdminEmails() {
-        return $this->admins()->lists('email')->toArray();
+    public static function getAdminEmails() {
+        return User::admins()->lists('email')->toArray();
     }
 }

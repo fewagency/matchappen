@@ -101,7 +101,7 @@ class AuthController extends Controller
 
         \Mail::queue('emails.workplace_registration_admin_notification', compact('workplace'),
             function ($message) use ($workplace) {
-                $message->to(User::admins()->lists('email')->toArray());
+                $message->to(User::getAdminEmails());
                 $message->subject(trans('workplace.registration_admin_notification_mail_subject',
                     ['workplace' => $workplace->name]));
             });

@@ -71,6 +71,7 @@ class OpportunityController extends Controller
         $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity created
+        // Email admin
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
@@ -90,6 +91,8 @@ class OpportunityController extends Controller
         $opportunity->occupations()->sync($occupations);
 
         //TODO: trigger emails on opportunity update
+        // Email admin
+        // Email booked students and supervisors
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
