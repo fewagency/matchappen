@@ -21,4 +21,7 @@ return [
         'book' => 'boka',
     ],
     'datetime_format' => 'Y-m-d H:i',
+
+    'created_admin_notification_mail_subject' => 'Möte skapat: :opportunity',
+    'update_admin_notification_mail_subject' => 'Ändrat möte: :opportunity',
 ];

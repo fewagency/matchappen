@@ -9,6 +9,7 @@ use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreOpportunityRequest;
 use Matchappen\Occupation;
 use Matchappen\Opportunity;
+use Matchappen\User;
 
 class OpportunityController extends Controller
 {
@@ -70,8 +71,13 @@ class OpportunityController extends Controller
         $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $opportunity->occupations()->sync($occupations);
 
-        //TODO: trigger emails on opportunity created
-        // Email admin
+        // Email admin when new opportunity was created
+        \Mail::queue('emails.opportunity_created_admin_notification', compact('opportunity'),
+            function ($message) use ($opportunity) {
+                $message->to(User::getAdminEmails());
+                $message->subject(trans('opportunity.created_admin_notification_mail_subject',
+                    ['opportunity' => $opportunity->name]));
+            });
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
@@ -90,8 +96,15 @@ class OpportunityController extends Controller
         $occupations = Occupation::getOrCreateFromNames($request->input('occupations'), $request->user());
         $opportunity->occupations()->sync($occupations);
 
+        // Email admin when opportunity was updated
+        \Mail::queue('emails.opportunity_update_admin_notification', compact('opportunity'),
+            function ($message) use ($opportunity) {
+                $message->to(User::getAdminEmails());
+                $message->subject(trans('opportunity.update_admin_notification_mail_subject',
+                    ['opportunity' => $opportunity->name]));
+            });
+
         //TODO: trigger emails on opportunity update
-        // Email admin
         // Email booked students and supervisors
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
