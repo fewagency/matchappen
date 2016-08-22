@@ -121,7 +121,9 @@ return [
 
     'pretend' => env('MAIL_PRETEND', false),
 
-    // Universal To Email Address to be used in staging and prototype environments to avoid sending test emails to real people
+    /*
+     *  Universal To Email Address to be used in staging and prototype environments to avoid sending test emails to real people
+     */
     'to' => env('MAIL_UNIVERSAL_TO') ? [
         'address' => env('MAIL_UNIVERSAL_TO'),
         'name' => 'Universal TODO Test Recipient'
