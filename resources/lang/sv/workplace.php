@@ -7,4 +7,7 @@ return [
 
     'registration_admin_notification_mail_subject' => 'Ny arbetsplats: :workplace',
     'update_admin_notification_mail_subject' => 'Arbetsplats ändrad: :workplace',
+
+    'occupations.description' => 'Välj bland yrken genom att börja skriva några tecken. Om yrket inte visas kan du lägga till det genom att skriva hela yrkesnamnet. Skriv ett kommatecken efter varje yrke för att separera dem i listan.',
+    'description.description' => 'Beskriv kortfattat arbetsplatsen – vad ni gör och för vem.',
 ];
