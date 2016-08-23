@@ -16,6 +16,7 @@ FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()
 ->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
 ->withLabel(trans('validation.attributes.workplace.occupations'))
+->withDescription(trans('workplace.occupations.description'))
 
 ->followedByInputBlock('employees', 'number')
 ->withInputAttribute(['min'=>1, 'max'=>65535])
@@ -23,6 +24,7 @@ FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()
 
 ->followedByInputBlock('contact_name')
 ->withInputAttribute('placeholder', $workplace->fallback_contact_name)
+->withDescription(trans('workplace.contact.description'))
 
 ->followedByInputBlock('email', 'email')
 ->withInputAttribute('placeholder', $workplace->fallback_email)
@@ -34,6 +36,7 @@ FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()
 ->required()
 
 ->followedByInputBlock('description', 'textarea')
+->withDescription(trans('workplace.description.description'))
 
 ->followedByInputBlock('homepage')
 

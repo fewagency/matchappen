@@ -5,5 +5,5 @@
   <p>Här registrerar du din arbetsplats. Skapa ett konto nedan. Uppgifterna du skriver in blir publika när vår administratör har godkänt kontot.</p>
   @include('auth.partials.registration_form')
 
-  <a href="{{ action('Auth\AuthController@getLogin') }}">Har du ett konto?</a>
+  <a href="{{ action('Auth\AuthController@getLogin') }}">Har din {{ trans_choice('workplace.workplace', 1) }} redan ett konto? Logga in här!</a>
 @endsection
