@@ -14,7 +14,7 @@ return [
 
     'failed' => 'Inloggningsuppgifterna matchar inte.',
     'throttle' => 'För många inloggningar. Försök igen om :seconds sekunder.',
-    'token_sent' => 'Vi har skickat din inloggningsläng till din epostadress!',
+    'token_sent' => 'Vi har skickat en autentiseringslänk till din epostadress!',
 
     'labels' => [
         'your_email' => 'Din epostaddress',

@@ -34,6 +34,7 @@ return [
     ],
     'regex' => ':attribute har ett ogiltigt format.',
     'required' => ':attribute måste anges.',
+    'required_if' => ':attribute måste anges när :other är :value.',
     'required_without' => ':attribute måste anges.',
     'unique' => ':attribute finns redan i systemet.',
     'url' => ':attribute måste vara en giltig webbadress med protokoll - prova att lägga till http:// i början!',
@@ -76,6 +77,10 @@ return [
         'supervisor_email' => [
             'regex' => 'epostaddressen måste tillhöra en anställd på Malmö kommuns skolor.',
             // TODO: lägg till personal från klara friskolor i detta meddelande
+        ],
+        'edu_email' => [
+            'regex' => 'epostaddressen måste tillhöra någon från Malmö kommuns skolor.',
+            // TODO: lägg till elever och personal från klara friskolor i detta meddelande
         ],
     ],
 

@@ -52,7 +52,8 @@ class EmailTokenController extends Controller
     public function postEmail(Request $request, EmailTokenGuard $guard)
     {
         $this->validate($request,
-            ['email' => ['required', 'email', 'regex:' . config('school.edu_email_regex')]]
+            ['email' => ['required', 'email', 'regex:' . config('school.edu_email_regex')]],
+            ['email.regex' => trans('validation.custom.edu_email.regex')]
         );
 
         $email = $request->get('email');
