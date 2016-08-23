@@ -13,8 +13,15 @@ return [
     |
     */
 
+    'after' => ':attribute måste vara efter :date.',
+    'before' => ':attribute måste vara före :date.',
+    'between' => [
+        'numeric' => ':attribute måste vara mellan :min och :max.',
+        'string' => ':attribute måste vara mellan :min och :max tecken.',
+    ],
     'confirmed' => 'bekräftelsen för :attribute matchar inte.',
     'email' => ':attribute måste vara en giltig epostadress.',
+    'in' => 'valet av :attribute är ogiltigt.',
     'integer' => ':attribute måste vara ett heltal.',
     'max' => [
         'numeric' => ':attribute får inte vara större än :max.',
