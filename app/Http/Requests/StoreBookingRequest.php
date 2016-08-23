@@ -45,4 +45,18 @@ class StoreBookingRequest extends Request
             'visitors' => 'int|min:1|max:' . $opportunity->placesLeft(),
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.regex' => trans('validation.custom.student_email.regex'),
+            'email.unique' => trans('booking.student_email_booked'),
+            'supervisor_email.regex' => trans('validation.custom.supervisor_email.regex'),
+        ];
+    }
 }

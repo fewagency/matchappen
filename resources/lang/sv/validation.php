@@ -20,6 +20,7 @@ return [
         'string' => ':attribute måste vara mellan :min och :max tecken.',
     ],
     'confirmed' => 'bekräftelsen för :attribute matchar inte.',
+    'different' => ':attribute och :other måste vara olika.',
     'email' => ':attribute måste vara en giltig epostadress.',
     'in' => 'valet av :attribute är ogiltigt.',
     'integer' => ':attribute måste vara ett heltal.',
@@ -33,6 +34,7 @@ return [
     ],
     'regex' => ':attribute har ett ogiltigt format.',
     'required' => ':attribute måste anges.',
+    'required_without' => ':attribute måste anges.',
     'unique' => ':attribute finns redan i systemet.',
     'url' => ':attribute måste vara en giltig webbadress med protokoll - prova att lägga till http:// i början!',
 
@@ -63,6 +65,17 @@ return [
         ],
         'contact_name' => [
             'regex' => 'namnet måste bestå av minst två ord.',
+        ],
+        'name' => [
+            'regex' => 'namnet måste bestå av minst två ord.',
+        ],
+        'student_email' => [
+            'regex' => 'epostaddressen måste tillhöra en elev i Malmö kommuns skolor.',
+            // TODO: lägg till klara friskolor i detta meddelande
+        ],
+        'supervisor_email' => [
+            'regex' => 'epostaddressen måste tillhöra en anställd på Malmö kommuns skolor.',
+            // TODO: lägg till klara friskolor i detta meddelande
         ],
     ],
 
