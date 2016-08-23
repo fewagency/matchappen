@@ -15,7 +15,7 @@ return [
 
     'confirmed' => 'bekräftelsen för :attribute matchar inte.',
     'email' => ':attribute måste vara en giltig epostadress.',
-    'integer'              => ':attribute måste vara ett heltal.',
+    'integer' => ':attribute måste vara ett heltal.',
     'max' => [
         'numeric' => ':attribute får inte vara större än :max.',
         'string' => ':attribute får inte vara längre än :max tecken.',
@@ -27,6 +27,7 @@ return [
     'regex' => ':attribute har ett ogiltigt format.',
     'required' => ':attribute måste anges.',
     'unique' => ':attribute finns redan i systemet.',
+    'url' => ':attribute måste vara en giltig webbadress med protokoll - prova att lägga till http:// i början!',
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ return [
     'custom' => [
         'user' => [
             'name' => [
-                'regex' => 'namn ska bestå av minst två ord.',
+                'regex' => 'namnet måste bestå av minst två ord.',
             ],
             'email' => [
                 'unique' => 'epostadressen är redan registrerad - försök logga in!',
@@ -52,7 +53,10 @@ return [
             'name' => [
                 'unique' => 'arbetsplatsens namn är redan registrerat - fråga dina kollegor vem som har inloggningsuppgifterna!'
             ],
-        ]
+        ],
+        'contact_name' => [
+            'regex' => 'namnet måste bestå av minst två ord.',
+        ],
     ],
 
     /*
