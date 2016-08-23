@@ -34,6 +34,7 @@ class StoreWorkplaceRequest extends Request
         $validator->after(function ($validator) {
             Occupation::validateMax2Words($validator, 'occupations');
         });
+        //TODO: validate that the occupations are at least 4 characters long
 
         return $validator;
     }
