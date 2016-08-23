@@ -37,6 +37,9 @@
 
 ul.form-block__messages {
   @extend .list-unstyled;
+  li:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .form-block__messages--error {
