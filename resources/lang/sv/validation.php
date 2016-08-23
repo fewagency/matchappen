@@ -78,6 +78,7 @@ return [
     */
 
     'attributes' => [
+        'password' => 'lösenord',
         'email' => 'epostadress',
         'name' => 'namn',
         'supervisor_email' => 'ansvarig skolpersonals epostadress',

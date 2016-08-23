@@ -1,5 +1,21 @@
 <?php
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
+    |
+    */
+
+    'failed' => 'Inloggningsuppgifterna matchar inte.',
+    'throttle' => 'För många inloggningar. Försök igen om :seconds sekunder.',
+    'token_sent' => 'Vi har skickat din inloggningsläng till din epostadress!',
+
     'labels' => [
         'your_email' => 'Din epostaddress',
         'your_password' => 'Ditt lösenord',
