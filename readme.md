@@ -11,7 +11,7 @@ Built on the [Laravel](http://laravel.com/docs) 5 framework.
 
 ### Building assets
 We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` in the project root
-and then `gulo` or `gulp watch` will build the assets during development.
+and then `gulp` or `gulp watch` will build the assets during development.
 
 ## App structure
 The base PHP namespace is `Matchappen`.
@@ -50,6 +50,18 @@ Authorization policies for models are defined in [app/Policies](app/Policies), r
 (app/Providers/AuthServiceProvider.php)[app/Providers/AuthServiceProvider.php]
 and can be checked throughout controllers, blade-views, etc using the
 [standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
+
+
+### Email
+The site accepts student and supervisor email patterns that are defined in [config/school.php](config/school.php).
+The validation messages related to those email patterns can be edited in [validation.php](resources/lang/sv/validation.php)
+under `custom.student_email.regexp`, `custom.supervisor_email.regexp`, and `custom.edu_email.regexp`.
+
+Outgoing email is configured in `.env`, see [.env.example](.env.example).
+
+Install and set up a [queue driver like Redis](https://laravel.com/docs/5.1/queues),
+and [run it](https://laravel.com/docs/5.1/queues#running-the-queue-listener)
+to make mail sending asynchronous.
 
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
