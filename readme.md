@@ -5,7 +5,7 @@ Built on the [Laravel](http://laravel.com/docs) 5 framework.
 1. Clone the git-repository into a directory of your choice - preferable in your [Homestead virtual machine](http://laravel.com/docs/homestead).
 2. In the project directory, run `composer create-project` to create a default `.env` file.
 3. Set up the site and database to be served by a webserver - preferable in your [Homestead.yaml file](http://laravel.com/docs/5.1/homestead#configuring-homestead).
-4. Put database credentials in `.env` and run `php artisan migrate` in the project directory to create the tables. 
+4. Put database credentials in `.env` and run `php artisan migrate` in the project directory to create the tables.
 
 [Configure PhpStorm](https://github.com/fewagency/best-practices/blob/master/Configure%20PhpStorm%20for%20Laravel%20project.md) if relevant.
 
@@ -58,10 +58,12 @@ The validation messages related to those email patterns can be edited in [valida
 under `custom.student_email.regexp`, `custom.supervisor_email.regexp`, and `custom.edu_email.regexp`.
 
 Outgoing email is configured in `.env`, see [.env.example](.env.example).
+Set `MAIL_DRIVER=log` to log emails instead of sending them from your development environment.
 
 Install and set up a [queue driver like Redis](https://laravel.com/docs/5.1/queues),
 and [run it](https://laravel.com/docs/5.1/queues#running-the-queue-listener)
 to make mail sending asynchronous.
+Remember to set the `QUEUE_DRIVER` in `.env`.
 
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
