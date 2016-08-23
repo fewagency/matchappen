@@ -27,6 +27,7 @@ FluentForm::withAction($opportunity->exists ? action('OpportunityController@upda
 
 ->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
+->withDescription(trans('opportunity.occupations.description'), trans('occupation.input.description'))
 
 ->followedByInputBlock('description', 'textarea')
 

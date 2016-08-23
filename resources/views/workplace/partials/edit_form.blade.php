@@ -16,7 +16,7 @@ FluentForm::withAction(action('WorkplaceController@update', $workplace->getKey()
 ->followedByInputBlock('occupations')
 ->withInputAttribute('data-occupationsurl', action('OccupationController@index'))
 ->withLabel(trans('validation.attributes.workplace.occupations'))
-->withDescription(trans('workplace.occupations.description'))
+->withDescription(trans('occupation.input.description'))
 
 ->followedByInputBlock('employees', 'number')
 ->withInputAttribute(['min'=>1, 'max'=>65535])
