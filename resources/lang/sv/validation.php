@@ -71,11 +71,11 @@ return [
         ],
         'student_email' => [
             'regex' => 'epostaddressen måste tillhöra en elev i Malmö kommuns skolor.',
-            // TODO: lägg till klara friskolor i detta meddelande
+            // TODO: lägg till elever i klara friskolor i detta meddelande
         ],
         'supervisor_email' => [
             'regex' => 'epostaddressen måste tillhöra en anställd på Malmö kommuns skolor.',
-            // TODO: lägg till klara friskolor i detta meddelande
+            // TODO: lägg till personal från klara friskolor i detta meddelande
         ],
     ],
 
