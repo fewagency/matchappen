@@ -13,6 +13,19 @@ return [
     |
     */
 
+    'confirmed' => 'bekräftelsen för :attribute matchar inte.',
+    'email' => ':attribute måste vara en giltig epostadress.',
+    'max' => [
+        'numeric' => ':attribute får inte vara större än :max.',
+        'string' => ':attribute får inte vara längre än :max tecken.',
+    ],
+    'min' => [
+        'numeric' => ':attribute måste vara minst :min.',
+        'string' => ':attribute måste vara minst :min tecken.',
+    ],
+    'regex' => ':attribute har ett ogiltigt format.',
+    'required' => ':attribute måste anges.',
+    'unique' => ':attribute är upptagen.',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,8 +39,13 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'user' => [
+            'name' => [
+                'regex' => 'namn ska bestå av minst två ord.',
+            ],
+            'email' => [
+                'unique' => 'epostadressen är redan registrerad. Försök logga in!',
+            ],
         ],
     ],
 
