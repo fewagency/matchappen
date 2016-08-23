@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'todo.studiebesok.system@malmo.se', 'name' => 'TO·DO Malmö stad'],
+    'from' => ['address' => 'system@matchappen.fewfewfew.se', 'name' => 'TO·DO Malmö stad'],
 
     /*
     |--------------------------------------------------------------------------
