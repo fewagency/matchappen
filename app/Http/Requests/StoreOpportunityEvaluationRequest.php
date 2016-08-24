@@ -40,7 +40,8 @@ class StoreOpportunityEvaluationRequest extends Request
     public function rules()
     {
         return [
-            //
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'string|max:65535',
         ];
     }
 }

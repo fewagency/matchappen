@@ -132,7 +132,9 @@ return [
             'email' => 'din epostadress',
             'phone' => 'ditt telefonnummer',
             'password' => 'lösenord',
-        ]
+        ],
+        'rating' => 'betyg',
+        'comment' => 'kommentar',
     ],
 
 ];
