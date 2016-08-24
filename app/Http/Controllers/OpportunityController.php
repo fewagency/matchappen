@@ -129,6 +129,7 @@ class OpportunityController extends Controller
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
     }
 
+    // TODO: Refactor booking, move it to BookingController
     public function booking(Opportunity $opportunity)
     {
         if (!$opportunity->isBookable()) {
