@@ -3,6 +3,7 @@
 namespace Matchappen\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
 use Matchappen\Services\EmailTokenGuard;
 
 class AuthenticateToken
@@ -17,7 +18,7 @@ class AuthenticateToken
     /**
      * Create a new middleware instance.
      *
-     * @param  Guard  $auth
+     * @param  EmailTokenGuard $auth
      * @return void
      */
     public function __construct(EmailTokenGuard $auth)
@@ -28,8 +29,8 @@ class AuthenticateToken
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
