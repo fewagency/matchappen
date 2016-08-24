@@ -6,7 +6,7 @@
   ->withToken(csrf_token())
 
   //TODO: switch dropdown to rating radio-buttons
-  ->containingSelectBlock('rating', range(1,5))
+  ->containingSelectBlock('rating', array_combine(range(1,5), range(1,5)))
   ->followedByInputBlock('comment','textarea')
 
   ->followedByButtonBlock(trans('evaluation.actions.send'))

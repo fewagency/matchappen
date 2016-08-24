@@ -5,4 +5,5 @@ return [
     'actions' => [
         'send' => 'Skicka utvärdering'
     ],
+    'sent' => 'Tack, vi har tagit emot din utvärdering!',
 ];

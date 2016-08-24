@@ -2,6 +2,8 @@
 
 @section('content')
 
+  @include('partials.status')
+
   <h1>Din {{ trans_choice('workplace.workplace', 1) }}: {{ $workplace->name }}</h1>
 
   <p>Publicerad: {{ $workplace->isPublished() ? 'Ja' : 'Nej' }}</p>

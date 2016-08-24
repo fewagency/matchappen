@@ -21,11 +21,17 @@ class OpportunityEvaluationController extends Controller
     {
         $this->auth = $auth;
         $this->token_guard = $token_guard;
+
+        $this->middleware('reformulator.trim:comment', ['only' => 'store']);
     }
 
     public function create(Opportunity $opportunity)
     {
-        // TODO: if opportunity is in the future, abort!
+        if ($opportunity->start->isFuture()) {
+            abort(404, 'Opportunity is in the future - it cannot be evaluated yet');
+        }
+
+        //TODO: check if user has already evaluated this opportunity
 
         // For workplace
         if ($this->auth->check() and $this->auth->user()->workplace_id === $opportunity->workplace_id) {
@@ -33,10 +39,7 @@ class OpportunityEvaluationController extends Controller
         }
 
         // For student
-        if ($booking = $opportunity->bookings->first(function ($key, Booking $booking) {
-            return $booking->checkVisitorEmail($this->token_guard->email());
-        })
-        ) {
+        if ($this->token_guard->check() and ($booking = $opportunity->getBookingForStudent($this->token_guard->email()))) {
             return view('evaluation.create')->with(compact('opportunity', 'booking'));
         }
 
@@ -45,6 +48,10 @@ class OpportunityEvaluationController extends Controller
 
     public function store(Opportunity $opportunity, StoreOpportunityEvaluationRequest $request)
     {
-        //
+        $evaluation = $request->getOpportunityEvaluation();
+        $evaluation->fill($request->all());
+        $evaluation->save();
+
+        return redirect()->route('dashboard')->with('status', trans('evaluation.sent'));
     }
 }

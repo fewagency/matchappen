@@ -537,4 +537,16 @@ class Opportunity extends Model
     {
         return ['00' => '00', '15' => '15', '30' => '30', '45' => '45'];
     }
+
+    /**
+     * Get a student's booking on this opportunity - if student has a booking
+     * @param $student_email
+     * @return Booking|null
+     */
+    public function getBookingForStudent($student_email)
+    {
+        return $this->bookings->first(function ($key, Booking $booking) use ($student_email) {
+            return $booking->checkVisitorEmail($student_email);
+        });
+    }
 }
