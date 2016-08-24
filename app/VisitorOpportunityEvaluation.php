@@ -35,7 +35,7 @@ class VisitorOpportunityEvaluation extends Model
      * The Opportunity related to this evaluation
      * @return Opportunity
      */
-    public function opportunity()
+    public function getOpportunityAttribute()
     {
         return $this->booking->opportunity;
     }

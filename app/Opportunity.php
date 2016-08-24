@@ -33,6 +33,8 @@ use Illuminate\Database\Query\Expression;
  * @property string name
  * @property Collection occupations
  * @property string timezone
+ * @property HostOpportunityEvaluation hostEvaluation
+ * @property Collection visitorEvaluations
  */
 class Opportunity extends Model
 {
@@ -259,6 +261,24 @@ class Opportunity extends Model
     public function bookings()
     {
         return $this->hasMany('Matchappen\Booking');
+    }
+
+    /**
+     * The host evaluation of this opportunity
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function hostEvaluation()
+    {
+        return $this->hasOne('Matchappen\HostOpportunityEvaluation');
+    }
+
+    /**
+     * The visitor evaluations for this opportunity
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function visitorEvaluations()
+    {
+        return $this->hasManyThrough('Matchappen\VisitorOpportunityEvaluation', 'bookings');
     }
 
     public static function getTimezoneAttribute()

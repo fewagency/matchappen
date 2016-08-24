@@ -31,15 +31,20 @@ class OpportunityEvaluationController extends Controller
             abort(404, 'Opportunity is in the future - it cannot be evaluated yet');
         }
 
-        //TODO: check if user has already evaluated this opportunity
-
         // For workplace
         if ($this->auth->check() and $this->auth->user()->workplace_id === $opportunity->workplace_id) {
+            if ($opportunity->hostEvaluation) {
+                return redirect()->route('dashboard')->with('warning',
+                    trans('evaluation.already_sent', ['opportunity' => $opportunity->name]));
+            }
+
             return view('evaluation.create')->with(compact('opportunity'));
         }
 
         // For student
         if ($this->token_guard->check() and ($booking = $opportunity->getBookingForStudent($this->token_guard->email()))) {
+            //TODO: check if user has already evaluated this opportunity
+
             return view('evaluation.create')->with(compact('opportunity', 'booking'));
         }
 
@@ -52,6 +57,7 @@ class OpportunityEvaluationController extends Controller
         $evaluation->fill($request->all());
         $evaluation->save();
 
-        return redirect()->route('dashboard')->with('status', trans('evaluation.sent'));
+        return redirect()->route('dashboard')->with('status',
+            trans('evaluation.sent', ['opportunity' => $opportunity->name]));
     }
 }

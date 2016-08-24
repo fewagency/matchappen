@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null phone to the visitor
  * @property Collection access_tokens generated for this Booking
  * @property Opportunity opportunity
+ * @property VisitorOpportunityEvaluation visitorEvaluation
  */
 class Booking extends Model
 {
@@ -151,6 +152,15 @@ class Booking extends Model
     public function isCancelable()
     {
         return !$this->opportunity->isRegistrationClosed();
+    }
+
+    /**
+     * The student's evaluation of the Opportunity
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function visitorEvaluation()
+    {
+        return $this->hasOne('Matchappen\VisitorOpportunityEvaluation');
     }
 
     /**
