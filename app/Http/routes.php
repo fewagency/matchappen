@@ -1,5 +1,6 @@
 <?php
 
+//Index page has no controller class
 Route::get('/', function () {
     $limit = 5;
 
@@ -32,36 +33,54 @@ Route::get('/', function () {
     return view('index', compact('opportunities', 'workplaces', 'occupations', 'body_class'));
 });
 
-Route::group(['prefix' => 'yrken'], function () {
+//Occupations
+Route::group(['prefix' => trans_choice('occupation.occupation', 1)], function () {
     Route::get('/', 'OccupationController@index');
     Route::get('{occupation}', 'OccupationController@show');
 });
 
+//Workplaces
 Route::group(['prefix' => trans_choice('workplace.workplace', 1)], function () {
     Route::get('/', 'WorkplaceController@index');
     Route::get('{workplace}/edit', 'WorkplaceController@edit');
     Route::post('{workplace}/update', 'WorkplaceController@update');
     Route::post('{workplace}/approve', 'WorkplaceController@approve');
+
+    //Show is last to catch longer urls before trying this
     Route::get('{workplace}', 'WorkplaceController@show');
 });
 
+//Opportunities
 Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function () {
     Route::get('/', 'OpportunityController@index');
     Route::get('create', 'OpportunityController@create');
     Route::post('store', 'OpportunityController@store');
     Route::get('{opportunity}/edit', 'OpportunityController@edit');
     Route::post('{opportunity}/update', 'OpportunityController@update');
+
+    //Booking opportunity
     Route::get('{opportunity}/boka', 'OpportunityController@booking');
     Route::post('{opportunity}/boka', 'BookingController@store');
+
+    //Show is last to catch longer urls before trying this
     Route::get('{opportunity}', 'OpportunityController@show');
 });
 
+//Bookings
 // Prefix for booking urls is hardcoded because it needs to be fixed for emailed links
 Route::group(['prefix' => 'bokning'], function () {
     Route::get('reserverad', 'BookingController@reserved');
     Route::get('klar', 'BookingController@completed');
     Route::post('{booking}/avboka', 'BookingController@postCancel');
+
+    //Show is last to catch longer urls before trying this
     Route::get('{booking}', 'BookingController@show');
+});
+
+//Evaluation of opportunities
+Route::group(['prefix' => trans_choice('evaluation.evaluation', 1)], function () {
+    Route::get('{opportunity}', 'OpportunityEvaluationController@create');
+    Route::post('{opportunity}', 'OpportunityEvaluationController@store');
 });
 
 // Dashboard for workplaces, admins, supervisors, and students too!
