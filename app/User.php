@@ -3,6 +3,7 @@
 namespace Matchappen;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -17,6 +18,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property string name
  * @property string email
  * @property string phone
+ * @property Collection opportunities
  */
 class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
@@ -55,6 +57,15 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
+     * The opportunities managed by this user
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function opportunities()
+    {
+        return $this->hasManyThrough('Matchappen\Opportunity', 'workplace');
+    }
+
+    /**
      * Check if user has admin privileges
      * @return bool
      */
@@ -89,7 +100,8 @@ class User extends Model implements AuthenticatableContract,
     /**
      * @return array of email addresses to admin
      */
-    public static function getAdminEmails() {
+    public static function getAdminEmails()
+    {
         return User::admins()->lists('email')->toArray();
     }
 }
