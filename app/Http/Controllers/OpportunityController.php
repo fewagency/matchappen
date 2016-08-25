@@ -9,6 +9,7 @@ use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreOpportunityRequest;
 use Matchappen\Occupation;
 use Matchappen\Opportunity;
+use Matchappen\Services\EmailTokenGuard;
 use Matchappen\User;
 
 class OpportunityController extends Controller
@@ -130,10 +131,14 @@ class OpportunityController extends Controller
     }
 
     // TODO: Refactor booking, move it to BookingController
-    public function booking(Opportunity $opportunity)
+    public function booking(Opportunity $opportunity, EmailTokenGuard $token_guard)
     {
         if (!$opportunity->isBookable()) {
             return redirect()->action('OpportunityController@show', $opportunity);
+        }
+        if ($opportunity->getBookingForStudent($token_guard->email())) {
+            //The logged in student already has a booking
+            return redirect()->route('dashboard');
         }
 
         return view('opportunity.booking')->with(compact('opportunity'));

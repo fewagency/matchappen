@@ -569,4 +569,45 @@ class Opportunity extends Model
             return $booking->checkVisitorEmail($student_email);
         });
     }
+
+    /**
+     * Get the saved host evaluation or a new evaluation if the supplied user is admin of the opportunity
+     * @param User $user
+     * @return HostOpportunityEvaluation|null
+     */
+    public function getHostEvaluationForUser(User $user)
+    {
+        if ($user->workplace_id === $this->workplace_id) {
+            if ($this->hostEvaluation) {
+                return $this->hostEvaluation;
+            }
+            $evaluation = new HostOpportunityEvaluation();
+            $evaluation->opportunity()->associate($this);
+            $evaluation->user()->associate($user);
+
+            return $evaluation;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the saved evaluation for a visitor's email or create a new one if the visitor had a booking
+     * @param $student_email
+     * @return VisitorOpportunityEvaluation|null
+     */
+    public function getVisitorEvaluationForEmail($student_email)
+    {
+        if ($booking = $this->getBookingForStudent($student_email)) {
+            if ($booking->visitorEvaluation) {
+                return $booking->visitorEvaluation;
+            }
+            $evaluation = new VisitorOpportunityEvaluation();
+            $evaluation->booking()->associate($booking);
+
+            return $evaluation;
+        }
+
+        return null;
+    }
 }

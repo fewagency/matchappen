@@ -6,5 +6,5 @@ return [
         'send' => 'Skicka utvärdering'
     ],
     'sent' => 'Tack, vi har tagit emot din utvärdering av :opportunity',
-    'already_sent' => 'Vi har redan tagit emot din utvärdering av :opportunity',
+    'already_received' => 'Vi har redan tagit emot din utvärdering av :opportunity',
 ];

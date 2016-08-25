@@ -32,23 +32,16 @@ class StoreOpportunityEvaluationRequest extends Request
             return false;
         }
 
-        //TODO: check if user has already evaluated this opportunity
-
-        if ($auth->check() and $auth->user()->workplace_id === $opportunity->workplace_id) {
+        if ($auth->check() and $this->opportunity_evaluation = $opportunity->getHostEvaluationForUser($auth->user())) {
             // The logged in user represents the organising workplace
-            $this->opportunity_evaluation = new HostOpportunityEvaluation();
-            $this->opportunity_evaluation->opportunity()->associate($opportunity);
-            $this->opportunity_evaluation->user()->associate($auth->user());
-
-            return true;
+            // If the evaluation is already saved, don't authorize
+            return !$this->opportunity_evaluation->exists;
         }
 
-        if ($booking = $opportunity->getBookingForStudent($token_guard->email())) {
+        if ($token_guard->check() and $this->opportunity_evaluation = $opportunity->getVisitorEvaluationForEmail($token_guard->email())) {
             // The logged in student had a booking
-            $this->opportunity_evaluation = new VisitorOpportunityEvaluation();
-            $this->opportunity_evaluation->booking()->associate($booking);
-
-            return true;
+            // If the evaluation is already saved, don't authorize
+            return !$this->opportunity_evaluation->exists;
         }
 
         return false;

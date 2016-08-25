@@ -31,24 +31,25 @@ class OpportunityEvaluationController extends Controller
             abort(404, 'Opportunity is in the future - it cannot be evaluated yet');
         }
 
-        // For workplace
-        if ($this->auth->check() and $this->auth->user()->workplace_id === $opportunity->workplace_id) {
-            if ($opportunity->hostEvaluation) {
-                return redirect()->route('dashboard')->with('warning',
-                    trans('evaluation.already_sent', ['opportunity' => $opportunity->name]));
-            }
-
-            return view('evaluation.create')->with(compact('opportunity'));
+        if ($this->auth->check()) {
+            $evaluation = $opportunity->getHostEvaluationForUser($this->auth->user());
+        } elseif ($this->token_guard->check()) {
+            $evaluation = $opportunity->getVisitorEvaluationForEmail($this->token_guard->email());
         }
 
-        // For student
-        if ($this->token_guard->check() and ($booking = $opportunity->getBookingForStudent($this->token_guard->email()))) {
-            //TODO: check if user has already evaluated this opportunity
-
-            return view('evaluation.create')->with(compact('opportunity', 'booking'));
+        if (empty($evaluation)) {
+            return redirect()->guest(action('Auth\AuthController@getLogin'));
         }
 
-        return redirect()->guest(action('Auth\AuthController@getLogin'));
+        if ($evaluation->exists) {
+            return redirect()->route('dashboard')->with('warning',
+                trans('evaluation.already_received', ['opportunity' => $opportunity->name]));
+        }
+
+        return view('evaluation.create')->with([
+            'opportunity' => $opportunity,
+            'booking' => $evaluation->booking
+        ]);
     }
 
     public function store(Opportunity $opportunity, StoreOpportunityEvaluationRequest $request)
