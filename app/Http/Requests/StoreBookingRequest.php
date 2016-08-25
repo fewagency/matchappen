@@ -33,7 +33,7 @@ class StoreBookingRequest extends Request
                 'email',
                 'max:255',
                 'regex:' . config('school.student_email_regex'),
-                'unique:bookings,email,NULL,NULL,opportunity_id,' . $opportunity->getKey(),
+                'unique:bookings,email,NULL,NULL,deleted_at,NULL,opportunity_id,' . $opportunity->getKey(),
             ],
             'supervisor_email' => [
                 'required',
