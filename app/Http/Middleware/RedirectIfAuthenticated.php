@@ -44,7 +44,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next)
     {
         if ($this->auth->check() or $this->token_guard->check()) {
-            return redirect(action('UserController@dashboard'));
+            return redirect()->route('dashboard');
         }
 
         return $next($request);
