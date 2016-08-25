@@ -135,9 +135,9 @@ class OpportunityController extends Controller
         if (!$opportunity->isBookable()) {
             return redirect()->action('OpportunityController@show', $opportunity);
         }
-        if ($opportunity->getBookingForStudent($token_guard->email())) {
+        if ($booking = $opportunity->getBookingForStudent($token_guard->email())) {
             //The logged in student already has a booking
-            return redirect()->route('dashboard');
+            return redirect()->action('BookingController@show', $booking);
         }
 
         return view('opportunity.booking')->with(compact('opportunity'));
