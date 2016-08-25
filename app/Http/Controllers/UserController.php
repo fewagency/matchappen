@@ -3,10 +3,9 @@
 namespace Matchappen\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Matchappen\Booking;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
+use Matchappen\Booking;
 use Matchappen\Services\EmailTokenGuard;
 use Matchappen\Workplace;
 

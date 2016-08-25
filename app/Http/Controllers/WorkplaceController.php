@@ -2,11 +2,10 @@
 
 namespace Matchappen\Http\Controllers;
 
-use Gate;
 use Illuminate\Http\Request;
-
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
+use Gate;
 use Matchappen\Http\Requests\StoreWorkplaceRequest;
 use Matchappen\Occupation;
 use Matchappen\User;

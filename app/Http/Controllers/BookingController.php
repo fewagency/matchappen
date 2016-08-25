@@ -2,12 +2,11 @@
 
 namespace Matchappen\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use Matchappen\Booking;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Matchappen\Booking;
 use Matchappen\Http\Requests\StoreBookingRequest;
 use Matchappen\Http\Requests\CancelBookingRequest;
 use Matchappen\Opportunity;
