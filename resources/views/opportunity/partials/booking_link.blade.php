@@ -1,6 +1,6 @@
 @if($opportunity->isBookable())
   @include('partials.btn-xxl', [
-            'href' => action('OpportunityController@booking', $opportunity),
+            'href' => action('BookingController@create', $opportunity),
             'text' => 'Boka besök'
           ])
 @endif

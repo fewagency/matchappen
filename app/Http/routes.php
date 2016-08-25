@@ -59,7 +59,7 @@ Route::group(['prefix' => trans_choice('opportunity.opportunity', 1)], function 
     Route::post('{opportunity}/update', 'OpportunityController@update');
 
     //Booking opportunity
-    Route::get('{opportunity}/boka', 'OpportunityController@booking');
+    Route::get('{opportunity}/boka', 'BookingController@create');
     Route::post('{opportunity}/boka', 'BookingController@store');
 
     //Show is last to catch longer urls before trying this

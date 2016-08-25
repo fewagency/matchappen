@@ -20,6 +20,19 @@ class BookingController extends Controller
         $this->middleware('reformulator.trim:name,email,supervisor_email,phone', ['only' => ['update', 'store']]);
     }
 
+    public function create(Opportunity $opportunity, EmailTokenGuard $token_guard)
+    {
+        if (!$opportunity->isBookable()) {
+            return redirect()->action('OpportunityController@show', $opportunity);
+        }
+        if ($booking = $opportunity->getBookingForStudent($token_guard->email())) {
+            //The logged in student already has a booking
+            return redirect()->action('BookingController@show', $booking);
+        }
+
+        return view('booking.create')->with(compact('opportunity'));
+    }
+
     public function store(Opportunity $opportunity, StoreBookingRequest $request, EmailTokenGuard $guard)
     {
         if (!$opportunity->isBookable()) {

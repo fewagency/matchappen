@@ -16,7 +16,7 @@ class OpportunityController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'booking']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
 
         $fields_to_trim = array_keys(StoreOpportunityRequest::rulesForUpdate());
         $middleware_options = ['only' => ['update', 'store']];
@@ -127,19 +127,5 @@ class OpportunityController extends Controller
         }
 
         return redirect()->action('OpportunityController@show', $opportunity->getKey());
-    }
-
-    // TODO: Refactor booking, move it to BookingController
-    public function booking(Opportunity $opportunity, EmailTokenGuard $token_guard)
-    {
-        if (!$opportunity->isBookable()) {
-            return redirect()->action('OpportunityController@show', $opportunity);
-        }
-        if ($booking = $opportunity->getBookingForStudent($token_guard->email())) {
-            //The logged in student already has a booking
-            return redirect()->action('BookingController@show', $booking);
-        }
-
-        return view('opportunity.booking')->with(compact('opportunity'));
     }
 }
