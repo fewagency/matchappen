@@ -459,6 +459,11 @@ class Opportunity extends Model
         return $this->bookings()->sum('visitors');
     }
 
+    public function hasBookings()
+    {
+        return (bool)$this->numberOfBookedVisitors();
+    }
+
     public function isPublished()
     {
         return $this->workplace ? $this->workplace->isPublished() : false;
@@ -471,7 +476,7 @@ class Opportunity extends Model
 
     public function isPassed()
     {
-        return $this->start->isPast();
+        return $this->end->isPast();
     }
 
     public function isViewable()
@@ -581,11 +586,15 @@ class Opportunity extends Model
             if ($this->hostEvaluation) {
                 return $this->hostEvaluation;
             }
-            $evaluation = new HostOpportunityEvaluation();
-            $evaluation->opportunity()->associate($this);
-            $evaluation->user()->associate($user);
 
-            return $evaluation;
+            // Build new evaluation if the event has passed and there was at least one booking
+            if ($this->isPassed() and $this->hasBookings()) {
+                $evaluation = new HostOpportunityEvaluation();
+                $evaluation->opportunity()->associate($this);
+                $evaluation->user()->associate($user);
+
+                return $evaluation;
+            }
         }
 
         return null;
@@ -598,12 +607,17 @@ class Opportunity extends Model
      */
     public function getVisitorEvaluationForEmail($student_email)
     {
+        // For student with booking only
         if ($booking = $this->getBookingForStudent($student_email)) {
             if ($booking->visitorEvaluation) {
                 return $booking->visitorEvaluation;
             }
-            $evaluation = new VisitorOpportunityEvaluation();
-            $evaluation->booking()->associate($booking);
+
+            // Build new evaluation if the event has passed
+            if ($this->isPassed()) {
+                $evaluation = new VisitorOpportunityEvaluation();
+                $evaluation->booking()->associate($booking);
+            }
 
             return $evaluation;
         }

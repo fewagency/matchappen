@@ -28,10 +28,6 @@ class StoreOpportunityEvaluationRequest extends Request
     {
         $opportunity = $this->route('opportunity');
 
-        if ($opportunity->start->isFuture()) {
-            return false;
-        }
-
         if ($auth->check() and $this->opportunity_evaluation = $opportunity->getHostEvaluationForUser($auth->user())) {
             // The logged in user represents the organising workplace
             // If the evaluation is already saved, don't authorize

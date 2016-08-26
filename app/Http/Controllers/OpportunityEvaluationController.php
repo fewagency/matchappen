@@ -3,6 +3,7 @@
 namespace Matchappen\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Matchappen\HostOpportunityEvaluation;
 use Matchappen\Http\Requests;
 use Matchappen\Http\Controllers\Controller;
 use Matchappen\Http\Requests\StoreOpportunityEvaluationRequest;
@@ -25,7 +26,7 @@ class OpportunityEvaluationController extends Controller
 
     public function create(Opportunity $opportunity)
     {
-        if ($opportunity->start->isFuture()) {
+        if (!$opportunity->isPassed()) {
             abort(404, 'Opportunity is in the future - it cannot be evaluated yet');
         }
 
@@ -55,6 +56,19 @@ class OpportunityEvaluationController extends Controller
         $evaluation = $request->getOpportunityEvaluation();
         $evaluation->fill($request->all());
         $evaluation->save();
+
+        \Mail::queue('emails.supervisor_evaluation_notification', compact('opportunity', 'evaluation'),
+            function ($message) use ($opportunity, $evaluation) {
+                if ($evaluation instanceof HostOpportunityEvaluation) {
+                    $message->to(array_unique($opportunity->bookings->pluck('supervisor_email')->toArray()));
+                    $message->subject(trans('evaluation.supervisor_notification_subject',
+                        ['author' => $opportunity->workplace->name, 'opportunity' => $opportunity->name]));
+                } else {
+                    $message->to($evaluation->booking->supervisor_email);
+                    $message->subject(trans('evaluation.supervisor_notification_subject',
+                        ['author' => $evaluation->booking->name, 'opportunity' => $opportunity->name]));
+                }
+            });
 
         return redirect()->route('dashboard')->with('status',
             trans('evaluation.sent', ['opportunity' => $opportunity->name]));

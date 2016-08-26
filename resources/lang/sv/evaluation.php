@@ -7,4 +7,6 @@ return [
     ],
     'sent' => 'Tack, vi har tagit emot din utvärdering av :opportunity',
     'already_received' => 'Vi har redan tagit emot din utvärdering av :opportunity',
+
+    'supervisor_notification_subject' => ':author har utvärderat :opportunity',
 ];
