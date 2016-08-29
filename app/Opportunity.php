@@ -26,6 +26,7 @@ use Illuminate\Database\Query\Expression;
  * @property string contact_phone
  * @property string display_contact_phone
  * @property string fallback_contact_phone
+ * @property string display_contact_email
  * @property Collection bookings
  * @property Carbon registration_end
  * @property Carbon registration_end_local
@@ -35,6 +36,7 @@ use Illuminate\Database\Query\Expression;
  * @property string timezone
  * @property HostOpportunityEvaluation hostEvaluation
  * @property Collection visitorEvaluations
+ * @property Carbon evaluation_notified_at
  */
 class Opportunity extends Model
 {
@@ -56,7 +58,7 @@ class Opportunity extends Model
      *
      * @var array
      */
-    protected $dates = ['deleted_at', 'start', 'end', 'registration_end'];
+    protected $dates = ['deleted_at', 'start', 'end', 'registration_end', 'evaluation_notified_at'];
 
     /**
      * The attributes that are mass assignable.
@@ -234,6 +236,16 @@ class Opportunity extends Model
     public function scopePromoted($query)
     {
         return $query->bookable()->orderBy('registration_end');
+    }
+
+    /**
+     * Scope a query to only include opportunites that should have their evaluations sent out.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeToEvaluate($query)
+    {
+        return $query->passed()->whereNull('evaluation_notified_at');
     }
 
     /**
@@ -417,6 +429,11 @@ class Opportunity extends Model
         }
 
         return null;
+    }
+
+    public function getDisplayContactEmailAttribute()
+    {
+        return $this->workplace->display_email;
     }
 
     public function getNameAttribute()
@@ -623,5 +640,14 @@ class Opportunity extends Model
         }
 
         return null;
+    }
+
+    /**
+     * Mark that this opportunity has had it's evaluations sent out
+     */
+    public function setEvaluationNotified()
+    {
+        $this->evaluation_notified_at = $this->freshTimestamp();
+        $this->save(['timestamps' => false]);
     }
 }
