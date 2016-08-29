@@ -19,6 +19,14 @@ use Illuminate\Support\Str;
 class AccessToken extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The model's attributes.
+     *
+     * @var array
+     */
+    protected $attributes = ['is_single_use' => true];
+
     /**
      * @var string the action for authenticating tokens
      */
@@ -56,14 +64,6 @@ class AccessToken extends Model
         'is_single_use',
         'object_action',
     ];
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        if (is_null($this->is_single_use)) {
-            $this->is_single_use = true;
-        }
-    }
 
     /**
      * Relation to the object this token is valid for
