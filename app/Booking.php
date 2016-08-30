@@ -50,6 +50,22 @@ class Booking extends Model
         return $this->accessTokens()->save($token) ? $token : false;
     }
 
+    public function generateStudentEvaluationToken()
+    {
+        if (empty($this->email)) {
+            return false;
+        }
+        $token = new AccessToken([
+            'email' => $this->email,
+            'is_single_use' => false,
+            'valid_until' => $this->freshTimestamp()->addWeeks(2)
+        ]);
+        $token->object_action = 'OpportunityEvaluationController@create';
+        $token->object()->associate($this->opportunity);
+
+        return $token->save() ? $token : false;
+    }
+
     /**
      * Relation to the Opportunity
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

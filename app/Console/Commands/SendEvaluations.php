@@ -3,6 +3,7 @@
 namespace Matchappen\Console\Commands;
 
 use Illuminate\Console\Command;
+use Matchappen\Booking;
 use Matchappen\Opportunity;
 
 class SendEvaluations extends Command
@@ -38,7 +39,7 @@ class SendEvaluations extends Command
      */
     public function handle()
     {
-        Opportunity::toEvaluate()->get()->each(function ($opportunity) {
+        Opportunity::toEvaluate()->get()->each(function (Opportunity $opportunity) {
             $opportunity->setEvaluationNotified();
             if ($opportunity->hasBookings()) {
                 //Email evaluation-link to the workplace
@@ -48,9 +49,17 @@ class SendEvaluations extends Command
                         $message->subject(trans('evaluation.workplace_notification_subject',
                             ['opportunity' => $opportunity->name]));
                     });
-                $opportunity->bookings->each(function ($booking) {
-                    //TODO: generate token for visitor
-                    //TODO: email token to visitor
+                $opportunity->bookings->each(function (Booking $booking) {
+                    //Email evaluation-token to visitor
+                    $token = $booking->generateStudentEvaluationToken();
+                    if ($token) {
+                        \Mail::queue('emails.student_evaluation_notification', compact('booking', 'token'),
+                            function ($message) use ($booking) {
+                                $message->to($booking->email);
+                                $message->subject(trans('evaluation.student_notification_subject',
+                                    ['opportunity' => $booking->opportunity->name]));
+                            });
+                    }
                 });
             }
         });
