@@ -30,6 +30,7 @@ class StoreBookingRequest extends Request
             'email' => [
                 'required_without:visitors',
                 'required_if:visitors,1',
+                //TODO: student email must not be present on a booking request where visitors > 1
                 'email',
                 'max:255',
                 'regex:' . config('school.student_email_regex'),

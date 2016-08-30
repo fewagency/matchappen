@@ -112,6 +112,8 @@ class BookingController extends Controller
 
     public function postCancel(Booking $booking, CancelBookingRequest $request, EmailTokenGuard $guard)
     {
+        //TODO: ensure bookings can't be edited after they have passed!
+
         //Cancel booking (soft-delete)
         $booking->delete();
 
