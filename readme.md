@@ -65,5 +65,10 @@ and [run it](https://laravel.com/docs/5.1/queues#running-the-queue-listener)
 to make mail sending asynchronous.
 Remember to set the `QUEUE_DRIVER` in `.env`.
 
+### Scheduler
+Remember to configure the [Laravel scheduler](https://laravel.com/docs/5.1/scheduling)
+on the server to periodically run the jobs that are scheduled in
+[app/Console/Kernel.php](app/Console/Kernel.php).
+
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
