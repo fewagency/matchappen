@@ -17,7 +17,7 @@ class CancelBookingRequest extends Request
     {
         $booking = $this->route('booking');
 
-        return $booking->checkEmail($token_guard->email());
+        return $booking->checkEmail($token_guard->email()) and $booking->isCancelable();
     }
 
     /**
