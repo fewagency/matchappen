@@ -102,7 +102,7 @@ return [
         'supervisor_email' => 'ansvarig skolpersonals epostadress',
         'phone' => 'telefon',
         'employees' => 'antal anställda',
-        'address' => 'adress',
+        'address' => 'besöksadress',
         'contact_name' => 'kontaktperson',
         'description' => 'beskrivning',
         'is_published' => 'publicerad',
@@ -124,7 +124,7 @@ return [
             'name' => 'arbetsplatsens namn',
             'employees' => 'antal anställda på arbetsplatsen',
             'occupations' => 'yrken på arbetsplatsen',
-            'address' => 'arbetsplatsens adress',
+            'address' => 'arbetsplatsens besöksadress',
             'description' => 'beskrivning av arbetsplatsen',
         ],
         'user' => [
