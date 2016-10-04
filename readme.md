@@ -35,6 +35,18 @@ If a `Booking` has `reserved_until` time set, it should be soft-deleted after th
 
 [User](app/User.php) represents `Workplace` users as well as system wide admins (identified by `is_admin`).
 
+Admin users can be created directly in the database table `users`,
+or through `php artisan tinker` with
+
+```php
+$admin = Matchappen\User::create(['email'=>'testadmin@malmo.se', 'name' => 'admin', 'is_admin' => 1]);
+$admin->is_admin = 1;
+$admin->save();
+```
+
+After the user record is saved, the user can set their desired password
+by entering their email address through the password reset url.
+
 ### Authentication and Authorization
 Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/authentication),
 each an instance of the `User` model.
