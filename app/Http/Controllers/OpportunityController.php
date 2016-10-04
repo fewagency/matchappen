@@ -44,7 +44,7 @@ class OpportunityController extends Controller
 
     public function show(Opportunity $opportunity)
     {
-        if (!$opportunity->isViewable()) {
+        if (!$opportunity->isViewable() and !$this->authorize('update', $opportunity)) {
             return redirect()->action('OpportunityController@index');
         }
 
