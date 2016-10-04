@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property Carbon|null reserved_until Soft-delete instances where this time has passed
- * @property string name of the visitor - or the supervisor if booking for a group
- * @property integer visitors >1 if booking is for a group
- * @property string|null email Email to the booked student
- * @property string supervisor_email
- * @property string|null phone to the visitor
- * @property Collection access_tokens generated for this Booking
- * @property Opportunity opportunity
+ * @property Carbon|null                  reserved_until Soft-delete instances where this time has passed
+ * @property string                       name           of the visitor - or the supervisor if booking for a group
+ * @property integer                      visitors       >1 if booking is for a group
+ * @property string|null                  email          Email to the booked student
+ * @property string                       supervisor_email
+ * @property string|null                  phone          to the visitor
+ * @property Collection                   access_tokens  generated for this Booking
+ * @property Opportunity                  opportunity
  * @property VisitorOpportunityEvaluation visitorEvaluation
  */
 class Booking extends Model
@@ -58,7 +58,7 @@ class Booking extends Model
         $token = new AccessToken([
             'email' => $this->email,
             'is_single_use' => false,
-            'valid_until' => $this->freshTimestamp()->addWeeks(2)
+            'valid_until' => $this->freshTimestamp()->addWeeks(2),
         ]);
         $token->object_action = 'OpportunityEvaluationController@create';
         $token->object()->associate($this->opportunity);
@@ -183,7 +183,7 @@ class Booking extends Model
      * Scope a query to only include bookings for a specified supervisor.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $email
+     * @param string                                $email
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForSupervisor($query, $email)
@@ -195,7 +195,7 @@ class Booking extends Model
      * Scope a query to only include bookings for a specified student.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $email
+     * @param string                                $email
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeForStudent($query, $email)
@@ -251,5 +251,16 @@ class Booking extends Model
         return $query->whereHas('opportunity', function ($query) {
             $query->recentlyPassed();
         });
+    }
+
+    /**
+     * Scope a query to only include bookings where reservation has expired.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeExpired($query)
+    {
+        return $query->where('reserved_until', '<', $this->freshTimestamp());
     }
 }
