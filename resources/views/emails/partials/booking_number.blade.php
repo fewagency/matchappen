@@ -1,0 +1,1 @@
+Bokningsnummer: {{ $booking->id }}
