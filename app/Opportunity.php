@@ -356,7 +356,7 @@ class Opportunity extends Model
 
     public function setMinutesAttribute($minutes)
     {
-        $this->end = $this->start->addMinutes($minutes);
+        $this->end = $this->start->copy()->addMinutes($minutes);
     }
 
     public function getRegistrationEndLocalAttribute()
