@@ -20,27 +20,32 @@ class EmailPatternTest extends TestCase
 
     public function testSupervisorEmail()
     {
-        $this->assertNotRegExp($this->supervisor_regex, 'utb123@skola.malmo.se');
-        $this->assertRegExp($this->supervisor_regex, 'syv@malmo.se');
-        $this->assertNotRegExp($this->supervisor_regex, 'abc@abc.com');
-        $this->assertRegExp($this->supervisor_regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $regex = $this->supervisor_regex;
+        $this->assertNotRegExp($regex, 'utb12a@skola.malmo.se');
+        $this->assertRegExp($regex, 'syv@malmo.se');
+        $this->assertNotRegExp($regex, 'abc@abc.com');
+        $this->assertRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $this->assertNotRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
     }
 
     public function testStudentEmail()
     {
-        $this->assertRegExp($this->student_regex, 'utb123@skola.malmo.se');
-        $this->assertNotRegExp($this->student_regex, 'syv@malmo.se');
-        $this->assertNotRegExp($this->student_regex, 'abc@abc.com');
-        $this->assertNotRegExp($this->student_regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $regex = $this->student_regex;
+        $this->assertRegExp($regex, 'utb12a@skola.malmo.se');
+        $this->assertNotRegExp($regex, 'syv@malmo.se');
+        $this->assertNotRegExp($regex, 'abc@abc.com');
+        $this->assertNotRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $this->assertRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
     }
 
     public function testEduEmail()
     {
-        $this->assertRegExp($this->edu_regex, 'utb123@skola.malmo.se');
-        $this->assertRegExp($this->edu_regex, 'syv@malmo.se');
-        $this->assertNotRegExp($this->edu_regex, 'abc@abc.com');
-        $this->assertRegExp($this->edu_regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $regex = $this->edu_regex;
+        $this->assertRegExp($regex, 'utb12a@skola.malmo.se');
+        $this->assertRegExp($regex, 'syv@malmo.se');
+        $this->assertNotRegExp($regex, 'abc@abc.com');
+        $this->assertRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
+        $this->assertRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
     }
-
 
 }
