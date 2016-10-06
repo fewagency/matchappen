@@ -26,6 +26,8 @@ class EmailPatternTest extends TestCase
         $this->assertNotRegExp($regex, 'abc@abc.com');
         $this->assertRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
         $this->assertNotRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
+        $this->assertRegExp($regex, 'en_lärare.på-@plusgymnasiet.se');
+        $this->assertNotRegExp($regex, 'en_elev.på-@plusgymnasietmalmo.se');
     }
 
     public function testStudentEmail()
@@ -36,6 +38,8 @@ class EmailPatternTest extends TestCase
         $this->assertNotRegExp($regex, 'abc@abc.com');
         $this->assertNotRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
         $this->assertRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
+        $this->assertNotRegExp($regex, 'en_lärare.på-@plusgymnasiet.se');
+        $this->assertRegExp($regex, 'en_elev.på-@plusgymnasietmalmo.se');
     }
 
     public function testEduEmail()
@@ -46,6 +50,8 @@ class EmailPatternTest extends TestCase
         $this->assertNotRegExp($regex, 'abc@abc.com');
         $this->assertRegExp($regex, 'för.efternamn@kunskapsgymnasiet.se');
         $this->assertRegExp($regex, 'xxx111@edu.kunskapsgymnasiet.se');
+        $this->assertRegExp($regex, 'en_lärare.på-@plusgymnasiet.se');
+        $this->assertRegExp($regex, 'en_elev.på-@plusgymnasietmalmo.se');
     }
 
 }
