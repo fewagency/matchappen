@@ -61,7 +61,7 @@ return [
         ],
         'workplace' => [
             'name' => [
-                'unique' => 'arbetsplatsens namn är redan registrerat - fråga dina kollegor vem som har inloggningsuppgifterna!'
+                'unique' => 'arbetsplatsens namn är redan registrerat - fråga dina kollegor vem som har inloggningsuppgifterna!',
             ],
         ],
         'contact_name' => [
@@ -71,15 +71,15 @@ return [
             'regex' => 'namnet måste bestå av minst två ord.',
         ],
         'student_email' => [
-            'regex' => 'epostaddressen måste tillhöra en elev i Malmö kommuns skolor.',
+            'regex' => 'epostaddressen måste tillhöra en elev i Malmö kommuns skolor, Kunskapsgymnasiet, Plusgymnasiet eller Montessoriskolan.',
             // TODO: lägg till elever i klara friskolor i detta meddelande
         ],
         'supervisor_email' => [
-            'regex' => 'epostaddressen måste tillhöra en anställd på Malmö kommuns skolor.',
+            'regex' => 'epostaddressen måste tillhöra en anställd på Malmö kommuns skolor, Kunskapsgymnasiet, Plusgymnasiet eller Montessoriskolan.',
             // TODO: lägg till personal från klara friskolor i detta meddelande
         ],
         'edu_email' => [
-            'regex' => 'epostaddressen måste tillhöra någon från Malmö kommuns skolor.',
+            'regex' => 'epostaddressen måste tillhöra någon från Malmö kommuns skolor, Kunskapsgymnasiet, Plusgymnasiet eller Montessoriskolan.',
             // TODO: lägg till elever och personal från klara friskolor i detta meddelande
         ],
     ],
