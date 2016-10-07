@@ -1,5 +1,5 @@
 # Matchappen för Malmö stad
-Built on the [Laravel](http://laravel.com/docs) 5 framework.
+Built on the [Laravel](http://laravel.com/5.1/docs) 5.1 framework for Long Term Support (LTS).
 
 ## Development installation
 1. Clone the git-repository into a directory of your choice - preferable in your [Homestead virtual machine](http://laravel.com/docs/homestead).
@@ -66,21 +66,38 @@ and can be checked throughout controllers, blade-views, etc using the
 
 ### Email
 The site accepts student and supervisor email patterns that are defined in [config/school.php](config/school.php).
-The validation messages related to those email patterns can be edited in [validation.php](resources/lang/sv/validation.php)
+The validation messages related to those email patterns can be edited in
+[validation.php](resources/lang/sv/validation.php)
 under `custom.student_email.regexp`, `custom.supervisor_email.regexp`, and `custom.edu_email.regexp`.
 
 Outgoing email is configured in `.env`, see [.env.example](.env.example).
 Set `MAIL_DRIVER=log` to log emails instead of sending them from your development environment.
 
+#### Rejected emails
+Depending on the email server configuration, make sure to catch bounced or rejected outgoing emails.
+Any outgoing email that didn't reach its intended receiver should raise the
+[EmailWasRejected](app/Events/EmailWasRejected.php) event.
+This can be done from [within the app](https://laravel.com/docs/5.1/events#firing-events)
+or from the outside through the 'php artisan bookings:handle-email-rejection' command.
+
+#### Queue driver
 Install and set up a [queue driver like Redis](https://laravel.com/docs/5.1/queues),
-and [run it](https://laravel.com/docs/5.1/queues#running-the-queue-listener)
-to make mail sending asynchronous.
-Remember to set the `QUEUE_DRIVER` in `.env`.
+and [run it](https://laravel.com/docs/5.1/queues#running-the-queue-listener) to make mail sending asynchronous.
+
+Remember to set the `QUEUE_DRIVER` in `.env`. 
 
 ### Scheduler
 Remember to configure the [Laravel scheduler](https://laravel.com/docs/5.1/scheduling)
 on the server to periodically run the jobs that are scheduled in
 [app/Console/Kernel.php](app/Console/Kernel.php).
 
+## Authors
+Matchappen was conceived within
+(11:11 Meet Malmö)[http://malmo.se/Foretagande--jobb/Driva--utveckla-foretag/Meet-Malmo.html]
+and originally designed and built by [FEW](http://fewagency.se) for Malmö Stad.
+
 ## License
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+Matchappen's code is released as open source in accordance with
+[the Malmö Stad Web Application Guidelines](http://malmostad.github.io/wag-v4/#source-code-license-and-management). 
