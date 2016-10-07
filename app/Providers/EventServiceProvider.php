@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Matchappen\Events\SomeEvent' => [
-            'Matchappen\Listeners\EventListener',
+        'Matchappen\Events\EmailWasRejected' => [
+            'Matchappen\Listeners\HandleEmailRejection',
         ],
     ];
 

@@ -5,6 +5,7 @@ namespace Matchappen\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Matchappen\Console\Commands\CancelExpiredBookings;
+use Matchappen\Console\Commands\HandleEmailRejection;
 use Matchappen\Console\Commands\SendEvaluations;
 
 class Kernel extends ConsoleKernel
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         SendEvaluations::class,
         CancelExpiredBookings::class,
+        HandleEmailRejection::class,
     ];
 
     /**

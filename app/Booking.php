@@ -263,4 +263,15 @@ class Booking extends Model
     {
         return $query->where('reserved_until', '<', $this->freshTimestamp());
     }
+
+    /**
+     * Scope a query to only include bookings made in the recent past.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRecentlyBooked($query)
+    {
+        return $query->where('created_at', '>', Carbon::parse('-48 hours'));
+    }
 }
