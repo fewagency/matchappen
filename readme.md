@@ -1,5 +1,5 @@
 # Matchappen för Malmö stad
-Built on the [Laravel](http://laravel.com/5.1/docs) 5.1 framework for Long Term Support (LTS).
+Built on the [Laravel](http://laravel.com/5.1/docs) framework 5.1 for Long Term Support (LTS).
 
 ## Development installation
 1. Clone the git-repository into a directory of your choice - preferable in your [Homestead virtual machine](http://laravel.com/docs/homestead).
@@ -9,9 +9,11 @@ Built on the [Laravel](http://laravel.com/5.1/docs) 5.1 framework for Long Term 
 
 [Configure PhpStorm](https://github.com/fewagency/best-practices/blob/master/Configure%20PhpStorm%20for%20Laravel%20project.md) if relevant.
 
-### Building assets
-We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` in the project root
-and then `gulp` or `gulp watch` will build the assets during development.
+## Building assets
+We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` and `bower install`
+in the project root and then `gulp` or `gulp watch` will build the assets during development.
+
+In a deployment, run `gulp --production` instead (after installing composer dependencies).
 
 ## App structure
 The base PHP namespace is `Matchappen`.
@@ -44,7 +46,7 @@ $admin->is_admin = 1;
 $admin->save();
 ```
 
-After the user record is saved, the user can set their desired password
+After the admin user record is saved, the user can set their desired password
 by entering their email address through the password reset url.
 
 ### Authentication and Authorization
@@ -62,7 +64,6 @@ Authorization policies for models are defined in [app/Policies](app/Policies), r
 (app/Providers/AuthServiceProvider.php)[app/Providers/AuthServiceProvider.php]
 and can be checked throughout controllers, blade-views, etc using the
 [standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
-
 
 ### Email
 The site accepts student and supervisor email patterns that are defined in [config/school.php](config/school.php).
