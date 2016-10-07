@@ -2,7 +2,7 @@
 Built on the [Laravel](http://laravel.com/5.1/docs) framework 5.1 for Long Term Support (LTS).
 
 ## Development installation
-1. Clone the git-repository into a directory of your choice - preferable in your [Homestead virtual machine](http://laravel.com/docs/homestead).
+1. Clone the git-repository into a directory of your choice - preferable in your [Homestead virtual machine](http://laravel.com/docs/5.1/homestead).
 2. In the project directory, run `composer create-project` to create a default `.env` file.
 3. Set up the site and database to be served by a webserver - preferable in your [Homestead.yaml file](http://laravel.com/docs/5.1/homestead#configuring-homestead).
 4. Put database credentials in `.env` and run `php artisan migrate` in the project directory to create the tables.
@@ -10,7 +10,7 @@ Built on the [Laravel](http://laravel.com/5.1/docs) framework 5.1 for Long Term 
 [Configure PhpStorm](https://github.com/fewagency/best-practices/blob/master/Configure%20PhpStorm%20for%20Laravel%20project.md) if relevant.
 
 ## Building assets
-We're using [Laravel's Elixir](http://laravel.com/docs/elixir) for assets, so run `npm install` and `bower install`
+We're using [Laravel's Elixir](http://laravel.com/docs/5.1/elixir) for assets, so run `npm install` and `bower install`
 in the project root and then `gulp` or `gulp watch` will build the assets during development.
 
 In a deployment, run `gulp --production` instead (after installing composer dependencies).
@@ -18,7 +18,7 @@ In a deployment, run `gulp --production` instead (after installing composer depe
 ## App structure
 The base PHP namespace is `Matchappen`.
 
-[Controllers](https://laravel.com/docs/controllers) are found in [app/Http/Controllers](app/Http/Controllers) and the
+[Controllers](https://laravel.com/docs/5.1/controllers) are found in [app/Http/Controllers](app/Http/Controllers) and the
 routes to them in [app/Http/routes.php](app/Http/routes.php).
 Route-Model binding is configured in [app/Providers/RouteServiceProvider.php](app/Providers/RouteServiceProvider.php).
 
@@ -50,7 +50,7 @@ After the admin user record is saved, the user can set their desired password
 by entering their email address through the password reset url.
 
 ### Authentication and Authorization
-Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/authentication),
+Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/5.1/authentication),
 each an instance of the `User` model.
 These users log in and out using the standard Laravel [AuthController](app/Http/Controllers/Auth/AuthController.php)
 and reset their passwords through the [PasswordController](app/Http/Controllers/Auth/PasswordController.php)
@@ -63,7 +63,7 @@ privileges for these token-users.
 Authorization policies for models are defined in [app/Policies](app/Policies), registered in
 (app/Providers/AuthServiceProvider.php)[app/Providers/AuthServiceProvider.php]
 and can be checked throughout controllers, blade-views, etc using the
-[standard Laravel ways](https://laravel.com/docs/authorization#checking-policies).
+[standard Laravel ways](https://laravel.com/docs/5.1/authorization#checking-policies).
 
 ### Email
 The site accepts student and supervisor email patterns that are defined in [config/school.php](config/school.php).
