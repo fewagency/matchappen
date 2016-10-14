@@ -77,6 +77,9 @@ The validation messages related to those email patterns can be edited in
 [validation.php](resources/lang/sv/validation.php)
 under `custom.student_email.regexp`, `custom.supervisor_email.regexp`, and `custom.edu_email.regexp`.
 
+[Tests for the email patterns](tests/EmailPatternTest.php) should be updated and run through
+`vendor/bin/phpunit` after any modifications to the patterns.
+
 Outgoing email is configured in `.env`, see [.env.example](.env.example).
 Set `MAIL_DRIVER=log` to log emails instead of sending them from your development environment.
 
