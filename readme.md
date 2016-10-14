@@ -47,7 +47,13 @@ $admin->save();
 ```
 
 After the admin user record is saved, the user can set their desired password
-by entering their email address through the password reset url.
+by entering their email address through the password reset url, if outgoing email is configured.
+If not, you can set and save the `password` attribute on the model using `bcrypt()`:
+
+```php
+$admin->password = bcrypt('PW GOES HERE');
+$admin->save();
+```
 
 ### Authentication and Authorization
 Workplace users and system admins are standard [Laravel users](https://laravel.com/docs/5.1/authentication),
