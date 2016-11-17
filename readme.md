@@ -103,7 +103,7 @@ on the server to periodically run the jobs that are scheduled in
 
 ## Authors
 Matchappen was conceived within
-(11:11 Meet Malmö)[http://malmo.se/Foretagande--jobb/Driva--utveckla-foretag/Meet-Malmo.html]
+[11:11 Meet Malmö](http://malmo.se/Foretagande--jobb/Driva--utveckla-foretag/Meet-Malmo.html)
 and originally designed and built by [FEW](http://fewagency.se) for Malmö Stad.
 
 ## License
